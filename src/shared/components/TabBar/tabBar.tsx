@@ -7,26 +7,26 @@ import { StyleSheet, Text, View } from 'react-native';
 import { MainPage } from '../../../modules/home/pages/MainPage/mainPage';
 import { ProductPage } from '../../../modules/home/pages/ProductPage/productPage';
 
+import { MainStackNavigator, ProductStackNavigator } from '../../../modules/home/routes/navigation/StackNavigator';
+
 export function TabBar() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator screenOptions={{ headerShown: false }}>
         <Tab.Screen 
-            name="MainPage" 
-            component={MainPage} 
+            name="Main Page" 
+            component={MainStackNavigator} 
             options={{
                 tabBarLabel: 'Home',
                 tabBarIcon: ({ color, size }) => (<Ionicons name="home" color={color} size={size} />),}}
         />
         <Tab.Screen 
             name="ProductPage" 
-            component={ProductPage} 
+            component={ProductStackNavigator} 
             options={{
                 tabBarLabel: 'User',
                 tabBarIcon: ({ color, size }) => (<Ionicons name="person" color={color} size={size} />),}}
             />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 }
 

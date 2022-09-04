@@ -6,10 +6,15 @@ import { TabBar } from './src/shared/components/TabBar/tabBar';
 
 import { MainPage } from './src/modules/home/pages/MainPage/mainPage';
 import { ProductPage } from './src/modules/home/pages/ProductPage/productPage';
+import React from 'react';
+import { MainStackNavigator } from './src/modules/home/routes/navigation/StackNavigator';
+import DrawerNavigator from './src/modules/home/routes/navigation/DrawerNavigator';
 
 export default function App() {
   return (
-    <TabBar />
+    <NavigationContainer>
+      <DrawerNavigator />
+    </NavigationContainer>
   );
 }
 
