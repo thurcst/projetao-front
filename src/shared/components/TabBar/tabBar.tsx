@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet } from 'react-native';
 import { ProfilePage } from '../../../modules/profile/pages/ProfilePage/profilePage';
 import { HomePage } from '../../../modules/home/pages/HomePage/homePage';
+import Scanner from '../../../modules/barCodeScanner/components/scanner/scanner';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,6 +17,13 @@ export function TabBar() {
                 tabBarLabel: 'Home',
                 tabBarIcon: ({ color, size }) => (<Ionicons name="home" color={color} size={size} />),}}
         />
+        <Tab.Screen 
+            name="Scanner" 
+            component={Scanner} 
+            options={{
+                tabBarLabel: 'Scanner',
+                tabBarIcon: ({ color, size }) => (<Ionicons name="person" color={color} size={size} />),}}
+            />
         <Tab.Screen 
             name="Profile" 
             component={ProfilePage} 
