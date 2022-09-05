@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, Button, StyleSheet } from "react-native";
+import { MainItems } from "../../components/MainItems/mainItems";
 import SearchBar from "../../components/SearchBar/searchbar";
 
 export function MainPage({ navigation }) {
@@ -7,10 +8,13 @@ export function MainPage({ navigation }) {
     <View style={styles.container}>
       <SearchBar />
       <View style={styles.content}>
-        <Text>SemGlus!</Text>
+        <Text>SemGlú!</Text>
         <Button title="Go to about screen" 
-          onPress={() => navigation.navigate("About")} 
+          onPress={() => navigation.navigate('About')} 
         />
+      </View>
+      <View style={styles.mainItems}>
+        <MainItems navigationProp={navigation}/>
       </View>
     </View>
   );
@@ -27,5 +31,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",  
   },
+  mainItems: {
+    flex: 2,
+  }
 });
 

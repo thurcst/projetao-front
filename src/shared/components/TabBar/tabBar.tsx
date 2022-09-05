@@ -1,27 +1,24 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { ProfilePage } from '../../../modules/profile/pages/ProfilePage/profilePage';
+import { HomePage } from '../../../modules/home/pages/HomePage/homePage';
 
-import { MainPage } from '../../../modules/home/pages/MainPage/mainPage';
-import { ProductPage } from '../../../modules/home/pages/ProductPage/productPage';
-
-import { MainStackNavigator, ProductStackNavigator } from '../../../modules/home/routes/navigation/StackNavigator';
+const Tab = createBottomTabNavigator();
 
 export function TabBar() {
   return (
       <Tab.Navigator screenOptions={{ headerShown: false }}>
         <Tab.Screen 
-            name="Main Page" 
-            component={MainStackNavigator} 
+            name="Home" 
+            component={HomePage} 
             options={{
                 tabBarLabel: 'Home',
                 tabBarIcon: ({ color, size }) => (<Ionicons name="home" color={color} size={size} />),}}
         />
         <Tab.Screen 
-            name="ProductPage" 
-            component={ProductStackNavigator} 
+            name="Profile" 
+            component={ProfilePage} 
             options={{
                 tabBarLabel: 'User',
                 tabBarIcon: ({ color, size }) => (<Ionicons name="person" color={color} size={size} />),}}
@@ -30,7 +27,6 @@ export function TabBar() {
   );
 }
 
-const Tab = createBottomTabNavigator();
 const styles = StyleSheet.create({
   container: {
     flex: 1,
