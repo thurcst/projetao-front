@@ -22,7 +22,7 @@ export function TabBar() {
             component={Scanner} 
             options={{
                 tabBarLabel: 'Scanner',
-                tabBarIcon: ({ color, size }) => (<Ionicons name="person" color={color} size={size} />),}}
+                tabBarIcon: ({ color, size }) => (<Ionicons name="barcode" color={color} size={size} />),}}
             />
         <Tab.Screen 
             name="Profile" 
