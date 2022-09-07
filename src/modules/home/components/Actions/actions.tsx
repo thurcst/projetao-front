@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 
 const Item1 = ['Macarrão de Arroz Penne sem Glúten Urbano 500g']
@@ -14,16 +14,28 @@ export function Action( props ) {
     return (
        
       <ScrollView style={styles.scroll} horizontal={false} showsHorizontalScrollIndicator={false}>
+         
         <TouchableOpacity onPress={() => 
           {props.navigationProp.navigate("ProductPage", {
             productName: Item1.toString()
           })}} 
           style={styles.actionButton}>
           
-          <Text style={styles.areaButton}>{Item1}</Text>
           <View style={styles.areaButton}>
-          <Ionicons name="reader-outline" color={'#000'} size={25} />
-          <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+            <Image
+             source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1014321893584683089/logo.png'}} 
+             style={styles.image}
+            />
+            <View style={styles.teste}>
+              <Text>
+              {Item1}
+              </Text>
+              <View style={styles.areaButton} >
+                <Ionicons name="reader-outline" color={'#000'} size={25} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+              </View>
+            </View>
+           
           </View>
           
         </TouchableOpacity>
@@ -34,10 +46,21 @@ export function Action( props ) {
           })}}
           style={styles.actionButton}>
           
-          <Text style={styles.areaButton}>{Item2}</Text>
           <View style={styles.areaButton}>
-          <Ionicons name="reader-outline" color={'#000'} size={25} />
-          <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+            <Image
+              source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1014321893584683089/logo.png'}}
+             style={styles.image}
+            />
+            <View style={styles.teste}>
+              <Text>
+              {Item2}
+              </Text>
+              <View style={styles.areaButton} >
+                <Ionicons name="reader-outline" color={'#000'} size={25} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+              </View>
+            </View>
+           
           </View>
           
         </TouchableOpacity>
@@ -47,10 +70,21 @@ export function Action( props ) {
           })}}
           style={styles.actionButton}>
           
-          <Text style={styles.areaButton}>{Item3}</Text>
           <View style={styles.areaButton}>
-          <Ionicons name="reader-outline" color={'#000'} size={25} />
-          <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+            <Image
+              source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1014321893584683089/logo.png'}}
+             style={styles.image}
+            />
+            <View style={styles.teste}>
+              <Text>
+              {Item3}
+              </Text>
+              <View style={styles.areaButton} >
+                <Ionicons name="reader-outline" color={'#000'} size={25} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+              </View>
+            </View>
+           
           </View>
           
         </TouchableOpacity>
@@ -60,10 +94,21 @@ export function Action( props ) {
           })}}
           style={styles.actionButton}>
           
-          <Text style={styles.areaButton}>{Item4}</Text>
           <View style={styles.areaButton}>
-          <Ionicons name="reader-outline" color={'#000'} size={25} />
-          <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+            <Image
+              source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1014321893584683089/logo.png'}}
+             style={styles.image}
+            />
+            <View style={styles.teste}>
+              <Text>
+              {Item4}
+              </Text>
+              <View style={styles.areaButton} >
+                <Ionicons name="reader-outline" color={'#000'} size={25} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+              </View>
+            </View>
+           
           </View>
           
         </TouchableOpacity>
@@ -73,10 +118,21 @@ export function Action( props ) {
           })}}
           style={styles.actionButton}>
           
-          <Text style={styles.areaButton}>{Item5}</Text>
           <View style={styles.areaButton}>
-          <Ionicons name="reader-outline" color={'#000'} size={25} />
-          <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+            <Image
+              source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1014321893584683089/logo.png'}}
+             style={styles.image}
+            />
+            <View style={styles.teste}>
+              <Text>
+              {Item5}
+              </Text>
+              <View style={styles.areaButton} >
+                <Ionicons name="reader-outline" color={'#000'} size={25} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+              </View>
+            </View>
+           
           </View>
           
         </TouchableOpacity>
@@ -88,10 +144,21 @@ export function Action( props ) {
           })}}
           style={styles.actionButton}>
           
-          <Text style={styles.areaButton}>{Item6}</Text>
           <View style={styles.areaButton}>
-          <Ionicons name="reader-outline" color={'#000'} size={25} />
-          <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+            <Image
+             source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1014321893584683089/logo.png'}}
+             style={styles.image}
+            />
+            <View style={styles.teste}>
+              <Text>
+              {Item6}
+              </Text>
+              <View style={styles.areaButton} >
+                <Ionicons name="reader-outline" color={'#000'} size={25} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+              </View>
+            </View>
+           
           </View>
           
         </TouchableOpacity>
@@ -103,10 +170,21 @@ export function Action( props ) {
           })}}
           style={styles.actionButton}>
           
-          <Text style={styles.areaButton}>{Item7}</Text>
           <View style={styles.areaButton}>
-          <Ionicons name="reader-outline" color={'#000'} size={25} />
-          <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+            <Image
+              source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1014321893584683089/logo.png'}}
+             style={styles.image}
+            />
+            <View style={styles.teste}>
+              <Text>
+              {Item7}
+              </Text>
+              <View style={styles.areaButton} >
+                <Ionicons name="reader-outline" color={'#000'} size={25} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+              </View>
+            </View>
+           
           </View>
           
         </TouchableOpacity>
@@ -120,7 +198,7 @@ const styles = StyleSheet.create({
     actionButton: {
         flex: 1,
         backgroundColor: '#fff',
-        paddingStart: 40,
+        paddingStart: 5, 
         marginVertical: 8,
         borderBottomWidth: 0.5,
         borderBottomColor: '#DADADA'    
@@ -128,17 +206,29 @@ const styles = StyleSheet.create({
     areaButton: {
         flex:1,
         backgroundColor: '#fff',
-        paddingStart: 40,
         flexDirection: 'row',
         
     },
     scroll: {
         flex: 1,
+        width: '100%',
         backgroundColor: '#fff',
-        maxHeight: 200,
+        maxHeight: 250,
         marginBottom: 14,
         marginTop: 18,
-        paddingEnd: 14,
-        paddingStart: 14,
-    }
+        paddingRight: 0,
+        paddingStart: 0,
+    },
+    image: {
+      width: 60,
+      height: 60,
+      flexDirection: 'row',
+      right: 6,
+     },
+    teste: {
+      flexDirection: 'column',
+      top: 5,
+      left: 5,
+     },
+
 });
