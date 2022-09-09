@@ -1,8 +1,10 @@
 import React from "react";
 import { Text, View, Image, StyleSheet } from "react-native";
+import { ItemName } from "../../components/ItemDescription/ItemName/itemName";
+import { ItemValidation } from "../../components/ItemDescription/ItemValidation/itemValidation";
 import SearchBar from "../../components/SearchBar/searchbar";
 
-export function ProductPage( {route} ) {
+export function ProductPage( {route, navigation} ) {
   const {productName} = route.params;
   return (
     <View style={styles.container}>
@@ -14,8 +16,8 @@ export function ProductPage( {route} ) {
        />
       </View>
        <View style={styles.itemDescriptionView}>
-        <Text style={{marginBottom: 10,}}>Página do produto</Text>
-        <Text>Nome do produto: {productName}</Text>
+        <ItemName productName={productName}/>
+        <ItemValidation navigationProp={navigation}/>
        </View>
     </View>
   );
@@ -40,6 +42,23 @@ const styles = StyleSheet.create({
   itemDescriptionView: {
     flex: 1,
     paddingVertical: 8,
-    paddingHorizontal: 15
+    paddingHorizontal: 8
+  },
+  itemValidationTitle: {
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  itemValidationLaudoLink: {
+    color: 'green',
+    textDecorationLine: 'underline'
+  },
+  itemValidationIconText: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '43%'
+  },
+  itemValidationView: {
+    alignItems: 'flex-end'
+
   }
 })
