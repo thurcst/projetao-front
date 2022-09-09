@@ -1,27 +1,50 @@
-import React from "react";
+import React, { Component } from "react";
 import { Text, View, Image, StyleSheet } from "react-native";
 import { ItemName } from "../../components/ItemDescription/ItemName/itemName";
 import { ItemValidation } from "../../components/ItemDescription/ItemValidation/itemValidation";
 import SearchBar from "../../components/SearchBar/searchbar";
+import { Product } from "../../types/product";
 
-export function ProductPage( {route, navigation} ) {
-  const {productName} = route.params;
-  return (
-    <View style={styles.container}>
-      <SearchBar />
-      <View style={styles.imageView}>
-      <Image
-              source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
-              style={styles.image}
-       />
+class ProductPage extends React.Component<any, any> { // Consertar esse <any, any> fazendo uma interface
+  product: Product = new Product(123, 9.3, 'Produto sem glúten');
+  render(): JSX.Element {
+    const { productName } = this.props.route.params;
+    this.product.setName(productName);
+    return (
+      <View style={styles.container}>
+        <SearchBar />
+        <View style={styles.imageView}>
+        <Image
+                source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
+                style={styles.image}
+         />
+        </View>
+         <View style={styles.itemDescriptionView}>
+          <ItemName productName={this.product.getName()}/>
+          <ItemValidation navigationProp={this.props.navigation} classifGluten={this.product.getContainsGlutenClassification()} securityGrade={this.product.getSecurityGrade().toString()}/>
+         </View>
       </View>
-       <View style={styles.itemDescriptionView}>
-        <ItemName productName={productName}/>
-        <ItemValidation navigationProp={navigation}/>
-       </View>
-    </View>
-  );
+    );
+  }
 }
+// export function ProductPage( {route, navigation} ) {
+//   const {productName} = route.params;
+//   return (
+//     <View style={styles.container}>
+//       <SearchBar />
+//       <View style={styles.imageView}>
+//       <Image
+//               source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
+//               style={styles.image}
+//        />
+//       </View>
+//        <View style={styles.itemDescriptionView}>
+//         <ItemName productName={productName}/>
+//         <ItemValidation navigationProp={navigation}/>
+//        </View>
+//     </View>
+//   );
+// }
 
 const styles = StyleSheet.create({
   container: {
@@ -62,3 +85,5 @@ const styles = StyleSheet.create({
 
   }
 })
+
+export {ProductPage};
