@@ -106,17 +106,9 @@ const categories = [
     }
 ];
 
-function renderItem() {
-    return categories.map((item) => {
-        return (
-            <Text>{item.category}</Text>
-        )
-    })
-}
-
 const Item = ({ item }) => (
     <View style={styles.item}>
-        <Text>alo: {item.data[0].name} ({item.category})</Text>
+        {item.data.map((item) => <Text>{item.name}</Text>)}
     </View>
 );
 
@@ -174,7 +166,7 @@ const styles = StyleSheet.create({
     },
     filterBar: {
         flexDirection: 'row',
-        // flex: 0.2,
+        justifyContent: 'space-around',
         height: 40,
     },
     item: {

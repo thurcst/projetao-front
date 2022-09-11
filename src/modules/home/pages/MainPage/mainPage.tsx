@@ -9,12 +9,6 @@ export function MainPage({ navigation }) {
     <View style={styles.container}>
       <SearchBar />
       <MainSection />
-      <View style={styles.content}>
-        <Text>SemGlú!</Text>
-        {/* <Button title="Go to about screen" 
-          onPress={() => navigation.navigate('About')} 
-        /> */}
-      </View>
       <View style={styles.mainItems}>
         <MainItems navigationProp={navigation}/>
       </View>
