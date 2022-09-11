@@ -3,7 +3,7 @@ import { Text, View, Image } from "react-native";
 import SearchBar from "../../components/SearchBar/searchbar";
 
 export function ProductPage( {route} ) {
-  const {productName} = route.params;
+  const {productName,typeItem, dataItem} = route.params;
   return (
     <View>
       <SearchBar />
@@ -14,7 +14,7 @@ export function ProductPage( {route} ) {
       <Text >Página do produto</Text>
       
       <Text>Nome do produto: {productName}</Text>
+      <Text>Codigo de barras: Tipo = {typeItem}, Data = {dataItem}</Text>
     </View>
   );
 }
-

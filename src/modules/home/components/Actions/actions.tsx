@@ -31,8 +31,8 @@ export function Action( props ) {
               {Item1}
               </Text>
               <View style={styles.icons} >
-                <Ionicons name="reader-outline" color={'#000'} size={25} />
-                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+                <Ionicons name="reader-outline" color={'#000'} size={20} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={20} />
               </View>
             </View>
            
@@ -56,8 +56,8 @@ export function Action( props ) {
               {Item2}
               </Text>
               <View style={styles.icons} >
-                <Ionicons name="reader-outline" color={'#000'} size={25} />
-                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+                <Ionicons name="reader-outline" color={'#000'} size={20} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={20} />
               </View>
             </View>
            
@@ -80,8 +80,8 @@ export function Action( props ) {
               {Item3}
               </Text>
               <View style={styles.icons} >
-                <Ionicons name="reader-outline" color={'#000'} size={25} />
-                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+                <Ionicons name="reader-outline" color={'#000'} size={20} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={20} />
               </View>
             </View>
            
@@ -104,8 +104,8 @@ export function Action( props ) {
               {Item4}
               </Text>
               <View style={styles.icons} >
-                <Ionicons name="reader-outline" color={'#000'} size={25} />
-                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+                <Ionicons name="reader-outline" color={'#000'} size={20} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={20} />
               </View>
             </View>
            
@@ -128,8 +128,8 @@ export function Action( props ) {
               {Item5}
               </Text>
               <View style={styles.icons} >
-                <Ionicons name="reader-outline" color={'#000'} size={25} />
-                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+                <Ionicons name="reader-outline" color={'#000'} size={20} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={20} />
               </View>
             </View>
            
@@ -154,8 +154,8 @@ export function Action( props ) {
               {Item6}
               </Text>
               <View style={styles.icons} >
-                <Ionicons name="reader-outline" color={'#000'} size={25} />
-                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+                <Ionicons name="reader-outline" color={'#000'} size={20} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={20} />
               </View>
             </View>
            
@@ -180,8 +180,8 @@ export function Action( props ) {
               {Item7}
               </Text>
               <View style={styles.icons} >
-                <Ionicons name="reader-outline" color={'#000'} size={25} />
-                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+                <Ionicons name="reader-outline" color={'#000'} size={20} />
+                <Ionicons name="chatbubbles-outline" color={'#000'} size={20} />
               </View>
             </View>
            
@@ -213,8 +213,7 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
       backgroundColor: '#fff',
       flexDirection: 'row-reverse',
-      paddingRight: 10,
-      borderBottomWidth: 0.5,
+      borderBottomWidth: 0.9,
       borderBottomColor: '#DADADA'
       
   },
