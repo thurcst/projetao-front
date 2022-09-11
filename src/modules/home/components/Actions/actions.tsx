@@ -30,7 +30,7 @@ export function Action( props ) {
               <Text>
               {Item1}
               </Text>
-              <View style={styles.areaButton} >
+              <View style={styles.icons} >
                 <Ionicons name="reader-outline" color={'#000'} size={25} />
                 <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
               </View>
@@ -55,7 +55,7 @@ export function Action( props ) {
               <Text>
               {Item2}
               </Text>
-              <View style={styles.areaButton} >
+              <View style={styles.icons} >
                 <Ionicons name="reader-outline" color={'#000'} size={25} />
                 <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
               </View>
@@ -79,7 +79,7 @@ export function Action( props ) {
               <Text>
               {Item3}
               </Text>
-              <View style={styles.areaButton} >
+              <View style={styles.icons} >
                 <Ionicons name="reader-outline" color={'#000'} size={25} />
                 <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
               </View>
@@ -103,7 +103,7 @@ export function Action( props ) {
               <Text>
               {Item4}
               </Text>
-              <View style={styles.areaButton} >
+              <View style={styles.icons} >
                 <Ionicons name="reader-outline" color={'#000'} size={25} />
                 <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
               </View>
@@ -127,7 +127,7 @@ export function Action( props ) {
               <Text>
               {Item5}
               </Text>
-              <View style={styles.areaButton} >
+              <View style={styles.icons} >
                 <Ionicons name="reader-outline" color={'#000'} size={25} />
                 <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
               </View>
@@ -153,7 +153,7 @@ export function Action( props ) {
               <Text>
               {Item6}
               </Text>
-              <View style={styles.areaButton} >
+              <View style={styles.icons} >
                 <Ionicons name="reader-outline" color={'#000'} size={25} />
                 <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
               </View>
@@ -179,7 +179,7 @@ export function Action( props ) {
               <Text>
               {Item7}
               </Text>
-              <View style={styles.areaButton} >
+              <View style={styles.icons} >
                 <Ionicons name="reader-outline" color={'#000'} size={25} />
                 <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
               </View>
@@ -200,8 +200,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingStart: 5, 
         marginVertical: 8,
-        borderBottomWidth: 0.5,
-        borderBottomColor: '#DADADA'    
+            
     },
     areaButton: {
         flex:1,
@@ -209,6 +208,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         
     },
+    icons: {
+      flex:1,
+      justifyContent: 'flex-start',
+      backgroundColor: '#fff',
+      flexDirection: 'row-reverse',
+      paddingRight: 10,
+      borderBottomWidth: 0.5,
+      borderBottomColor: '#DADADA'
+      
+  },
     scroll: {
         flex: 1,
         width: '100%',
@@ -224,9 +233,10 @@ const styles = StyleSheet.create({
       height: 60,
       flexDirection: 'row',
       right: 6,
+      
      },
     teste: {
-      flexDirection: 'column',
+      flex: 1,
       top: 5,
       left: 5,
      },

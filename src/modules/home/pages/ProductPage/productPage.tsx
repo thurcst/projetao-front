@@ -9,9 +9,9 @@ export function ProductPage( {route} ) {
       <SearchBar />
       <Image
               source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
-              style={{width: '100%',height: '100%',flexDirection: 'row',}}
+              style={{width: '100%',height: 200, flexDirection: 'row',}}
        />
-      <Text style={{marginBottom: 150,}}>Página do produto</Text>
+      <Text >Página do produto</Text>
       
       <Text>Nome do produto: {productName}</Text>
     </View>
