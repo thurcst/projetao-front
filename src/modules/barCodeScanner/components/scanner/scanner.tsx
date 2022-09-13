@@ -17,7 +17,7 @@ export default function Scanner({navigation}) {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
-    {navigation.navigate('About', {typeItem: type, dataItem: data})}
+    {navigation.navigate('ProductPage', {typeItem: type, dataItem: data})}
     // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     // mexer no alert para salvar type e data em variáveis globais
   };
