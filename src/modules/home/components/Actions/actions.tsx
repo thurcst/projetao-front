@@ -30,6 +30,7 @@ export function Action( props ) {
               <Text>
               {Item1}
               </Text>
+              
               <View style={styles.icons} >
                 <Ionicons name="reader-outline" color={'#000'} size={20} />
                 <Ionicons name="chatbubbles-outline" color={'#000'} size={20} />
