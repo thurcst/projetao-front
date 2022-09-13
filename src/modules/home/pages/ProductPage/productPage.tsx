@@ -6,7 +6,7 @@ import SearchBar from "../../components/SearchBar/searchbar";
 import { Product } from "../../types/product";
 
 class ProductPage extends React.Component<any, any> { // Consertar esse <any, any> fazendo uma interface
-  product: Product = new Product();// instanciar o produto e fazê-lo dentro do render usando setters
+  product: Product = new Product();
   render(): JSX.Element {
     const { navigation, route } = this.props;
     const { productName, typeItem, dataItem} = route.params;
