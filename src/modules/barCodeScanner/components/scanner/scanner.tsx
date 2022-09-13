@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button, ProgressBarAndroidBase } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import DrawerNavigator from '../../../home/routes/navigation/DrawerNavigator';
 
 export default function Scanner({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -15,12 +14,13 @@ export default function Scanner({navigation}) {
 
     getBarCodeScannerPermissions();
   }, []);
-
+  
   const handleBarCodeScanned = ({ type, data }) => {
-    {navigation.navigate('About', {typeItem: type, dataItem: data})}
-    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    // mexer no alert para salvar type e data em variáveis globais
+    if (type === 32){
+      setScanned(true)
+    }
   };
+  
 
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>;
@@ -29,14 +29,20 @@ export default function Scanner({navigation}) {
     return <Text>No access to camera</Text>;
   }
 
+  const parar = ({ type, data }) =>{
+    {navigation.navigate('ProductPage', {typeItem: type, dataItem: data})}
+  };
+
   return (
+    
     <View style={styles.container}>
+      
       <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+       onBarCodeScanned={scanned ? parar : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
     </View>
+    
   );
 }
 
