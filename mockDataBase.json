@@ -1,0 +1,137 @@
+{    
+    "products": [        
+        {
+            "barCode": 1,
+            "productName": "Pão Francês",
+            "price": 10.00,
+            "productCategory": "Pães",
+            "safetyCategory": "Produto com glúten"
+        },
+        {
+            "barCode": 2,
+            "productName": "Pão de Forma",
+            "price": 15.00,
+            "productCategory": "Pães",
+            "safetyCategory": "Produto com glúten"
+        },  
+        {
+            "barCode": 3,
+            "productName": "Feijão",
+            "price": 20.00,
+            "productCategory": "Grãos",
+            "safetyCategory": "Produto sem glúten"
+        },
+        {
+            "barCode": 4,
+            "productName": "Soja",
+            "price": 25.00,
+            "productCategory": "Grãos",
+            "safetyCategory": "Produto sem glúten"
+        },        
+        {
+            "barCode": 5,
+            "productName": "Fini",
+            "price": 5.00,
+            "productCategory": "Doces",
+            "safetyCategory": "Produto com glúten"
+        },
+        {
+            "barCode": 6,
+            "productName": "Mentos",
+            "price": 5.00,
+            "productCategory": "Doces",
+            "safetyCategory": "Produto sem glúten"
+        },        
+        {
+            "barCode": 7,
+            "productName": "Maizena",
+            "price": 8.00,
+            "productCategory": "Biscoitos e Salgadinhos",
+            "safetyCategory": "Produto sem glúten"
+        },
+        {
+            "barCode": 8,
+            "productName": "Biscoito de Polvilho",
+            "price": 8.00,
+            "productCategory": "Biscoitos e Salgadinhos",
+            "safetyCategory": "Produto sem glúten"
+        },
+        {
+            "barCode": 9,
+            "productName": "Carne",
+            "price": 30.00,
+            "productCategory": "Carnes, Aves e Peixes",
+            "safetyCategory": "Produto sem glúten"
+        },
+        {
+            "barCode": 10,
+            "productName": "Peixe",
+            "price": 30.00,
+            "productCategory": "Carnes, Aves e Peixes",
+            "safetyCategory": "Produto sem glúten"
+        },
+        {
+            "barCode": 11,
+            "productName": "Molho de Tomate",
+            "price": 10.00,
+            "productCategory": "Molhos e Condimentos",
+            "safetyCategory": "Produto com glúten"
+        },
+        {
+            "barCode": 12,
+            "productName": "Molho de Pimenta",
+            "price": 10.00,
+            "productCategory": "Molhos e Condimentos",
+            "safetyCategory": "Produto sem glúten"
+        },
+        {
+            "barCode": 13,
+            "productName": "Macarrão de Arroz Penne Urbano",
+            "price": 15.00,
+            "productCategory": "Massas",
+            "safetyCategory":"Produto sem glúten"
+        },
+        {
+            "barCode": 14,
+            "productName": "Massa para Pizza Rigani",
+            "price": 20.00,
+            "productCategory": "Massas",
+            "safetyCategory":"Produto sem glúten"
+        },
+        {
+            "barCode": 15,
+            "productName": "Pão Tradicional Wickbold",
+            "price": 12.00,
+            "productCategory": "Pães",
+            "safetyCategory":"Produto sem glúten"
+        },
+        {
+            "barCode": 16,
+            "productName": "Bisc. De Amendoim Com Açúcar Mascavo",
+            "price": 18.00,
+            "productCategory": "Doces",
+            "safetyCategory":"Produto sem glúten"
+        },
+        {
+            "barCode": 17,
+            "productName": "Muffin Laranja com Gotas de Chocolate Belive",
+            "price": 7.00,
+            "productCategory": "Doces",
+            "safetyCategory":"Produto sem glúten"
+        },
+        {
+            "barCode": 18,
+            "productName": "Massa Pronta para Tapioca Natural Life",
+            "price": 15.00,
+            "productCategory": "Massas",
+            "safetyCategory":"Produto sem glúten"
+        },
+        {
+            "barCode": 19,
+            "productName": "Arroz Branco Tipo 1 Longo Fino Camil",
+            "price": 15.00,
+            "productCategory": "Grãos",
+            "safetyCategory":"Produto sem glúten"
+        }
+    ]
+}

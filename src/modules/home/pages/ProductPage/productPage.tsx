@@ -5,16 +5,16 @@ import { ItemValidation } from "../../components/ItemDescription/ItemValidation/
 import SearchBar from "../../components/SearchBar/searchbar";
 import { Product } from "../../types/product";
 
-class ProductPage extends React.Component<any, any> { // Consertar esse <any, any> fazendo uma interface
-  product: Product = new Product();// instanciar o produto e fazê-lo dentro do render usando setters
+class ProductPage extends Component<any, any> { // Consertar esse <any, any> fazendo uma interface
+  product: Product = new Product();
   render(): JSX.Element {
     const { navigation, route } = this.props;
     const { productName, typeItem, dataItem} = route.params;
     this.product.setName(productName);
     this.product.setBarCode(dataItem);
     this.product.setTypeItem(typeItem);
-    this.product.setClassifGluten("Produto sem glúten");
-    this.product.setSecurityGrade(9.3);
+    this.product.setSafetyCategory("Produto sem glúten");
+    this.product.setProductCategory("Pães");
     return (
       <View style={styles.container}>
         <SearchBar />
@@ -26,7 +26,7 @@ class ProductPage extends React.Component<any, any> { // Consertar esse <any, an
         </View>
          <View style={styles.itemDescriptionView}>
           <ItemName productName={this.product.getName()}/>
-          <ItemValidation navigationProp={navigation} classifGluten={this.product.getContainsGlutenClassification()} securityGrade={this.product.getSecurityGrade().toString()}/>
+          <ItemValidation navigationProp={navigation} safetyCategory={this.product.getSafetyCategory()} productCategory={this.product.getProductCategory()}/>
           <Text>Codigo de barras: Tipo = {typeItem}, Data = {dataItem}</Text>
          </View>
       </View>
