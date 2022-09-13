@@ -29,4 +29,5 @@ export class Product {
     public setName(name: string): void {
         this.productName = name;
     }
+    // Add a set function for each parameter
 }
