@@ -6,10 +6,15 @@ import SearchBar from "../../components/SearchBar/searchbar";
 import { Product } from "../../types/product";
 
 class ProductPage extends React.Component<any, any> { // Consertar esse <any, any> fazendo uma interface
-  product: Product = new Product(123, 9.3, 'Produto sem glúten');// instanciar o produto e fazê-lo dentro do render usando setters
+  product: Product = new Product();// instanciar o produto e fazê-lo dentro do render usando setters
   render(): JSX.Element {
-    const { productName } = this.props.route.params;
+    const { navigation, route } = this.props;
+    const { productName, typeItem, dataItem} = route.params;
     this.product.setName(productName);
+    this.product.setBarCode(dataItem);
+    this.product.setTypeItem(typeItem);
+    this.product.setClassifGluten("Produto sem glúten");
+    this.product.setSecurityGrade(9.3);
     return (
       <View style={styles.container}>
         <SearchBar />
@@ -21,26 +26,12 @@ class ProductPage extends React.Component<any, any> { // Consertar esse <any, an
         </View>
          <View style={styles.itemDescriptionView}>
           <ItemName productName={this.product.getName()}/>
-          <ItemValidation navigationProp={this.props.navigation} classifGluten={this.product.getContainsGlutenClassification()} securityGrade={this.product.getSecurityGrade().toString()}/>
+          <ItemValidation navigationProp={navigation} classifGluten={this.product.getContainsGlutenClassification()} securityGrade={this.product.getSecurityGrade().toString()}/>
+          <Text>Codigo de barras: Tipo = {typeItem}, Data = {dataItem}</Text>
          </View>
       </View>
     );
   }
-export function ProductPage( {route} ) {
-  const {productName,typeItem, dataItem} = route.params;
-  return (
-    <View>
-      <SearchBar />
-      <Image
-              source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
-              style={{width: '100%',height: 200, flexDirection: 'row',}}
-       />
-      <Text >Página do produto</Text>
-      
-      <Text>Nome do produto: {productName}</Text>
-      <Text>Codigo de barras: Tipo = {typeItem}, Data = {dataItem}</Text>
-    </View>
-  );
 }
 
 const styles = StyleSheet.create({

@@ -22,6 +22,7 @@ export function TabBar() {
             component={Scanner} 
             options={{
                 tabBarLabel: 'Scanner',
+                unmountOnBlur: true,
                 tabBarIcon: ({ color, size }) => (<Ionicons name="barcode" color={color} size={size} />),}}
             />
         <Tab.Screen 

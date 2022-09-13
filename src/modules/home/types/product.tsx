@@ -3,15 +3,16 @@ export class Product {
     private productName: string;
     private securityGrade: number; // Remover depois para integrar com o BD
     private containsGlutenClassification: string; // Remover depois para integrar com o BD
+    private typeItem: number;
 
-    constructor(barCode: number, securityGrade: number, classifGluten: string) {
-        this.barCode = barCode;
-        this.securityGrade = securityGrade;
-        this.containsGlutenClassification = classifGluten;
-    }
+    constructor() {}
 
     public getBarCode(): number {
         return this.barCode;
+    }
+
+    public getTypeItem(): number {
+        return this.typeItem;
     }
 
     public getName(): string {
@@ -26,8 +27,24 @@ export class Product {
         return this.containsGlutenClassification;
     }
 
+    public setBarCode(barCode: number): void {
+        this.barCode = barCode;
+    }
+
+    public setTypeItem(typeItem: number): void {
+        this.typeItem = typeItem;
+    }
+
     public setName(name: string): void {
         this.productName = name;
+    }
+
+    public setSecurityGrade(securityGrade: number): void {
+        this.securityGrade = securityGrade;
+    }
+
+    public setClassifGluten(classifGluten: string): void {
+        this.containsGlutenClassification = classifGluten;
     }
     // Add a set function for each parameter
 }
