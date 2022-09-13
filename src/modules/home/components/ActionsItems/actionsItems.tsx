@@ -5,7 +5,6 @@ import { GetActionItemInfo } from '../GetActionItemInfo/getActionItemInfo';
 
 export function ActionsItems( props ){
     return (
-
         <TouchableOpacity onPress={() => 
           {props.navigationProp.navigate("ProductPage", {
             productName: GetActionItemInfo(props.item).toString()
