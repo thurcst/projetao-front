@@ -1,8 +1,9 @@
 export class Product {
     private barCode: number;
     private productName: string;
-    private securityGrade: number; // Remover depois para integrar com o BD
-    private containsGlutenClassification: string; // Remover depois para integrar com o BD
+    private price: number;
+    private productCategory: string; // Remover depois para integrar com o BD
+    private safetyCategory: string; // Remover depois para integrar com o BD
     private typeItem: number;
 
     constructor() {}
@@ -15,16 +16,20 @@ export class Product {
         return this.typeItem;
     }
 
+    public getPrice(): number {
+        return this.price;
+    }
+
     public getName(): string {
         return this.productName;
     }
 
-    public getSecurityGrade(): number {
-        return this.securityGrade;
+    public getProductCategory(): string {
+        return this.productCategory;
     }
 
-    public getContainsGlutenClassification(): string {
-        return this.containsGlutenClassification;
+    public getSafetyCategory(): string {
+        return this.safetyCategory;
     }
 
     public setBarCode(barCode: number): void {
@@ -39,12 +44,15 @@ export class Product {
         this.productName = name;
     }
 
-    public setSecurityGrade(securityGrade: number): void {
-        this.securityGrade = securityGrade;
+    public setProductCategory(productCategory: string): void {
+        this.productCategory = productCategory;
     }
 
-    public setClassifGluten(classifGluten: string): void {
-        this.containsGlutenClassification = classifGluten;
+    public setSafetyCategory(safetyCategory: string): void {
+        this.safetyCategory = safetyCategory;
     }
-    // Add a set function for each parameter
+
+    public setPrice(price: number): void {
+        this.price = price;
+    }
 }

@@ -8,11 +8,11 @@ export function ItemValidation( props ) {
             <Text style={styles.itemValidationTitle}>Validação:</Text>
             <View style={styles.itemValidationIconText}>
               <Ionicons name="shield-checkmark-outline" color={'green'} size={20}/>
-              <Text>{props.classifGluten}</Text>
+              <Text>{props.safetyCategory}</Text>
             </View>
             <Text style={styles.itemValidationLink} 
                 onPress={() => {props.navigationProp.navigate("LaudoPage")}}>Laudo</Text>
-            <Text>Segurança: {props.securityGrade}/10.0</Text>
+            <Text>Categoria: {props.productCategory}</Text>
             <Text style={styles.itemValidationLink}>Entenda nossa avaliação</Text>
           </View>
         </View>
