@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, Image } from "react-native";
 import SearchBar from "../../components/SearchBar/searchbar";
 
 export function ProductPage( {route} ) {
   const {productName,typeItem, dataItem} = route.params;
+
+  
   return (
     <View>
       <SearchBar />
