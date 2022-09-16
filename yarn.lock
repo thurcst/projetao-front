@@ -1387,7 +1387,7 @@
 
 "@expo/vector-icons@^13.0.0":
   version "13.0.0"
-  resolved "https://registry.npmjs.org/@expo/vector-icons/-/vector-icons-13.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-13.0.0.tgz#e2989b85e95a82bce216f88cf8fb583ab050ec95"
   integrity sha512-TI+l71+5aSKnShYclFa14Kum+hQMZ86b95SH6tQUG3qZEmLTarvWpKwqtTwQKqvlJSJrpFiSFu3eCuZokY6zWA==
 
 "@expo/webpack-config@^0.17.0":
@@ -8214,7 +8214,7 @@ prompts@^2.3.2, prompts@^2.4.0:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.7.2:
+prop-types@^15.6.0, prop-types@^15.7.2:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -8544,6 +8544,13 @@ react-native-screens@~3.15.0:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-super-grid@^4.5.1:
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/react-native-super-grid/-/react-native-super-grid-4.5.1.tgz#2afa48638cc0f9f0cd5254902706ee20edb664b1"
+  integrity sha512-sIDfdTMhgSDAEn86BPHv8lpuf+iYmgxRi8dYefirV2/nWoIZP9UeJdOMO7Vn9ButtVqGAfkiGD16zS7iykvf8w==
+  dependencies:
+    prop-types "^15.6.0"
 
 react-native-svg@12.3.0:
   version "12.3.0"
