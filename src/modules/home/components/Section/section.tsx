@@ -1,5 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import { SectionList, StyleSheet, View, Text, Button, FlatList } from 'react-native';
+import { SectionList, StyleSheet, View, Text, Button, FlatList, TouchableOpacity } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FlipInEasyX } from 'react-native-reanimated';
+
 
 const categories = [
     {
@@ -106,45 +109,15 @@ const categories = [
     }
 ];
 
-const Item = ({ item }) => (
-    <View style={styles.item}>
-        {item.data.map((item) => <Text>{item.name}</Text>)}
-    </View>
-);
-
 const Section = () => {
-    const [data, setData] = useState(categories);
-
-    const [selectedCategory, setSelectedCategory] = useState('');
-
-    const filteredList = useMemo(() => {
-        if (selectedCategory) {
-            return data.filter(item => item.category === selectedCategory);
-        }
-        return data;
-    }, [selectedCategory, data]);
-
-    const onSelectedCategory = (category: string) => {
-        setSelectedCategory(category);
-    };
-
+    
     return (
-        <View style={styles.container}>
-            <Text>Selected category: {selectedCategory}</Text>
-            <View style={styles.filterBar}>
-                <Button title="Pães" onPress={() => onSelectedCategory('Pães')} />
-                <Button title="Grãos" onPress={() => onSelectedCategory('Grãos')} />
-                <Button title="Doces" onPress={() => onSelectedCategory('Doces')} />
-                <Button title="Biscoitos e Salgadinhos" onPress={() => onSelectedCategory('Biscoitos e Salgadinhos')} />
-                <Button title="Carnes, Aves e Peixes" onPress={() => onSelectedCategory('Carnes, Aves e Peixes')} />
-                <Button title="Molhos e Condimentos" onPress={() => onSelectedCategory('Molhos e Condimentos')} />
-            </View>
-            <FlatList
-                style={styles.list}
-                renderItem={Item}
-                data={filteredList}
-            />
-        </View>
+        <TouchableOpacity style={styles.container}
+            activeOpacity={0.8}
+        >
+            <Text style={styles.text}>Bilola</Text>
+            <MaterialCommunityIcons name="bread-slice-outline" size={40} color="black" />
+        </TouchableOpacity>
     )
 
 };
@@ -154,114 +127,18 @@ export default Section;
 
 const styles = StyleSheet.create({
     container: {
+      display: 'flex',
+      flexDirection: 'row',
       flex: 1,
-      justifyContent: 'center',
-      padding: 8,
-      backgroundColor: 'white',
+      borderRadius: 10,
+      padding: 10,
+      justifyContent: 'space-between',
+      backgroundColor: 'orange',
+      alignItems: 'flex-end',
     },
-    list: {
-      marginRight: 20,
-      height: '100%',
-      width: '100%'
-    },
-    filterBar: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        height: 40,
-    },
-    item: {
-      flex: 1,
-      justifyContent: 'flex-start',
-      padding: 8,
-      backgroundColor: 'white',
+    text: {
+        color: 'white',
+        fontSize: 32,
     }
   });
 
-// creating section list that can click on each title to get redirected to product page
-// export default function Section() {
-//     return (
-//         <View style={styles.container}>
-//             <SectionList
-//                 sections={categories}
-//                 keyExtractor={(item) => item.id}
-//                 renderItem={({ item }) => (
-//                     <View style={styles.item}>
-//                         <Text style={styles.title}>{item.name}</Text>
-//                         <Text style={styles.price}>{item.price}</Text>
-//                         <Text style={styles.rating}>{item.rating}</Text>
-//                     </View>
-//                 )}
-//                 renderSectionHeader={({ section: { category } }) => (
-//                     <Text style={styles.header}>{category}</Text>
-//                 )}
-//             />
-//         </View>
-//     );
-// }
-
-// // styling section list
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         marginTop: 20,
-//     },
-//     item: {
-//         backgroundColor: '#f9c2ff',
-//         padding: 20,
-//         marginVertical: 8,
-//     },
-//     header: {
-//         fontSize: 32,
-//         backgroundColor: '#fff',
-//     },
-//     title: {
-//         fontSize: 24,
-//     },
-//     price: {
-//         fontSize: 18,
-//     },
-//     rating: {
-//         fontSize: 18,
-//     },
-// });
-
-// export default function Section() {
-//     return(
-//         <View style={styles.container}>
-//             <SectionList
-//                 sections={[
-//                     {category: 'Pães', data: ['Bisnaguinha', 'Pão Francês', 'Pão de Forma']},
-//                     {category: 'Doces', data: ['Brigadeiro', 'Chocolate', 'Bolo']},
-//                     {category: 'Carnes, Aves e Peixes', data: ['Frango', 'Peixe', 'Carne']},
-//                     {category: 'Grãos', data: ['Arroz', 'Feijão', 'Macarrão']},
-//                     {category: 'Biscoitos e Salgadinhos', data: ['Biscoito', 'Salgadinho', 'Doritos']},
-//                     {category: 'Molhos e Condimentos', data: ['Molho de Tomate', 'Molho de Pimenta', 'Molho de Soja']},
-//                 ]}
-//                 renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-//                 renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.category}</Text>}
-//                 keyExtractor={(item, index) => `basicListEntry-${item.title}`}
-//             />
-//         </View>
-//     );
-// }
-
-// const styles = StyleSheet.create({
-//     container: {
-//      flex: 1,
-//      paddingTop: 22
-//     },
-//     sectionHeader: {
-//       paddingTop: 2,
-//       paddingLeft: 10,
-//       paddingRight: 10,
-//       paddingBottom: 2,
-//       fontSize: 14,
-//       fontWeight: 'bold',
-//       backgroundColor: 'rgba(247,247,247,1.0)',
-//     },
-//     item: {
-//       padding: 10,
-//       fontSize: 18,
-//       height: 44,
-//     },
-// })

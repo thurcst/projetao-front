@@ -9,9 +9,9 @@ export function MainPage({ navigation }) {
     <View style={styles.container}>
       <SearchBar />
       <MainSection />
-      <View style={styles.mainItems}>
+      {/* <View style={styles.mainItems}>
         <MainItems navigationProp={navigation}/>
-      </View>
+      </View> */}
     </View>
   );
 };
