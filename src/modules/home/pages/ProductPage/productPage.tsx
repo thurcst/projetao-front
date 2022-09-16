@@ -3,6 +3,7 @@ import { Text, View, Image, StyleSheet } from "react-native";
 import { ItemName } from "../../components/ItemDescription/ItemName/itemName";
 import { ItemValidation } from "../../components/ItemDescription/ItemValidation/itemValidation";
 import SearchBar from "../../components/SearchBar/searchbar";
+import { getProduct } from "../../services/product.service";
 import { Product } from "../../types/product";
 
 class ProductPage extends Component<any, any> { // Consertar esse <any, any> fazendo uma interface
@@ -10,11 +11,12 @@ class ProductPage extends Component<any, any> { // Consertar esse <any, any> faz
   render(): JSX.Element {
     const { navigation, route } = this.props;
     const { productName, typeItem, dataItem} = route.params;
-    this.product.setName(productName);
-    this.product.setBarCode(dataItem);
-    this.product.setTypeItem(typeItem);
-    this.product.setSafetyCategory("Produto sem glúten");
-    this.product.setProductCategory("Pães");
+    this.product = getProduct(dataItem);
+    // this.product.setName(productName);
+    // this.product.setBarCode(dataItem);
+    // this.product.setTypeItem(typeItem);
+    // this.product.setSafetyCategory("Produto sem glúten");
+    // this.product.setProductCategory("Pães");
     return (
       <View style={styles.container}>
         <SearchBar />

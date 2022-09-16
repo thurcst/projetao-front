@@ -6,7 +6,14 @@ export class Product {
     private safetyCategory: string; // Remover depois para integrar com o BD
     private typeItem: number;
 
-    constructor() {}
+    constructor(barCode: number = null, productName: string = null, price: number = null, productCategory: string = null, safetyCategory: string = null, typeItem: number = null) {
+        this.barCode = barCode;
+        this.productName = productName;
+        this.price = price;
+        this.productCategory = productCategory;
+        this.safetyCategory = safetyCategory;
+        this.typeItem = typeItem;
+    }
 
     public getBarCode(): number {
         return this.barCode;
