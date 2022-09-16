@@ -8,10 +8,10 @@ export function MainPage({ navigation }) {
   return (
     <View style={styles.container}>
       <SearchBar />
-      <MainSection />
-      {/* <View style={styles.mainItems}>
+      <MainSection navigation={navigation}/>
+      <View style={styles.mainItems}>
         <MainItems navigationProp={navigation}/>
-      </View> */}
+      </View>
     </View>
   );
 };

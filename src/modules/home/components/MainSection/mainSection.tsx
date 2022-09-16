@@ -1,20 +1,45 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { FlatGrid } from 'react-native-super-grid';
-import Section from '../Section/section';
+import { FlatList, StyleSheet, View, Text } from 'react-native';
+import { NavigationScreenProp } from 'react-navigation';
+import mockDataBase from '../../../../../mockDataBase';
+import Section, { SectionProps } from '../Section/section';
 
-export default function MainSection() {
+interface HandleSectionProps {
+    item: SectionProps;
+    index: number;
+}
+
+export interface MainSectionProps {
+    navigation: NavigationScreenProp<any,any>
+}
+
+export default function MainSection({ navigation }: MainSectionProps) {
+    const renderItem = ({ item, index }: HandleSectionProps) => <Section key={index} navigation={navigation} {...item}/>;
+    const keyExtractor = (item) => item.barCode;
     return(
-        <FlatGrid style={styles.container} 
-                  itemDimension={200} 
-                  data={[1,2,3,4,5,6]} 
-                  renderItem={({ item }) => (<Section />)} />
+        <View style={styles.container}>
+            <Text style={styles.text}>Categorias: </Text>
+            <FlatList
+                style={styles.list}
+                horizontal
+                data={mockDataBase}
+                renderItem={renderItem}
+                keyExtractor={keyExtractor}
+            />
+        </View>   
     );    
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        padding: 10,
+
+    },
+    text: {
+        fontSize: 24,
+        fontWeight: 'bold',
+    },
+    list: {
+        marginTop: 10,
+        marginLeft: 10,
     }
 });
