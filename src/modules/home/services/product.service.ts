@@ -1,9 +1,17 @@
 import React from "react";
-import product from "../../../../mockDataBase.json";
+import mockDataBase from "../../../../mockDataBase";
 import { Product } from "../types/product";
 
+// Talvez seja necessário melhorar a checagem de erros, mas não tenho certeza porque a parte de front não vai lidar com o banco de dados
 export function getProduct(productId: number): Product {
-    const productFromDatabase = product.products.find(item => item.barCode == productId);
-    const productItem = new Product(productId, productFromDatabase.productName, productFromDatabase.price, productFromDatabase.productCategory, productFromDatabase.safetyCategory);
+    let productItemFromDatabase;
+    // Iterate through every item and stops if it finds the desired product
+    mockDataBase.every(item => {
+        productItemFromDatabase = item.data.find(productItem => productItem.barCode == productId);
+        if (productItemFromDatabase !== undefined){
+            return false;
+        }
+    });
+    const productItem = new Product(productId, productItemFromDatabase.productName, productItemFromDatabase.price, productItemFromDatabase.productCategory, productItemFromDatabase.safetyCategory);
     return productItem;
 }
