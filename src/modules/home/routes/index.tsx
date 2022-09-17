@@ -1,7 +1,7 @@
-import DrawerNavigator from "./navigation/DrawerNavigator";
+import { HomeStackNavigator } from "./stack.routes";
 
 export function HomeRoutes(){
     return (
-        <DrawerNavigator/>
+        <HomeStackNavigator/>
     );
 }
