@@ -6,12 +6,17 @@ import { Product } from "../types/product";
 export function getProduct(productId: number): Product {
     let productItemFromDatabase;
     // Iterate through every item and stops if it finds the desired product
-    mockDataBase.every(item => {
+    for (let item of mockDataBase) {
         productItemFromDatabase = item.data.find(productItem => productItem.barCode == productId);
-        if (productItemFromDatabase !== undefined){
-            return false;
+        if (productItemFromDatabase !== undefined) {
+            break;
         }
-    });
-    const productItem = new Product(productId, productItemFromDatabase.productName, productItemFromDatabase.price, productItemFromDatabase.productCategory, productItemFromDatabase.safetyCategory);
-    return productItem;
+    }
+    if (productItemFromDatabase !== undefined) {
+        const productItem = new Product(productId, productItemFromDatabase.productName, productItemFromDatabase.price, productItemFromDatabase.productCategory, productItemFromDatabase.safetyCategory);
+        return productItem;
+    } else {
+        const productItem = new Product();
+        return productItem;
+    }
 }

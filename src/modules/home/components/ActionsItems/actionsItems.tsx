@@ -1,13 +1,24 @@
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import React from 'react';
-import { GetActionItemInfo } from '../GetActionItemInfo/getActionItemInfo';
+import React, { useEffect, useState } from 'react';
+import { Product } from '../../types/product';
+import { getProduct } from '../../services/product.service';
 
 export function ActionsItems( props ){
+    let [item, setItem] = useState(null);
+    useEffect(() => {
+      async function fetchData() {
+        const productItem: Product = await getProduct(props.itemId);
+        setItem(productItem);
+      }
+
+      fetchData();
+    }, [setItem]);
+    
     return (
         <TouchableOpacity onPress={() => 
           {props.navigationProp.navigate("ProductPage", {
-            productName: GetActionItemInfo(props.item).toString()
+            itemId: item.getBarCode()
           })}} 
           style={styles.actionButton}>
           
@@ -18,7 +29,7 @@ export function ActionsItems( props ){
             />
             <View style={styles.teste}>
               <Text>
-              {GetActionItemInfo(props.item)}
+              {item && item.getName()}
               </Text>
               <View style={styles.areaButton} >
                 <Ionicons name="reader-outline" color={'#000'} size={25} />

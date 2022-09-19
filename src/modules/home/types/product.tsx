@@ -2,11 +2,11 @@ export class Product {
     private barCode: number;
     private productName: string;
     private price: number;
-    private productCategory: string; // Remover depois para integrar com o BD
-    private safetyCategory: string; // Remover depois para integrar com o BD
+    private productCategory: string;
+    private safetyCategory: string;
     private typeItem: number;
 
-    constructor(barCode: number = null, productName: string = null, price: number = null, productCategory: string = null, safetyCategory: string = null, typeItem: number = null) {
+    constructor(barCode: number = -1, productName: string = "not found", price: number = -1, productCategory: string = "not found", safetyCategory: string = "not found", typeItem: number = -1) {
         this.barCode = barCode;
         this.productName = productName;
         this.price = price;
