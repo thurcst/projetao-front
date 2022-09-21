@@ -32,7 +32,7 @@ export default function MainSection({ navigation }: MainSectionProps) {
 
 const styles = StyleSheet.create({
     container: {
-
+        paddingBottom: 5
     },
     text: {
         fontSize: 24,
