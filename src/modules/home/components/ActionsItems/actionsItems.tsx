@@ -8,17 +8,19 @@ export function ActionsItems( props ){
     let [item, setItem] = useState(null);
     useEffect(() => {
       async function fetchData() {
-        const productItem: Product = await getProduct(props.itemId);
+        const productItem = await getProduct(props.itemId);
+        console.log(productItem);
         setItem(productItem);
       }
 
       fetchData();
     }, [setItem]);
     
+
     return (
         <TouchableOpacity onPress={() => 
           {props.navigationProp.navigate("ProductPage", {
-            itemId: item.getBarCode()
+            itemId: item.barCode
           })}} 
           style={styles.actionButton}>
           
@@ -29,7 +31,7 @@ export function ActionsItems( props ){
             />
             <View style={styles.teste}>
               <Text>
-              {item && item.getName()}
+              {item && item.productName}
               </Text>
               <View style={styles.areaButton} >
                 <Ionicons name="reader-outline" color={'#000'} size={25} />

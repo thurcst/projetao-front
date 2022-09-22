@@ -30,7 +30,7 @@ export default function Scanner({navigation}) {
   }
 
   const parar = ({ type, data }) =>{
-    {navigation.navigate('ProductPage', {typeItem: 1, itemId: 3})}
+    {navigation.navigate('ProductPage', {typeItem: 1, itemId: 13})}
   };
 
   return (

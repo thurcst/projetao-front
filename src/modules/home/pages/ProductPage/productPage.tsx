@@ -48,8 +48,8 @@ export function ProductPage( props ) {
             />
         </View>
         <View style={styles.itemDescriptionView}>
-        <ItemName productName={item.getName()}/>
-        <ItemValidation navigationProp={navigation} safetyCategory={item && item.getSafetyCategory()} productCategory={item && item.getProductCategory()}/>
+        <ItemName productName={item.productName}/>
+        <ItemValidation navigationProp={navigation} safetyCategory={item && item.safetyCategory} productCategory={item && item.productCategory}/>
         <Text>Codigo de barras: Tipo = {typeItem}, Data = {itemId}</Text>
         </View>
       </View>
