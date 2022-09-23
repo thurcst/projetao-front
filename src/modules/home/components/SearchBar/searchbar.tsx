@@ -10,7 +10,7 @@ const SearchBar = () => {
             placeholder="Search"
             onClear={() => setValue('')}
             onCancel={() => setValue('')}
-            iconColor="green"
+            iconColor="black"
             returnKeyType="search"
             onKeyPress={() => console.log('onKeyPress')}
         />

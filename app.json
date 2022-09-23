@@ -19,7 +19,7 @@
     ],
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.projetao.sem_glu",
@@ -31,7 +31,7 @@
       "bundleIdentifier": "com.projetao.semglu"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
     },
     "extra": {
       "eas": {

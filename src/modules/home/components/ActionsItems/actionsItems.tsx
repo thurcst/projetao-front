@@ -69,25 +69,28 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingStart: 5, 
         marginVertical: 8,
-        borderBottomWidth: 0.5,
-        borderBottomColor: '#DADADA'    
+          
     },
     areaButton: {
         flex:1,
         backgroundColor: '#fff',
         flexDirection: 'row',
         
+        
     },
     image: {
-      width: 60,
-      height: 60,
+      width: 100,
+      height: 100,
       flexDirection: 'row',
       right: 6,
      },
     teste: {
+      flex: 1,
       flexDirection: 'column',
       top: 5,
       left: 5,
+      borderBottomWidth: 0.5,
+      borderBottomColor: '#DADADA'
      },
 
 });
