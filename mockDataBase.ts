@@ -1,7 +1,7 @@
 const mockDataBase = [
     {
         productCategory: 'Pães',
-        urlImage: 'https://upload.wikimedia.org/wikipedia/commons/1/17/Breads_%281%29.jpg',
+        urlImage: 'https://cdn.discordapp.com/attachments/997813801762177104/1023027884157317150/WhatsApp_Image_2022-09-23_at_21.25.47.jpeg',
         data: [
             {
                 barCode: 1,
@@ -20,7 +20,7 @@ const mockDataBase = [
     },
     {
         productCategory: 'Grãos',
-        urlImage: 'https://www.damagrinha.com.br/imgs/q-1240-698-90/conteudo/site_posts/30/graos.jpg',
+        urlImage: 'https://cdn.discordapp.com/attachments/997813801762177104/1023027885126201344/WhatsApp_Image_2022-09-23_at_21.25.50.jpeg',
         data: [
             {
                 barCode: 3,
@@ -38,7 +38,7 @@ const mockDataBase = [
     },
     {
         productCategory: 'Doces',
-        urlImage: 'https://static4.depositphotos.com/1007566/339/i/600/depositphotos_3391287-stock-photo-color-cereal.jpg',
+        urlImage: 'https://cdn.discordapp.com/attachments/997813801762177104/1023027883817566278/WhatsApp_Image_2022-09-23_at_21.25.48.jpeg',
         data: [
             {
                 barCode: 5,
@@ -56,7 +56,7 @@ const mockDataBase = [
     },
     {
         productCategory: 'Biscoitos e Salgadinhos',
-        urlImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm_twYdE5A2gJc0K_u1OudP_XiSm2ncXG67VZJ5efOWf5JxTRkNfF-RBqzR-jdtrRK65s&usqp=CAU',
+        urlImage: 'https://cdn.discordapp.com/attachments/997813801762177104/1023027883448471592/WhatsApp_Image_2022-09-23_at_21.25.49.jpeg',
         data: [
             {
                 barCode: 7,
@@ -74,7 +74,7 @@ const mockDataBase = [
     },
     {
         productCategory: 'Carnes, Aves e Peixes',
-        urlImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_za928HzM8LMvp3kHmqJajO4x8BZXYoOQcMsuTrKZzfF7xRjkogP_HOefS1HZVB8wgr0&usqp=CAU',
+        urlImage: 'https://cdn.discordapp.com/attachments/997813801762177104/1023027884710952980/WhatsApp_Image_2022-09-23_at_21.25.50_1.jpeg',
         data: [
             {
                 barCode: 9,
@@ -92,7 +92,7 @@ const mockDataBase = [
     },
     {
         productCategory: 'Molhos e Condimentos',
-        urlImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSooVqDk0583fx_KCUWSzMsMZXwJfNZW_KPw4ysOTL9XkiaGipBTQt8VdkHtkY4UGDWx0&usqp=CAU',
+        urlImage: 'https://cdn.discordapp.com/attachments/997813801762177104/1023027885545619506/WhatsApp_Image_2022-09-23_at_21.25.49_1.jpeg',
         data: [
             {
                 barCode: 11,
