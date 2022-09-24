@@ -4,16 +4,15 @@ import { Product } from "../types/product";
 
 // Talvez seja necessário melhorar a checagem de erros, mas não tenho certeza porque a parte de front não vai lidar com o banco de dados
 export async function getProduct(productId: number) {
-    console.log("https://localhost:8000/product/" + productId.toString() + "/");
-    let productItemFromDatabase;
+    console.log("https://b221-200-124-166-169.sa.ngrok.io/product/" + productId.toString() + "/");
     try {
         console.log("try 1");
-        const response = await fetch("https://localhost:8000/product/" + productId.toString() + "/").then(data => {
-            return data.json();
-        }).then(item => {
-            console.log(item.barCode);
-        });
-        return response;
+        const response = await fetch("https://b221-200-124-166-169.sa.ngrok.io/product/" + productId.toString() + "/");
+        const data = await response.json();
+        console.log("try 2");
+        console.log("response" + response);
+        console.log(data);
+        return data;
     } catch (error) {
         console.log("não achei a database " + error);
         return null;

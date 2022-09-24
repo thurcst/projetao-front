@@ -1,23 +1,29 @@
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Product } from '../../types/product';
 import { getProduct } from '../../services/product.service';
 
 export function ActionsItems( props ){
     let [item, setItem] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
       async function fetchData() {
+        setIsLoading(true);
         const productItem = await getProduct(props.itemId);
-        console.log(productItem);
         setItem(productItem);
+        setIsLoading(false);
       }
 
       fetchData();
     }, [setItem]);
     
 
-    return (
+    const getContent = () => {    
+      if (isLoading) {      
+        return <ActivityIndicator size="large"/>;
+      }    
+      return (
         <TouchableOpacity onPress={() => 
           {props.navigationProp.navigate("ProductPage", {
             itemId: item.barCode
@@ -26,7 +32,7 @@ export function ActionsItems( props ){
           
           <View style={styles.areaButton}>
             <Image
-             source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1014321893584683089/logo.png'}} 
+             source= {{uri: item.picturePath}} 
              style={styles.image}
             />
             <View style={styles.teste}>
@@ -42,11 +48,22 @@ export function ActionsItems( props ){
           </View>
           
         </TouchableOpacity>
+      );
+    }
+
+    return (
+        <View style={styles.container}>
+          {getContent()}
+        </View>
     
     )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
     actionButton: {
         flex: 1,
         backgroundColor: '#fff',
