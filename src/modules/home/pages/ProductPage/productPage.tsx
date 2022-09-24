@@ -1,38 +1,69 @@
-import React, { Component } from "react";
-import { Text, View, Image, StyleSheet } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useState } from "react";
+import { Text, View, Image, StyleSheet, ActivityIndicator } from "react-native";
 import { ItemName } from "../../components/ItemDescription/ItemName/itemName";
 import { ItemValidation } from "../../components/ItemDescription/ItemValidation/itemValidation";
 import SearchBar from "../../components/SearchBar/searchbar";
-import { Product } from "../../types/product";
+import { getProduct } from "../../services/product.service";
 
-class ProductPage extends Component<any, any> { // Consertar esse <any, any> fazendo uma interface
-  product: Product = new Product();
-  render(): JSX.Element {
-    const { navigation, route } = this.props;
-    const { productName, typeItem, dataItem} = route.params;
-    this.product.setName(productName);
-    this.product.setBarCode(dataItem);
-    this.product.setTypeItem(typeItem);
-    this.product.setSafetyCategory("Produto sem glúten");
-    this.product.setProductCategory("Pães");
+export function ProductPage( props ) {
+  const { navigation, route } = props;
+  const { typeItem, itemId} = route.params;
+  let [item, setItem] = useState(null);
+  let [isLoading, setIsLoading] = useState(true);
+
+  let isActive = true;
+  useFocusEffect(
+    React.useCallback(() => {
+      isActive = true;      
+      const fetchData = async () => {
+        setIsLoading(true);
+        const response = await getProduct(itemId);
+        if (isActive) {
+          setItem(response);
+        }
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 100);
+      };
+
+      fetchData();
+
+      return () => {
+        isActive = false;
+      }
+    }, [itemId])
+  );
+
+  const getContent = () => {    
+    if (isLoading) {      
+      return <ActivityIndicator size="large"/>;
+    }    
     return (
       <View style={styles.container}>
-        <SearchBar />
         <View style={styles.imageView}>
-        <Image
-                source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
-                style={styles.image}
-         />
+          <Image
+                  source= {{uri:'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
+                  style={styles.image}
+            />
         </View>
-         <View style={styles.itemDescriptionView}>
-          <ItemName productName={this.product.getName()}/>
-          <ItemValidation navigationProp={navigation} safetyCategory={this.product.getSafetyCategory()} productCategory={this.product.getProductCategory()}/>
-          <Text>Codigo de barras: Tipo = {typeItem}, Data = {dataItem}</Text>
-         </View>
+        <View style={styles.itemDescriptionView}>
+        <ItemName productName={item.getName()}/>
+        <ItemValidation navigationProp={navigation} safetyCategory={item && item.getSafetyCategory()} productCategory={item && item.getProductCategory()}/>
+        <Text>Codigo de barras: Tipo = {typeItem}, Data = {itemId}</Text>
+        </View>
       </View>
     );
   }
+
+  return (
+    <View style={styles.container}>
+      <SearchBar />
+      {getContent()}
+    </View>
+  );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -73,5 +104,3 @@ const styles = StyleSheet.create({
 
   }
 })
-
-export {ProductPage};
