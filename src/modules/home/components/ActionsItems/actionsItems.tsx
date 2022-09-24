@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator } fr
 import React, { useEffect, useState } from 'react';
 import { Product } from '../../types/product';
 import { getProduct } from '../../services/product.service';
+import { moderateScale, scale, verticalScale } from '../../../../shared/styles/scaling_units';
 
 export function ActionsItems( props ){
     let [item, setItem] = useState(null);
@@ -35,7 +36,7 @@ export function ActionsItems( props ){
              source= {{uri: item.picturePath}} 
              style={styles.image}
             />
-            <View style={styles.teste}>
+            <View style={styles.foodNameAndIcons}>
               <Text>
               {item && item.productName}
               </Text>
@@ -62,35 +63,27 @@ export function ActionsItems( props ){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  actionButton: {
+    flex: 1,
     backgroundColor: '#fff',
   },
-    actionButton: {
-        flex: 1,
-        backgroundColor: '#fff',
-        paddingStart: 5, 
-        marginVertical: 8,
-          
+  areaButton: {
+      flex:1,
+      flexDirection: 'row',  
+  },
+  image: {
+    width: scale(50),
+    height: scale(50),
+    flexDirection: 'row',
+    alignItems: 'center'
     },
-    areaButton: {
-        flex:1,
-        backgroundColor: '#fff',
-        flexDirection: 'row',
-        
-        
+  foodNameAndIcons: {
+    flexDirection: 'column',
+    top: verticalScale(5),
+    left: moderateScale(5),
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#DADADA'
     },
-    image: {
-      width: 100,
-      height: 100,
-      flexDirection: 'row',
-      right: 6,
-     },
-    teste: {
-      flex: 1,
-      flexDirection: 'column',
-      top: 5,
-      left: 5,
-      borderBottomWidth: 0.5,
-      borderBottomColor: '#DADADA'
-     },
 
 });

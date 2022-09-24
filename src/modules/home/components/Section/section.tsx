@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationScreenProp } from 'react-navigation';
+import { moderateScale, scale, verticalScale } from '../../../../shared/styles/scaling_units';
 
 export interface SectionProps {
     productCategory: string;
@@ -23,7 +24,6 @@ const Section = ({ productCategory, urlImage, navigation }: SectionProps) => {
                     }}
                 />
             </TouchableOpacity>
-            <Text style={styles.text}>{productCategory}</Text>
         </View>
     )
 
@@ -34,9 +34,10 @@ export default Section;
 
 const styles = StyleSheet.create({
     container: {
-        marginRight: 10,
-        width: 180,
-        height: 120,
+        paddingVertical: scale(5),
+        marginHorizontal: scale(8),
+        width: moderateScale(150),
+        height: verticalScale(100),
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -44,8 +45,8 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'black',
-        fontSize: 16,
-        marginTop: 10,
+        fontSize: moderateScale(16),
+        marginTop: scale(10),
     },
     button: {
         flex: 1,
@@ -58,7 +59,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         borderRadius: 20,
-
     },
   });
 

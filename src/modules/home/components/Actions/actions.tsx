@@ -1,6 +1,7 @@
 import { StyleSheet, ScrollView } from 'react-native';
 import React from 'react';
 import { ActionsItems } from '../ActionsItems/actionsItems';
+import { moderateScale } from '../../../../shared/styles/scaling_units';
 
 export function Action( props ) {
     return ( 
@@ -18,49 +19,9 @@ export function Action( props ) {
 }
 
 const styles = StyleSheet.create({
-    actionButton: {
-        flex: 1,
-        backgroundColor: '#fff',
-        paddingStart: 5, 
-        marginVertical: 8,
-            
-    },
-    areaButton: {
-        flex:1,
-        backgroundColor: '#fff',
-        flexDirection: 'row',
-        
-    },
-    icons: {
-      flex:1,
-      justifyContent: 'flex-start',
-      backgroundColor: '#fff',
-      flexDirection: 'row-reverse',
-      borderBottomWidth: 0.9,
-      borderBottomColor: '#DADADA'
-      
-  },
     scroll: {
         flex: 1,
         width: '100%',
         backgroundColor: '#fff',
-        maxHeight: 250,
-        marginBottom: 14,
-        marginTop: 18,
-        paddingRight: 0,
-        paddingStart: 0,
-    },
-    image: {
-      width: 60,
-      height: 60,
-      flexDirection: 'row',
-      right: 6,
-      
-     },
-    teste: {
-      flex: 1,
-      top: 5,
-      left: 5,
-     },
-
+    }
 });

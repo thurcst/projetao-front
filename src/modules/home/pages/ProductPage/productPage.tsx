@@ -1,11 +1,13 @@
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useState } from "react";
-import { Text, View, Image, StyleSheet, ActivityIndicator } from "react-native";
+import { Text, View, Image, StyleSheet, ActivityIndicator, ScrollView, Dimensions } from "react-native";
+import { scale } from "../../../../shared/styles/scaling_units";
 import { ItemName } from "../../components/ItemDescription/ItemName/itemName";
 import { ItemValidation } from "../../components/ItemDescription/ItemValidation/itemValidation";
 import SearchBar from "../../components/SearchBar/searchbar";
 import { getProduct } from "../../services/product.service";
 
+const { width, height } = Dimensions.get('window');
 export function ProductPage( props ) {
   const { navigation, route } = props;
   const { typeItem, itemId} = route.params;
@@ -37,7 +39,7 @@ export function ProductPage( props ) {
 
   const getContent = () => {    
     if (isLoading) {      
-      return <ActivityIndicator size="large"/>;
+      return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
     }    
     return (
       <View style={styles.container}>
@@ -47,18 +49,19 @@ export function ProductPage( props ) {
                   style={styles.image}
             />
         </View>
-        <View style={styles.itemDescriptionView}>
+        <ScrollView style={styles.itemDescriptionView}>
         <ItemName productName={item.productName}/>
-        <ItemValidation navigationProp={navigation} safetyCategory={item && item.safetyCategory} productCategory={item && item.productCategory}/>
-        <Text>Codigo de barras: Tipo = {typeItem}, Data = {itemId}</Text>
+        <View style={styles.itemDescriptionFields}>
+          <ItemValidation navigationProp={navigation} safetyCategory={item && item.safetyCategory} productCategory={item && item.productCategory}/>
         </View>
+        <Text>Codigo de barras: Tipo = {typeItem}, Data = {itemId}</Text>
+        </ScrollView>
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
-      <SearchBar />
       {getContent()}
     </View>
   );
@@ -68,11 +71,10 @@ export function ProductPage( props ) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#DADADA',
   },
   imageView: {
     flex: 0.6,
-    backgroundColor: '#DADADA',
     width: '100%',
     height: '100%',
   },
@@ -82,25 +84,18 @@ const styles = StyleSheet.create({
     resizeMode: 'center'
   },
   itemDescriptionView: {
+    backgroundColor: 'white',
+    borderTopLeftRadius: scale(25),
+    borderTopRightRadius: scale(25),
     flex: 1,
     paddingVertical: 8,
     paddingHorizontal: 8
   },
-  itemValidationTitle: {
-    fontSize: 18,
-    fontWeight: 'bold'
-  },
-  itemValidationLaudoLink: {
-    color: 'green',
-    textDecorationLine: 'underline'
-  },
-  itemValidationIconText: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '43%'
-  },
-  itemValidationView: {
+  itemDescriptionFields: {
+    flex: 1,
     alignItems: 'flex-end'
-
+  },
+  activityIndicator: {
+    marginTop: width / 2,
   }
 })
