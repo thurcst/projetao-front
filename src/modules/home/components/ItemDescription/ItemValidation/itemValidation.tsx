@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { scale } from "../../../../../shared/styles/scaling_units";
+import { stackRouteNames } from "../../../types/stackRouteNames";
 
 export function ItemValidation( props ) {
     return (
@@ -12,7 +13,7 @@ export function ItemValidation( props ) {
               <Text style={{marginLeft: scale(5)}}>{props.safetyCategory}</Text>
             </View>
             <Text style={styles.itemValidationLink} 
-                onPress={() => {props.navigationProp.navigate("LaudoPage")}}>Laudo</Text>
+                onPress={() => {props.navigationProp.navigate(stackRouteNames.LaudoPage)}}>Laudo</Text>
             <Text>Categoria: {props.productCategory}</Text>
             <Text style={styles.itemValidationLink}>Entenda nossa avaliação</Text>
           </View>

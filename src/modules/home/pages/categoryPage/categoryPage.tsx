@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, ActivityIndicator, Scr
 import mockDataBase from '../../../../../mockDataBase';
 import { moderateScale, scale, verticalScale } from '../../../../shared/styles/scaling_units';
 import { getProductsByCategory } from '../../services/product.service';
+import { stackRouteNames } from '../../types/stackRouteNames';
 
 type ParamList = {
     CategoryPage: {
@@ -13,7 +14,7 @@ type ParamList = {
   };
   const { width, height } = Dimensions.get('window');
   export default function CategoryPage( props ) {
-    const route = useRoute<RouteProp<ParamList, 'CategoryPage'>>();
+    const route = useRoute<RouteProp<ParamList, stackRouteNames.CategoryPage>>();
     let [isLoading, setIsLoading] = useState(true);
     let [productsByCategory, setProductsByCategory] = useState([]);
     useEffect(() => {
@@ -35,7 +36,7 @@ type ParamList = {
             <View style={styles.container}>
             {productsByCategory.map((item) => 
             <TouchableOpacity onPress={() => 
-                {props.navigation.navigate("ProductPage", {
+                {props.navigation.navigate(stackRouteNames.ProductPage, {
                   itemId: 13
                 })}} 
                 style={styles.actionButton}>

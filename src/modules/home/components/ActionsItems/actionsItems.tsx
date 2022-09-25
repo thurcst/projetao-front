@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Product } from '../../types/product';
 import { getProduct } from '../../services/product.service';
 import { moderateScale, scale, verticalScale } from '../../../../shared/styles/scaling_units';
+import { stackRouteNames } from '../../types/stackRouteNames';
 
 export function ActionsItems( props ){
     let [item, setItem] = useState(null);
@@ -26,7 +27,7 @@ export function ActionsItems( props ){
       }    
       return (
         <TouchableOpacity onPress={() => 
-          {props.navigationProp.navigate("ProductPage", {
+          {props.navigationProp.navigate(stackRouteNames.ProductPage, {
             itemId: item.barCode
           })}} 
           style={styles.actionButton}>

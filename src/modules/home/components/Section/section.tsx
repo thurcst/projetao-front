@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationScreenProp } from 'react-navigation';
 import { moderateScale, scale, verticalScale } from '../../../../shared/styles/scaling_units';
+import { stackRouteNames } from '../../types/stackRouteNames';
 
 export interface SectionProps {
     productCategory: string;
@@ -15,7 +16,7 @@ const Section = ({ productCategory, urlImage, navigation }: SectionProps) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} activeOpacity={0.8}
-                              onPress={() => navigation.navigate("CategoryPage", { productCategory, urlImage })}
+                              onPress={() => navigation.navigate(stackRouteNames.CategoryPage, { productCategory, urlImage })}
             >
                 <Image
                     style={styles.image}
