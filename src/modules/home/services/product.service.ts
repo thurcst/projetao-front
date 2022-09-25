@@ -4,8 +4,8 @@ import { Product } from "../types/product";
 
 // Talvez seja necessário melhorar a checagem de erros, mas não tenho certeza porque a parte de front não vai lidar com o banco de dados
 export async function getProduct(productId: number) {
-    const url = "https://2107-200-124-166-133.sa.ngrok.io";
-    console.log("https://b221-200-124-166-169.sa.ngrok.io/product/" + productId.toString() + "/");
+    const url = "https://d849-200-124-166-196.sa.ngrok.io";
+    // console.log("https://b221-200-124-166-169.sa.ngrok.io/product/" + productId.toString() + "/");
     try {
         console.log("try 1");
         const response = await fetch(url + "/product/" + productId.toString() + "/");
@@ -35,4 +35,9 @@ export async function getProduct(productId: number) {
     //     const productItem = new Product();
     //     return productItem;
     // }
+}
+
+export async function getProductsByCategory(productCategory: string) {
+    const filteredItems = mockDataBase.find((item) => item.productCategory === productCategory).data;
+    return filteredItems;
 }

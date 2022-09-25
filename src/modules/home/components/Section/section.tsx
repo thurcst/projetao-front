@@ -15,7 +15,7 @@ const Section = ({ productCategory, urlImage, navigation }: SectionProps) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} activeOpacity={0.8}
-                              onPress={() => navigation.navigate("CategoryPage", { productCategory })}
+                              onPress={() => navigation.navigate("CategoryPage", { productCategory, urlImage })}
             >
                 <Image
                     style={styles.image}
