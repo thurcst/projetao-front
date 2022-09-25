@@ -33,7 +33,7 @@ type ParamList = {
           return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
         }    
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
             {productsByCategory.map((item) => 
             <TouchableOpacity onPress={() => 
                 {props.navigation.navigate(stackRouteNames.ProductPage, {
@@ -60,7 +60,7 @@ type ParamList = {
                 
               </TouchableOpacity>
               )}
-        </View>
+        </ScrollView>
         );
       }
 

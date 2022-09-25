@@ -1,7 +1,8 @@
 export enum stackRouteNames {
-    MainPage = "Home",
+    MainPage = "Main",
     About = "About",
     ProductPage = "Produto",
     LaudoPage = "Laudo",
-    CategoryPage = "Categoria"
+    CategoryPage = "Categoria",
+    SearchBarResultsPage = "Resultados"
 }

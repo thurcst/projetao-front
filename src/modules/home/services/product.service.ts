@@ -2,9 +2,9 @@ import React from "react";
 import mockDataBase from "../../../../mockDataBase";
 import { Product } from "../types/product";
 
+const url = "https://d849-200-124-166-196.sa.ngrok.io";
 // Talvez seja necessário melhorar a checagem de erros, mas não tenho certeza porque a parte de front não vai lidar com o banco de dados
 export async function getProduct(productId: number) {
-    const url = "https://d849-200-124-166-196.sa.ngrok.io";
     // console.log("https://b221-200-124-166-169.sa.ngrok.io/product/" + productId.toString() + "/");
     try {
         console.log("try 1");
@@ -12,10 +12,8 @@ export async function getProduct(productId: number) {
         const data = await response.json();
         const safetyData = await fetch(url + "/safety/" + data.idSafety.toString() + "/");
         console.log("try 2");
-        console.log("response " + response);
         const safetyDataJson = await safetyData.json();
         data["safetyCategory"] = safetyDataJson.category;
-        console.log(data);
         return data;
     } catch (error) {
         console.log("não achei a database " + error);
@@ -40,4 +38,27 @@ export async function getProduct(productId: number) {
 export async function getProductsByCategory(productCategory: string) {
     const filteredItems = mockDataBase.find((item) => item.productCategory === productCategory).data;
     return filteredItems;
+}
+
+export function getProductsByName(productName: string) {
+    console.log(productName);
+    let productItemFromDatabase;
+    let productByName;
+    for (let item of mockDataBase) {
+        console.log(item.data);
+        productItemFromDatabase = item.data.filter(productItem => productItem.productName == productName);
+        productByName = item.data.find(productItem => productItem.productName == productName);
+        if (productItemFromDatabase !== undefined) {
+            break;
+        }
+    }
+    console.log(productItemFromDatabase);
+    console.log(productByName);
+    if (productItemFromDatabase !== undefined) {
+        const productItem = new Product(123, productItemFromDatabase.productName, productItemFromDatabase.price, productItemFromDatabase.productCategory, productItemFromDatabase.safetyCategory);
+        return productItemFromDatabase;
+    } else {
+        const productItem = new Product();
+        return productItemFromDatabase;
+    }
 }
