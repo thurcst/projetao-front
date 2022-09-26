@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Image, ActivityIndicator, ScrollView, Dimensions } from 'react-native'
+import categoriesDB from '../../../../../categoriesDB';
 import mockDataBase from '../../../../../mockDataBase';
 import { moderateScale, scale, verticalScale } from '../../../../shared/styles/scaling_units';
 import { getProductsByCategory } from '../../services/product.service';
@@ -15,13 +16,18 @@ type ParamList = {
   const { width, height } = Dimensions.get('window');
   export default function CategoryPage( props ) {
     const route = useRoute<RouteProp<ParamList, stackRouteNames.CategoryPage>>();
+    let categoryImageURL = categoriesDB.find(item => item.productCategory === route.params.productCategory).urlImage;
     let [isLoading, setIsLoading] = useState(true);
     let [productsByCategory, setProductsByCategory] = useState([]);
     useEffect(() => {
         async function fetchData() {
           setIsLoading(true);
-          const filteredItems = await getProductsByCategory(route.params.productCategory);
-          setProductsByCategory(filteredItems);
+          try {
+            const filteredItems = await getProductsByCategory(route.params.productCategory);  
+            setProductsByCategory(filteredItems);
+          } catch (error) {
+            console.log(error);
+          }
           setIsLoading(false);
         }
   
@@ -37,15 +43,17 @@ type ParamList = {
             {productsByCategory.map((item) => 
             <TouchableOpacity onPress={() => 
                 {props.navigation.navigate(stackRouteNames.ProductPage, {
-                  itemId: 13
+                  itemId: item.barCode
                 })}} 
                 style={styles.actionButton}>
                 
                 <View style={styles.areaButton}>
-                  <Image
-                   source= {{uri: props.urlImage}} 
-                   style={styles.image}
-                  />
+                  <View style={styles.imageContainer}>
+                    <Image
+                    source= {{uri: categoryImageURL}} 
+                    style={styles.image}
+                    />
+                  </View>
                   <View style={styles.foodNameAndIcons}>
                     <Text>
                     {item && item.productName}
@@ -90,7 +98,8 @@ const styles = StyleSheet.create({
       width: scale(50),
       height: scale(50),
       flexDirection: 'row',
-      alignItems: 'center'
+      alignItems: 'center',
+      borderRadius: 15
       },
     foodNameAndIcons: {
       flexDirection: 'column',
@@ -99,5 +108,7 @@ const styles = StyleSheet.create({
       borderBottomWidth: 0.5,
       borderBottomColor: '#DADADA'
       },
-  
+    imageContainer: {
+        padding: 4,
+    }
   });

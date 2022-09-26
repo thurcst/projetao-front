@@ -4,7 +4,6 @@ import { Text, View, Image, StyleSheet, ActivityIndicator, ScrollView, Dimension
 import { scale } from "../../../../shared/styles/scaling_units";
 import { ItemName } from "../../components/ItemDescription/ItemName/itemName";
 import { ItemValidation } from "../../components/ItemDescription/ItemValidation/itemValidation";
-import SearchBar from "../../components/SearchBar/searchbar";
 import { getProduct } from "../../services/product.service";
 
 const { width, height } = Dimensions.get('window');
@@ -45,7 +44,7 @@ export function ProductPage( props ) {
       <View style={styles.container}>
         <View style={styles.imageView}>
           <Image
-                  source= {{uri: item.picturePath}}
+                  source= {{uri: 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
                   style={styles.image}
             />
         </View>
@@ -54,7 +53,6 @@ export function ProductPage( props ) {
         <View style={styles.itemDescriptionFields}>
           <ItemValidation navigationProp={navigation} safetyCategory={item && item.safetyCategory} productCategory={item && item.productCategory}/>
         </View>
-        <Text>Codigo de barras: Tipo = {typeItem}, Data = {itemId}</Text>
         </ScrollView>
       </View>
     );

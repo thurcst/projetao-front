@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
-import { Text, View, Button, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { Text, View, Button, StyleSheet, Image, TouchableOpacity, ActivityIndicator, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { moderateScale, scale, verticalScale } from "../../../../shared/styles/scaling_units";
@@ -10,32 +10,37 @@ import SearchBar from "../../components/SearchBar/searchbar";
 import { getProductsByName } from "../../services/product.service";
 import { stackRouteNames } from "../../types/stackRouteNames";
 
+const { width, height } = Dimensions.get('window');
+
 export function SearchBarResultsPage(props) {
     const { navigation, route } = props;
   const { searchedPhrase } = route.params;
   const [data, setData] = useState([]);
+  let [isLoading, setIsLoading] = useState(true);
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
-    fetchData("https://randomuser.me/api/?results=20");
+    fetchData();
   }, []);
 
-  const fetchData = async (url) => {
+  const fetchData = async () => {
+    setIsLoading(true);
     try {
       const response = await getProductsByName(searchedPhrase);
-    //   const json = await response.json();
-    console.log(response);
       setData(response);
       setFilteredData(response);
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   };
 
-  return (
-    <View style={styles.container}>
-      {/* <SearchBar navigation={props.navigation} /> */}
-      <ScrollView>
+  const getContent = () => {    
+    if (isLoading) {      
+      return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
+    }    
+    return (
+        <ScrollView>
         {
             filteredData.map((item, index) => {
                 return (
@@ -43,15 +48,17 @@ export function SearchBarResultsPage(props) {
                         {filteredData.map((item) => 
                         <TouchableOpacity onPress={() => 
                             {props.navigation.navigate(stackRouteNames.ProductPage, {
-                            itemId: 13
+                            itemId: item.barCode
                             })}} 
                             style={styles.actionButton}>
                             
                             <View style={styles.areaButton}>
-                            {/* <Image
-                            source= {{uri: props.urlImage}} 
-                            style={styles.image}
-                            /> */}
+                                <View style={styles.imageContainer}>
+                                    <Image
+                                    source= {{uri: 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}} 
+                                    style={styles.image}
+                                    />
+                                </View>
                             <View style={styles.foodNameAndIcons}>
                                 <Text>
                                 {item && item.productName}
@@ -71,11 +78,21 @@ export function SearchBarResultsPage(props) {
             })
         }
       </ScrollView>
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+      {/* <SearchBar navigation={props.navigation} /> */}
+      {getContent()}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+    activityIndicator: {
+        marginTop: width / 2,
+    },
     actionButton: {
         flex: 1,
         backgroundColor: '#fff',
@@ -88,7 +105,8 @@ const styles = StyleSheet.create({
         width: scale(50),
         height: scale(50),
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderRadius: 15
         },
     foodNameAndIcons: {
         flexDirection: 'column',
@@ -123,6 +141,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginLeft: 10,
     color: 'gray'
-  }
+  },
+    imageContainer: {
+        padding: 4,
+    }
 });
 

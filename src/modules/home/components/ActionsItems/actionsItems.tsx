@@ -33,10 +33,12 @@ export function ActionsItems( props ){
           style={styles.actionButton}>
           
           <View style={styles.areaButton}>
-            <Image
-             source= {{uri: item.picturePath}} 
-             style={styles.image}
-            />
+            <View style={styles.imageContainer}>
+              <Image
+              source= {{uri: 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}} 
+              style={styles.image}
+              />
+            </View>
             <View style={styles.foodNameAndIcons}>
               <Text>
               {item && item.productName}
@@ -77,7 +79,8 @@ const styles = StyleSheet.create({
     width: scale(50),
     height: scale(50),
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 15
     },
   foodNameAndIcons: {
     flexDirection: 'column',
@@ -86,5 +89,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: '#DADADA'
     },
-
+  imageContainer: {
+      padding: 4,
+  }
 });

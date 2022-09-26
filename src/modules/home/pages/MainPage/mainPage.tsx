@@ -9,9 +9,9 @@ export function MainPage({ navigation }) {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
-  useEffect(() => {
-    fetchData("https://randomuser.me/api/?results=20");
-  }, []);
+  // useEffect(() => {
+  //   fetchData("https://randomuser.me/api/?results=20");
+  // }, []);
 
   const fetchData = async (url) => {
     try {
@@ -19,7 +19,6 @@ export function MainPage({ navigation }) {
       const json = await response.json();
       setData(json.results);
       setFilteredData(json.results);
-      console.log(json.results);
     } catch (error) {
       console.log(error);
     }

@@ -10,12 +10,12 @@ export function ItemValidation( props ) {
             <Text style={styles.itemValidationTitle}>Validação:</Text>
             <View style={styles.itemValidationIconText}>
               <Ionicons name="shield-checkmark-outline" color={'green'} size={20}/>
-              <Text style={{marginLeft: scale(5)}}>{props.safetyCategory}</Text>
+              <Text style={{marginLeft: scale(5)}}>Produto sem glúten</Text>
             </View>
             <Text style={styles.itemValidationLink} 
                 onPress={() => {props.navigationProp.navigate(stackRouteNames.LaudoPage)}}>Laudo</Text>
             <Text>Categoria: {props.productCategory}</Text>
-            <Text style={styles.itemValidationLink}>Entenda nossa avaliação</Text>
+            {/* <Text style={styles.itemValidationLink}>Entenda nossa avaliação</Text> */}
           </View>
         </View>
     );

@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet, View, Text } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import mockDataBase from '../../../../../mockDataBase';
+import categoriesDB from '../../../../../categoriesDB';
 import { moderateScale, scale } from '../../../../shared/styles/scaling_units';
 import Section, { SectionProps } from '../Section/section';
 
@@ -16,14 +17,14 @@ export interface MainSectionProps {
 
 export default function MainSection({ navigation }: MainSectionProps) {
     const renderItem = ({ item, index }: HandleSectionProps) => <Section key={index} navigation={navigation} {...item}/>;
-    const keyExtractor = (item) => item.barCode;
+    const keyExtractor = (item) => item.productCategory;
     return(
         <View style={styles.container}>
             <FlatList
                 horizontal={false}
                 numColumns={2}
                 showsHorizontalScrollIndicator = {false}
-                data={mockDataBase}
+                data={categoriesDB}
                 renderItem={renderItem}
                 keyExtractor={keyExtractor}
             />
