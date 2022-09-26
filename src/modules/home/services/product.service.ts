@@ -1,4 +1,5 @@
 import React from "react";
+import { Alert } from "react-native";
 import mockDataBase from "../../../../mockDataBase";
 import { Product } from "../types/product";
 
@@ -14,9 +15,9 @@ export function getProduct(productId: number): Product {
     }
     if (productItemFromDatabase !== undefined) {
         const productItem = new Product(productId, productItemFromDatabase.productName, productItemFromDatabase.price, productItemFromDatabase.productCategory, productItemFromDatabase.safetyCategory);
-        return productItem;
+        return null;
     } else {
         const productItem = new Product();
-        return productItem;
+        return null;
     }
 }

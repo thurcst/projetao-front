@@ -1,11 +1,32 @@
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Product } from '../../types/product';
 import { getProduct } from '../../services/product.service';
 
 export function ActionsItems( props ){
-    let [item, setItem] = useState(null);
+
+    const showAlert = () => {
+      Alert.alert(
+        "Alert Title",
+        "My Alert Msg",
+        [
+          {
+            text: "Cancel",
+            onPress: () => Alert.alert("Cancel Pressed"),
+            style: "cancel",
+          },
+        ],
+        {
+          cancelable: true,
+          onDismiss: () =>
+            Alert.alert(
+              "This alert was dismissed by tapping outside of the alert dialog."
+            ),
+        }
+      );
+    }
+    let [item, setItem] = useState(null); 
     useEffect(() => {
       async function fetchData() {
         const productItem: Product = await getProduct(props.itemId);
@@ -16,10 +37,15 @@ export function ActionsItems( props ){
     }, [setItem]);
     
     return (
-        <TouchableOpacity onPress={() => 
-          {props.navigationProp.navigate("ProductPage", {
-            itemId: item.getBarCode()
-          })}} 
+        <TouchableOpacity onPress={() => {
+          if(item == null){
+            showAlert();
+          }
+          else{
+            {props.navigationProp.navigate("ProductPage", {
+              itemId: item.getBarCode()
+            })}}
+          }}
           style={styles.actionButton}>
           
           <View style={styles.areaButton}>
