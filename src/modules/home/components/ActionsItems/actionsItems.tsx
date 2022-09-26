@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Alert } from 'react-native';
 import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Product } from '../../types/product';
@@ -7,6 +8,28 @@ import { moderateScale, scale, verticalScale } from '../../../../shared/styles/s
 import { stackRouteNames } from '../../types/stackRouteNames';
 
 export function ActionsItems( props ){
+
+    const showAlert = () => {
+      Alert.alert(
+        "Alert Title",
+        "My Alert Msg",
+        [
+          {
+            text: "Cancel",
+            onPress: () => Alert.alert("Cancel Pressed"),
+            style: "cancel",
+          },
+        ],
+        {
+          cancelable: true,
+          onDismiss: () =>
+            Alert.alert(
+              "This alert was dismissed by tapping outside of the alert dialog."
+            ),
+        }
+      );
+    }
+    let [item, setItem] = useState(null); 
     let [item, setItem] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
@@ -20,6 +43,16 @@ export function ActionsItems( props ){
       fetchData();
     }, [setItem]);
     
+    return (
+        <TouchableOpacity onPress={() => {
+          if(item == null){
+            showAlert();
+          }
+          else{
+            {props.navigationProp.navigate("ProductPage", {
+              itemId: item.getBarCode()
+            })}}
+          }}
 
     const getContent = () => {    
       if (isLoading) {      

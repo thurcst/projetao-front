@@ -1,4 +1,5 @@
 import React from "react";
+import { Alert } from "react-native";
 import mockDataBase from "../../../../mockDataBase";
 import { Product } from "../types/product";
 
