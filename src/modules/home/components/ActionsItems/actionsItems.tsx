@@ -1,6 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Alert } from 'react-native';
-import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Product } from '../../types/product';
 import { getProduct } from '../../services/product.service';
@@ -11,81 +10,83 @@ export function ActionsItems( props ){
 
     const showAlert = () => {
       Alert.alert(
-        "Alert Title",
-        "My Alert Msg",
+        "",
+        "O produto não foi encontrado",
         [
           {
-            text: "Cancel",
-            onPress: () => Alert.alert("Cancel Pressed"),
+            text: "Ok",
+            onPress: () => console.log("cancel"),
             style: "cancel",
           },
         ],
         {
-          cancelable: true,
-          onDismiss: () =>
-            Alert.alert(
-              "This alert was dismissed by tapping outside of the alert dialog."
-            ),
+          cancelable: false,
+          // onDismiss: () =>
+          //   Alert.alert(
+          //     "This alert was dismissed by tapping outside of the alert dialog."
+          //   ),
         }
       );
     }
-    let [item, setItem] = useState(null); 
+    
+    let [isError, setIsError] = useState(false);
     let [item, setItem] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
       async function fetchData() {
         setIsLoading(true);
-        const productItem = await getProduct(props.itemId);
-        setItem(productItem);
+        try {
+          const productItem = await getProduct(props.itemId);
+          setItem(productItem);
+          setIsLoading(false);
+        } catch (error) {
+          console.log(error);
+          setIsError(true);
+          setIsLoading(false);
+        }
         setIsLoading(false);
       }
 
       fetchData();
     }, [setItem]);
-    
-    return (
-        <TouchableOpacity onPress={() => {
-          if(item == null){
-            showAlert();
-          }
-          else{
-            {props.navigationProp.navigate("ProductPage", {
-              itemId: item.getBarCode()
-            })}}
-          }}
 
     const getContent = () => {    
       if (isLoading) {      
         return <ActivityIndicator size="large"/>;
-      }    
-      return (
-        <TouchableOpacity onPress={() => 
-          {props.navigationProp.navigate(stackRouteNames.ProductPage, {
-            itemId: item.barCode
-          })}} 
-          style={styles.actionButton}>
-          
-          <View style={styles.areaButton}>
-            <View style={styles.imageContainer}>
-              <Image
-              source= {{uri: 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}} 
-              style={styles.image}
-              />
-            </View>
-            <View style={styles.foodNameAndIcons}>
-              <Text>
-              {item && item.productName}
-              </Text>
-              <View style={styles.areaButton} >
-                <Ionicons name="reader-outline" color={'#000'} size={25} />
-                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+      }
+      if (isError || !item) {
+        showAlert();
+        return <View></View>
+      } else {
+        return (
+          <TouchableOpacity onPress={() => 
+            {props.navigationProp.navigate(stackRouteNames.ProductPage, {
+              itemId: item.barCode
+            })}} 
+            style={styles.actionButton}>
+            
+            <View style={styles.areaButton}>
+              <View style={styles.imageContainer}>
+                <Image
+                source= {{uri: 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}} 
+                style={styles.image}
+                />
               </View>
+              <View style={styles.foodNameAndIcons}>
+                <Text>
+                {item && item.productName}
+                </Text>
+                <View style={styles.areaButton} >
+                  <Ionicons name="reader-outline" color={'#000'} size={25} />
+                  <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+                </View>
+              </View>
+             
             </View>
-           
-          </View>
-          
-        </TouchableOpacity>
-      );
+            
+          </TouchableOpacity>
+        );
+      }
     }
 
     return (

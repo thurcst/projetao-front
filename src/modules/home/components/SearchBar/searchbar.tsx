@@ -12,6 +12,9 @@ const SearchBar = ({ navigation }) => {
     const [clicked, setClicked] = useState(false);
     const [searchPhrase, setSearchPhrase] = useState("");
     function onSearch() {
+        setSearchPhrase("");
+        Keyboard.dismiss();
+        setClicked(false);
         navigation.navigate(stackRouteNames.SearchBarResultsPage, {searchedPhrase: searchPhrase});
     }
     const [value, setValue] = useState('');

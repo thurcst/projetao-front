@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
-import { Text, View, Button, StyleSheet, Image, TouchableOpacity, ActivityIndicator, Dimensions } from "react-native";
+import { Text, View, Button, StyleSheet, Image, TouchableOpacity, ActivityIndicator, Dimensions, Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { moderateScale, scale, verticalScale } from "../../../../shared/styles/scaling_units";
@@ -18,6 +18,28 @@ export function SearchBarResultsPage(props) {
   const [data, setData] = useState([]);
   let [isLoading, setIsLoading] = useState(true);
   const [filteredData, setFilteredData] = useState([]);
+  let [isError, setIsError] = useState(false);
+
+  const showAlert = () => {
+    Alert.alert(
+      "",
+      "O produto não foi encontrado",
+      [
+        {
+          text: "Voltar para a página anterior",
+          onPress: () => props.navigation.goBack(),
+          style: "cancel",
+        },
+      ],
+      {
+        cancelable: false,
+        // onDismiss: () =>
+        //   Alert.alert(
+        //     "This alert was dismissed by tapping outside of the alert dialog."
+        //   ),
+      }
+    );
+  }
 
   useEffect(() => {
     fetchData();
@@ -29,8 +51,11 @@ export function SearchBarResultsPage(props) {
       const response = await getProductsByName(searchedPhrase);
       setData(response);
       setFilteredData(response);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsError(true);
+      setIsLoading(false);
     }
     setIsLoading(false);
   };
@@ -39,46 +64,50 @@ export function SearchBarResultsPage(props) {
     if (isLoading) {      
       return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
     }    
-    return (
-        <ScrollView>
-        {
-            filteredData.map((item, index) => {
-                return (
-                    <ScrollView style={styles.container}>
-                        {filteredData.map((item) => 
-                        <TouchableOpacity onPress={() => 
-                            {props.navigation.navigate(stackRouteNames.ProductPage, {
-                            itemId: item.barCode
-                            })}} 
-                            style={styles.actionButton}>
-                            
-                            <View style={styles.areaButton}>
-                                <View style={styles.imageContainer}>
-                                    <Image
-                                    source= {{uri: 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}} 
-                                    style={styles.image}
-                                    />
+    if (isError || !filteredData) {
+        showAlert();
+    } else {
+        return (
+            <ScrollView>
+            {
+                filteredData.map((item, index) => {
+                    return (
+                        <ScrollView style={styles.container}>
+                            {filteredData.map((item) => 
+                            <TouchableOpacity onPress={() => 
+                                {props.navigation.navigate(stackRouteNames.ProductPage, {
+                                itemId: item.barCode
+                                })}} 
+                                style={styles.actionButton}>
+                                
+                                <View style={styles.areaButton}>
+                                    <View style={styles.imageContainer}>
+                                        <Image
+                                        source= {{uri: 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}} 
+                                        style={styles.image}
+                                        />
+                                    </View>
+                                <View style={styles.foodNameAndIcons}>
+                                    <Text>
+                                    {item && item.productName}
+                                    </Text>
+                                    <View style={styles.areaButton} >
+                                    <Ionicons name="reader-outline" color={'#000'} size={25} />
+                                    <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+                                    </View>
                                 </View>
-                            <View style={styles.foodNameAndIcons}>
-                                <Text>
-                                {item && item.productName}
-                                </Text>
-                                <View style={styles.areaButton} >
-                                <Ionicons name="reader-outline" color={'#000'} size={25} />
-                                <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
+                                
                                 </View>
-                            </View>
-                            
-                            </View>
-                            
-                        </TouchableOpacity>
-                        )}
-                    </ScrollView>
-                )
-            })
-        }
-      </ScrollView>
-    );
+                                
+                            </TouchableOpacity>
+                            )}
+                        </ScrollView>
+                    )
+                })
+            }
+          </ScrollView>
+        );
+    }
   }
 
   return (
