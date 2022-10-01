@@ -1,5 +1,6 @@
 import { Text, View, StyleSheet } from 'react-native';
 import React from 'react';
+import { moderateScale } from '../../../../shared/styles/scaling_units';
 
 export function Title() {
     return (
@@ -11,10 +12,8 @@ export function Title() {
 
 const styles = StyleSheet.create({
     title:{
-        fontSize: 25,
+        fontSize: moderateScale(20),
         fontWeight: 'bold',
-        marginLeft: 14,
-        marginRight: 14,
-       
+        marginHorizontal: moderateScale(14),       
     }
 })
