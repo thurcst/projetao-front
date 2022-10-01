@@ -1,11 +1,10 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
-const About = ({route}) => {
-  const {typeItem, dataItem} = route.params;
+const About = () => {
   return (
     <View style={styles.center}>
-      <Text>This is the about screen {typeItem}, {dataItem}</Text>
+      <Text>This is the about screen</Text>
     </View>
   );
 };

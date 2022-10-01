@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button, ProgressBarAndroidBase } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { stackRouteNames } from '../../../home/types/stackRouteNames';
 
 export default function Scanner({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -30,7 +31,7 @@ export default function Scanner({navigation}) {
   }
 
   const parar = ({ type, data }) =>{
-    {navigation.navigate('ProductPage', {typeItem: 1, itemId: 3})}
+    {navigation.navigate(stackRouteNames.ProductPage, {itemId: data})}
   };
 
   return (

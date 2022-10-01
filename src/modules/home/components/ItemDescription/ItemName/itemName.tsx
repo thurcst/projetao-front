@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
+import { scale, verticalScale } from "../../../../../shared/styles/scaling_units";
 
 export function ItemName( props ) {
     return (
@@ -11,12 +12,12 @@ export function ItemName( props ) {
 const styles = StyleSheet.create({
     itemNameCard: {
         backgroundColor: '#DADADA',
-        paddingVertical: 8,
-        paddingHorizontal: 25,
-        borderRadius: 50
+        paddingVertical: verticalScale(8),
+        paddingHorizontal: scale(25),
+        borderRadius: scale(50)
       },
       itemNameTitle: {
-        fontSize: 18,
+        fontSize: scale(18),
         fontWeight: 'bold'
       }
 })
