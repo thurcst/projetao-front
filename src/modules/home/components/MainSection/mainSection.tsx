@@ -18,10 +18,11 @@ export default function MainSection({ navigation }: MainSectionProps) {
     const keyExtractor = (item) => item.barCode;
     return(
         <View style={styles.container}>
-            <Text style={styles.text}>Categorias: </Text>
             <FlatList
                 style={styles.list}
-                horizontal
+                horizontal={false}
+                numColumns={2}
+                showsHorizontalScrollIndicator = {false}
                 data={mockDataBase}
                 renderItem={renderItem}
                 keyExtractor={keyExtractor}
@@ -32,6 +33,8 @@ export default function MainSection({ navigation }: MainSectionProps) {
 
 const styles = StyleSheet.create({
     container: {
+        
+        backgroundColor: "white",
         paddingBottom: 5
     },
     text: {
