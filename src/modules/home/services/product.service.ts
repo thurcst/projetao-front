@@ -3,7 +3,7 @@ import { Alert } from "react-native";
 import mockDataBase from "../../../../mockDataBase";
 import { Product } from "../types/product";
 
-const url = "https://semglu.loca.lt";
+const url = "https://semgluserver.cin.ufpe.br";
 // Talvez seja necessário melhorar a checagem de erros, mas não tenho certeza porque a parte de front não vai lidar com o banco de dados
 export async function getProduct(productId: number) {
     try {
