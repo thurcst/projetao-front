@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import ReactSearchBar from 'react-native-platform-searchbar';
 import { EvilIcons, Entypo } from '@expo/vector-icons';
-import { Button, StyleSheet, TextInput, View, Keyboard } from "react-native";
+import { StyleSheet, TextInput, View, Keyboard } from "react-native";
 import { scale } from '../../../../shared/styles/scaling_units';
-import { BoxButtonSearch, Input, Container } from '../../styles/searchBarStyles';
+import { Input, Container } from '../../styles/searchBarStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { stackRouteNames } from '../../types/stackRouteNames';
 
