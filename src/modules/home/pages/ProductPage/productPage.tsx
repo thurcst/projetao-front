@@ -1,6 +1,7 @@
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useState } from "react";
-import { Text, View, Image, StyleSheet, ActivityIndicator, ScrollView, Dimensions, Alert } from "react-native";
+import { Text, View, Image, StyleSheet, ActivityIndicator, ScrollView, Dimensions } from "react-native";
+import { ShowAlert } from "../../../../shared/pages/showAlert";
 import { scale } from "../../../../shared/styles/scaling_units";
 import { ItemName } from "../../components/ItemDescription/ItemName/itemName";
 import { ItemValidation } from "../../components/ItemDescription/ItemValidation/itemValidation";
@@ -15,26 +16,6 @@ export function ProductPage( props ) {
   let [item, setItem] = useState(null);
   let [isLoading, setIsLoading] = useState(true);
   let [isError, setIsError] = useState(false);
-  const showAlert = () => {
-    Alert.alert(
-      "",
-      "O produto não foi encontrado",
-      [
-        {
-          text: "Voltar para a página anterior",
-          onPress: () => navigation.goBack(),
-          style: "cancel",
-        },
-      ],
-      {
-        cancelable: false,
-        // onDismiss: () =>
-        //   Alert.alert(
-        //     "This alert was dismissed by tapping outside of the alert dialog."
-        //   ),
-      }
-    );
-  }
 
   let isActive = true;
   useFocusEffect(
@@ -75,7 +56,7 @@ export function ProductPage( props ) {
       return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
     }  else {
       if (isError || !item) {
-        showAlert();
+        ShowAlert();
       } else {
         return (
           <View style={styles.container}>

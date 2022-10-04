@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { ShowAlert } from '../../../../shared/pages/showAlert';
 import React, { useEffect, useState } from 'react';
 import { Product } from '../../types/product';
 import { getProduct } from '../../services/product.service';
@@ -7,28 +8,6 @@ import { moderateScale, scale, verticalScale } from '../../../../shared/styles/s
 import { stackRouteNames } from '../../types/stackRouteNames';
 
 export function ActionsItems( props ){
-
-    const showAlert = () => {
-      Alert.alert(
-        "",
-        "O produto não foi encontrado",
-        [
-          {
-            text: "Ok",
-            onPress: () => console.log("cancel"),
-            style: "cancel",
-          },
-        ],
-        {
-          cancelable: false,
-          // onDismiss: () =>
-          //   Alert.alert(
-          //     "This alert was dismissed by tapping outside of the alert dialog."
-          //   ),
-        }
-      );
-    }
-    
     let [isError, setIsError] = useState(false);
     let [item, setItem] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -55,7 +34,7 @@ export function ActionsItems( props ){
         return <ActivityIndicator size="large"/>;
       }
       if (isError || !item) {
-        showAlert();
+        ShowAlert();
         return <View></View>
       } else {
         return (

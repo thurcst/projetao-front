@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
-import { Text, View, Button, StyleSheet, Image, TouchableOpacity, ActivityIndicator, Dimensions, Alert } from "react-native";
+import { Text, View, Button, StyleSheet, Image, TouchableOpacity, ActivityIndicator, Dimensions } from "react-native";
+import { ShowAlert } from "../../../../shared/pages/showAlert";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { moderateScale, scale, verticalScale } from "../../../../shared/styles/scaling_units";
@@ -19,27 +20,6 @@ export function SearchBarResultsPage(props) {
   let [isLoading, setIsLoading] = useState(true);
   const [filteredData, setFilteredData] = useState([]);
   let [isError, setIsError] = useState(false);
-
-  const showAlert = () => {
-    Alert.alert(
-      "",
-      "O produto não foi encontrado",
-      [
-        {
-          text: "Voltar para a página anterior",
-          onPress: () => props.navigation.goBack(),
-          style: "cancel",
-        },
-      ],
-      {
-        cancelable: false,
-        // onDismiss: () =>
-        //   Alert.alert(
-        //     "This alert was dismissed by tapping outside of the alert dialog."
-        //   ),
-      }
-    );
-  }
 
   useEffect(() => {
     fetchData();
@@ -65,7 +45,7 @@ export function SearchBarResultsPage(props) {
       return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
     }    
     if (isError || !filteredData) {
-        showAlert();
+        ShowAlert();
     } else {
         return (
             <ScrollView>
