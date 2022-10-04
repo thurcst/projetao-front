@@ -1,10 +1,10 @@
 import { Alert } from 'react-native';
 
-export function ShowAlert() {
+export function ShowAlert(message) {
   return (
         Alert.alert(
           "",
-          "O produto não foi encontrado",
+          message,
           [
             {
               text: "Ok",

@@ -34,7 +34,7 @@ export function ActionsItems( props ){
         return <ActivityIndicator size="large"/>;
       }
       if (isError || !item) {
-        ShowAlert();
+        ShowAlert("O produto não foi encontrado");
         return <View></View>
       } else {
         return (

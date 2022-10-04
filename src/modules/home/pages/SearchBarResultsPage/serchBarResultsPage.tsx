@@ -45,7 +45,7 @@ export function SearchBarResultsPage(props) {
       return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
     }    
     if (isError || !filteredData) {
-        ShowAlert();
+        ShowAlert("O produto não foi encontrado");
     } else {
         return (
             <ScrollView>
