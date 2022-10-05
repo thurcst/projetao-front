@@ -1,7 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, Image, ActivityIndicator, ScrollView, Dimensions, Alert } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image, ActivityIndicator, ScrollView, Dimensions } from 'react-native'
+import { ShowAlert } from '../../../../shared/pages/showAlert';
 import categoriesDB from '../../../../../categoriesDB';
 import mockDataBase from '../../../../../mockDataBase';
 import { moderateScale, scale, verticalScale } from '../../../../shared/styles/scaling_units';
@@ -20,27 +21,6 @@ type ParamList = {
     let [isLoading, setIsLoading] = useState(true);
     let [productsByCategory, setProductsByCategory] = useState([]);
     let [isError, setIsError] = useState(false);
-
-    const showAlert = () => {
-        Alert.alert(
-          "",
-          "O produto não foi encontrado",
-          [
-            {
-              text: "Voltar para a página anterior",
-              onPress: () => props.navigation.goBack(),
-              style: "cancel",
-            },
-          ],
-          {
-            cancelable: false,
-            // onDismiss: () =>
-            //   Alert.alert(
-            //     "This alert was dismissed by tapping outside of the alert dialog."
-            //   ),
-          }
-        );
-      }
 
     useEffect(() => {
         async function fetchData() {
@@ -65,7 +45,7 @@ type ParamList = {
           return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
         }
         if (isError || !productsByCategory)  {
-            showAlert();
+            ShowAlert();
         } else {
             return (
                 <ScrollView style={styles.container}>
