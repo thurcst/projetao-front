@@ -4,7 +4,41 @@ const instance = axios.create({
     baseURL: "https://semgluserver.cin.ufpe.br"
 });
 
-const url = "https://semgluserver.cin.ufpe.br";
+let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1ODg0NzcyLCJpYXQiOjE2NjUwMjA3NzIsImp0aSI6ImJiOTVmMjQ2NzIxNDRmMjBiMGJmMGRhOTE2ZTI1OGViIiwidXNlcl9pZCI6MX0.WUvW14BlzBlg0paq3_GPUgggKJiUEek3YPkAd7wBYVA";
+let refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2NjMxNjc3MiwiaWF0IjoxNjY1MDIwNzcyLCJqdGkiOiIyMmViMjJkZTFjOWI0OGYzOGUwYTllZjg4NGQzMWZjYSIsInVzZXJfaWQiOjF9.hwGEVFDr_DPyY0I_HWtyK43h5xCQHx9xWx67bxfcIkU";
+instance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+
+const setNewAccessToken = async () => {
+    accessToken = await getNewAccessToken();
+}
+
+const setNewRefreshToken = async () => {
+    refreshToken = await getAuthorizationTokens();
+}
+
+const getNewAccessToken = async (): Promise<string> => {
+    const axiosResponse = await instance.post("/api/token/refresh/", {
+        refresh: refreshToken
+    });
+    return axiosResponse.data;
+}
+
+
+instance.interceptors.response.use(
+    response => {
+        return response;
+    },
+    error => {
+        if (error.response.status == 403) {
+            setNewAccessToken();
+            // if (error.response.messages[0].token_class === "AccessToken") {
+            // } else if (error.response.messages[0].token_class === "RefreshToken") {
+            //     setNewRefreshToken();
+            // }
+        }
+    }
+);
+
 export async function getProduct(productId: number) {
     try {
         const axiosResponse = await instance.get("/product/" + productId.toString() + "/");
@@ -55,6 +89,25 @@ export async function getProductsByName(productName: string) {
         return axiosResponse.data;
     } catch (error) {
         console.log("não achei a database " + error);
+        return null;
+    }
+}
+
+export async function getAuthorizationTokens(): Promise<string> {
+    const jsonToSend = {
+                            "username": "",
+                            "password": ""
+                        };
+    const options = {
+        headers: {'content-type': 'application/json'}
+    };
+    const data = JSON.stringify(jsonToSend);
+    try {
+        const axiosResponse = await instance.post("/api/token/", data, options);
+        console.log(axiosResponse.data);
+        return axiosResponse.data;
+    } catch (error) {
+        console.log("Deu erro " + error);
         return null;
     }
 }
