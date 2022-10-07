@@ -64,14 +64,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   imageView: {
-    flex: 0.6,
     width: '100%',
-    height: '100%',
+    height: verticalScale(350),
     justifyContent: 'center'
   },
   image: {
     width: '100%',
-    height: verticalScale(400),
+    height: '100%',
     resizeMode: 'center'
   },
 })

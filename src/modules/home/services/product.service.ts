@@ -58,7 +58,10 @@ export async function getProductsByCategory(productCategory: string) {
     params.append("product", "productCategory");
     try {
         const axiosResponse = await instance.get("/products/", {
-            params: params
+            params: {
+                search: productCategoryArray[0],
+                product: "productCategory"
+            }
         });
         // url do get = baseURL + "/products/?search=" + productCategoryArray[0] + "&product=productCategory"
         return axiosResponse.data;
@@ -83,7 +86,10 @@ export async function getProductsByName(productName: string) {
     params.append("product", "productName");
     try {
         const axiosResponse = await instance.get("/products/", {
-            params: params
+            params: {
+                search: finalStringToSearch,
+                product: "productName"
+            }
         });
         // url do get = baseURL + "/products/?search=" + finalStringToSearch + "&product=productName"
         return axiosResponse.data;
