@@ -6,11 +6,18 @@ import { Product } from '../../types/product';
 import { getProduct } from '../../services/product.service';
 import { moderateScale, scale, verticalScale } from '../../../../shared/styles/scaling_units';
 import { stackRouteNames } from '../../types/stackRouteNames';
+import { NavigationScreenProp } from 'react-navigation';
+import { ProductResponse } from '../../types/responseInterfaces';
 
-export function ActionsItems( props ){
-    let [isError, setIsError] = useState(false);
-    let [item, setItem] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+interface ActionsItemsProps {
+  itemId: number,
+  navigationProp: NavigationScreenProp<any,any>
+}
+
+export function ActionsItems( props: ActionsItemsProps ){
+    let   [isError, setIsError] =     useState<boolean>(false);
+    let   [item, setItem] =           useState<ProductResponse>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     useEffect(() => {
       async function fetchData() {
         setIsLoading(true);
@@ -38,12 +45,18 @@ export function ActionsItems( props ){
         return <View></View>
       } else {
         return (
-          <TouchableOpacity onPress={() => 
-            {props.navigationProp.navigate(stackRouteNames.ProductPage, {
-              itemId: item.barCode
-            })}} 
-            style={styles.actionButton}>
-            
+          <TouchableOpacity
+            onPress={() => 
+              {
+                props.navigationProp.navigate(
+                  stackRouteNames.ProductPage,
+                  { itemId: item.barCode }
+                  )
+              }
+            } 
+            style={styles.actionButton}
+          >
+
             <View style={styles.areaButton}>
               <View style={styles.imageContainer}>
                 <Image
@@ -60,7 +73,6 @@ export function ActionsItems( props ){
                   <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
                 </View>
               </View>
-             
             </View>
             
           </TouchableOpacity>

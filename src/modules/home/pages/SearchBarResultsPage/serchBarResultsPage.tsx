@@ -86,10 +86,6 @@ export function SearchBarResultsPage(props) {
                                     <Text>
                                     {item && item.productName}
                                     </Text>
-                                    {/* <View style={styles.areaButton} >
-                                    <Ionicons name="reader-outline" color={'#000'} size={25} />
-                                    <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
-                                    </View> */}
                                 </View>
                                 
                                 </View>

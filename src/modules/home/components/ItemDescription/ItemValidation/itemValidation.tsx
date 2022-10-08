@@ -6,9 +6,14 @@ import React from "react";
 import { Modal } from "../../../../../shared/components/Modal/Modal";
 import { Button } from "../../../../../shared/components/Button/Button";
 import { SetSafetyCategory } from "../../../types/setSafetyCategory";
-// import Farelo_de_Aveia from '../../../../../shared/assets/Farelo_de_Aveia.jpg';
+import { NavigationScreenProp } from "react-navigation";
 
-export function ItemValidation( props ) {
+interface ItemValidationProps {
+  navigationProp:  NavigationScreenProp<any,any>,
+  safetyCategory:  string,
+  productCategory: string
+}
+export function ItemValidation( props: ItemValidationProps ) {
   const [isReportModalVisible, setIsReportModalVisible] = React.useState(false);
   const [isCriteriaModalVisible, setIsCriteriaModalVisible] = React.useState(false);
 
@@ -23,7 +28,7 @@ export function ItemValidation( props ) {
         <View>
           <Text style={styles.itemValidationTitle}>Validação:</Text>
           {SetSafetyCategory("6")}
-          <Text style={styles.itemValidationLink} onPress={handleCriteriaModal}>Entenda nossa avaliação</Text>
+          <Text style={styles.itemValidationReport} onPress={handleCriteriaModal}>Entenda nossa avaliação</Text>
           <Modal isVisible={isCriteriaModalVisible}>
             <Modal.Container>
               <Modal.Header title="Entenda Nossa Avaliação"/>
@@ -40,45 +45,62 @@ export function ItemValidation( props ) {
               </Modal.Footer>
             </Modal.Container>
           </Modal>
-
-          <Text style={styles.itemValidationLink} 
-              onPress={handleReportModal}>Laudo</Text>
-          <Modal isVisible={isReportModalVisible}>
-            <Modal.Container>
-              <Modal.Header title="Laudo"/>
-              <Modal.Body>
-                <View style={styles.imageView}>
-                  <Image
-                          source={require('../../../../../../assets/PITASEMGLUTEN-LAUDODEGLUTEN.png')}
-                          style={styles.image}
-                    />
-                </View>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button title="Fechar" onPress={handleReportModal}/>
-              </Modal.Footer>
-            </Modal.Container>
-          </Modal>
-          {/* <Text>Categoria: {props.productCategory}</Text> */}
         </View>
+
+        <Text
+          style={styles.itemValidationReport} 
+          onPress={handleReportModal}>LAUDO</Text>
+
+        <Text>
+          <Text>Segurança: </Text>
+          <Text style={ {fontStyle: 'italic'} }>{props.safetyCategory}</Text>
+        </Text>
+
+        <Modal isVisible={isReportModalVisible}>
+          <Modal.Container>
+            <Modal.Header title="Laudo"/>
+            <Modal.Body>
+              <View style={styles.imageView}>
+                <Image
+                  source= {require('../../../../../../assets/PITASEMGLUTEN-LAUDODEGLUTEN.png')}
+                  style={styles.image}
+                />
+              </View>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button title="Fechar" onPress={handleReportModal}/>
+            </Modal.Footer>
+          </Modal.Container>
+        </Modal>
+
       </View>
   );
 }
 
 const styles = StyleSheet.create({
-  itemValidationTitle: {
-    fontSize: scale(16),
-    fontWeight: 'bold',
+  itemValidationView: {
+    backgroundColor: 'white',
   },
-  itemValidationLink: {
-    color: 'green',
-    textDecorationLine: 'underline'
+  itemValidationTitle: {
+    fontSize: scale(18),
+    fontWeight: 'bold',
+    marginBottom: scale(5)
   },
   itemValidationIconText: {
     flexDirection: 'row',
+    marginBottom: scale(5)
   },
-  itemValidationView: {
-    backgroundColor: 'white',
+  itemValidationAbout: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+    marginBottom: scale(5)
+  },
+  itemValidationReport: {
+    color: 'green',
+    textDecorationLine: 'underline',
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    marginBottom: scale(5)
   },
   imageView: {
     paddingTop: scale(10),
@@ -88,7 +110,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: '100%',
+    height: verticalScale(300),
     resizeMode: 'center'
   },
   buttonView: {

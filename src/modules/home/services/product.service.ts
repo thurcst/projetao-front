@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ProductResponse } from "../types/responseInterfaces";
 
 const instance = axios.create({
     baseURL: "https://semgluten.cin.ufpe.br"
@@ -39,7 +40,26 @@ instance.interceptors.response.use(
     }
 );
 
-export async function getProduct(productId: number) {
+async function getMockedProduct(): Promise<ProductResponse> {
+    return {
+        "barCode": 7893500035497,
+        "createdAt": "2022-10-01T22:41:09Z",
+        "idBrand": 623774,
+        "idReport": 1,
+        "idSafety": 1,
+        "picturePath": "http://semgluserver.cin.ufpe.br/media/ARROZ%20TIO%20JOAO%205K",
+        "productCategory": "paes",
+        "productIngredients": "Trigo sem glúten\nGergelim\nCasca de banana\nInhame\nFermento\nÁcido fólico",
+        "productName": "Pão++",
+        "safetyCategory": "a"
+    }
+}
+
+export async function getProduct(productId: number): Promise<ProductResponse|null> {
+    // set to true if the server is offline
+    const MOCKED = false;
+    if(MOCKED) return getMockedProduct();
+
     try {
         const axiosResponse = await instance.get("/productInfos/" + productId.toString() + "/");
         //const axiosSafetyData = await instance.get("/safety/" + axiosResponse.data.idSafety.toString() + "/");
