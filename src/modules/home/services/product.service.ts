@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: "https://semgluserver.cin.ufpe.br"
+    baseURL: "https://semgluprov.loca.lt/"
 });
 
 let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1ODg0NzcyLCJpYXQiOjE2NjUwMjA3NzIsImp0aSI6ImJiOTVmMjQ2NzIxNDRmMjBiMGJmMGRhOTE2ZTI1OGViIiwidXNlcl9pZCI6MX0.WUvW14BlzBlg0paq3_GPUgggKJiUEek3YPkAd7wBYVA";
@@ -41,9 +41,9 @@ instance.interceptors.response.use(
 
 export async function getProduct(productId: number) {
     try {
-        const axiosResponse = await instance.get("/product/" + productId.toString() + "/");
-        const axiosSafetyData = await instance.get("/safety/" + axiosResponse.data.idSafety.toString() + "/");
-        axiosResponse.data["safetyCategory"] = axiosSafetyData.data.description;
+        const axiosResponse = await instance.get("/productInfos/" + productId.toString() + "/");
+        //const axiosSafetyData = await instance.get("/safety/" + axiosResponse.data.idSafety.toString() + "/");
+        //axiosResponse.data["safetyCategory"] = axiosSafetyData.data.description;
         return axiosResponse.data;
     } catch (error) {
         console.log("não achei a database " + error);
@@ -57,8 +57,11 @@ export async function getProductsByCategory(productCategory: string) {
     params.append("search", productCategoryArray[0]);
     params.append("product", "productCategory");
     try {
-        const axiosResponse = await instance.get("/products/", {
-            params: params
+        const axiosResponse = await instance.get("/productInfos/", {
+            params: {
+                search : productCategoryArray [0],
+                product: "productCategory"
+            }
         });
         // url do get = baseURL + "/products/?search=" + productCategoryArray[0] + "&product=productCategory"
         return axiosResponse.data;
@@ -82,8 +85,11 @@ export async function getProductsByName(productName: string) {
     params.append("search", finalStringToSearch);
     params.append("product", "productName");
     try {
-        const axiosResponse = await instance.get("/products/", {
-            params: params
+        const axiosResponse = await instance.get("/productInfos/", {
+            params: {
+                search: finalStringToSearch,
+                product: "productName"
+            }
         });
         // url do get = baseURL + "/products/?search=" + finalStringToSearch + "&product=productName"
         return axiosResponse.data;

@@ -6,6 +6,9 @@ import { scale } from '../../../../shared/styles/scaling_units';
 import { Input, Container } from '../../styles/searchBarStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { stackRouteNames } from '../../types/stackRouteNames';
+import { Alert, Text, Pressable} from "react-native";
+import { KeyboardEvent } from "react";
+
 
 
 const SearchBar = ({ navigation }) => {
@@ -18,6 +21,11 @@ const SearchBar = ({ navigation }) => {
         navigation.navigate(stackRouteNames.SearchBarResultsPage, {searchedPhrase: searchPhrase});
     }
     const [value, setValue] = useState('');
+   
+    
+
+
+    
     return(
     <View style={styles.container}>
       <View
@@ -40,6 +48,9 @@ const SearchBar = ({ navigation }) => {
                 <EvilIcons name="search" size={28} color="black" style={{ marginLeft: 1 }}/>
             </TouchableOpacity>)
         }
+        
+
+
         {/* Input field */}
         <TextInput
           style={styles.input}
@@ -101,7 +112,14 @@ const styles = StyleSheet.create({
     inputField: {
         borderRadius: 15,
         backgroundColor: '#DADADA'
+    },
+    filter: {
+      color: 'green',
+      textDecorationLine: 'underline'
     }
+
+
+    
 })
 
 export default SearchBar;
