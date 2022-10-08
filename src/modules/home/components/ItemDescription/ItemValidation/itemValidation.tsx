@@ -5,6 +5,7 @@ import { stackRouteNames } from "../../../types/stackRouteNames";
 import React from "react";
 import { Modal } from "../../../../../shared/components/Modal/Modal";
 import { Button } from "../../../../../shared/components/Button/Button";
+import { SetSafetyCategory } from "../../../types/setSafetyCategory";
 
 export function ItemValidation( props ) {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
@@ -14,10 +15,11 @@ export function ItemValidation( props ) {
       <View style={styles.itemValidationView}>
         <View>
           <Text style={styles.itemValidationTitle}>Validação:</Text>
-          <View style={styles.itemValidationIconText}>
+          {SetSafetyCategory(props.safetyCategory)}
+          {/* <View style={styles.itemValidationIconText}>
             <Ionicons name="shield-checkmark-outline" color={'green'} size={20}/>
             <Text style={{marginLeft: scale(5)}}>Produto sem glúten</Text>
-          </View>
+          </View> */}
           <Text style={styles.itemValidationLink}>Entenda nossa avaliação</Text>
           <Text style={styles.itemValidationLink} 
               onPress={handleModal}>Laudo</Text>

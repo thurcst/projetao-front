@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: "https://semgluserver.cin.ufpe.br"
+    baseURL: "https://semgluprov.loca.lt"
 });
 
 let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1ODg0NzcyLCJpYXQiOjE2NjUwMjA3NzIsImp0aSI6ImJiOTVmMjQ2NzIxNDRmMjBiMGJmMGRhOTE2ZTI1OGViIiwidXNlcl9pZCI6MX0.WUvW14BlzBlg0paq3_GPUgggKJiUEek3YPkAd7wBYVA";
@@ -41,9 +41,10 @@ instance.interceptors.response.use(
 
 export async function getProduct(productId: number) {
     try {
-        const axiosResponse = await instance.get("/product/" + productId.toString() + "/");
-        const axiosSafetyData = await instance.get("/safety/" + axiosResponse.data.idSafety.toString() + "/");
-        axiosResponse.data["safetyCategory"] = axiosSafetyData.data.description;
+        const axiosResponse = await instance.get("/productInfos/" + productId.toString() + "/");
+        // const axiosSafetyData = await instance.get("/safety/" + axiosResponse.data.idSafety.toString() + "/");
+        // axiosResponse.data["safetyCategory"] = axiosSafetyData.data.description;
+        console.log(axiosResponse);
         return axiosResponse.data;
     } catch (error) {
         console.log("não achei a database " + error);

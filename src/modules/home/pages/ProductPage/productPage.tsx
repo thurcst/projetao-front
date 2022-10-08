@@ -69,7 +69,7 @@ export function ProductPage( props ) {
             <ScrollView style={styles.itemDescriptionView}>
             <ItemName productName={item.productName}/>
             <View style={styles.itemDescriptionFields}>
-              <ItemValidation navigationProp={navigation} safetyCategory={item && item.safetyCategory} productCategory={item && item.productCategory}/>
+              <ItemValidation navigationProp={navigation} safetyCategory={item && item.category} productCategory={item && item.productCategory}/>
             </View>
             </ScrollView>
           </View>
