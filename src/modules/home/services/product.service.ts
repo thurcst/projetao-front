@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: "https://semgluprov.loca.lt/"
+    baseURL: "https://bright-dingo-94.loca.lt/"
 });
 
-let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1ODg0NzcyLCJpYXQiOjE2NjUwMjA3NzIsImp0aSI6ImJiOTVmMjQ2NzIxNDRmMjBiMGJmMGRhOTE2ZTI1OGViIiwidXNlcl9pZCI6MX0.WUvW14BlzBlg0paq3_GPUgggKJiUEek3YPkAd7wBYVA";
-let refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2NjMxNjc3MiwiaWF0IjoxNjY1MDIwNzcyLCJqdGkiOiIyMmViMjJkZTFjOWI0OGYzOGUwYTllZjg4NGQzMWZjYSIsInVzZXJfaWQiOjF9.hwGEVFDr_DPyY0I_HWtyK43h5xCQHx9xWx67bxfcIkU";
+let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTAwMjUwLCJpYXQiOjE2NjUyMzU4OTIsImp0aSI6IjY1ZTI1ZTAxOTJmZjRiMjA5NTc3YzA0YWY5Mjc5YTIwIiwidXNlcl9pZCI6MX0.ZJTcqz0jwhjYi1S-w6-Ouo2gqCcuEPv4UyKOB5f8Ge4";
+let refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2NjUzMTg5MiwiaWF0IjoxNjY1MjM1ODkyLCJqdGkiOiI2ZGMxOGFkYTA4NmY0OTViODhkODNlM2Y3NGI1NjkxNSIsInVzZXJfaWQiOjF9.kdOn6HcXgADfecGcfyI15vtBDv9L_lej8EuaXY1blK4";
 instance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
 const setNewAccessToken = async () => {
@@ -57,7 +57,7 @@ export async function getProductsByCategory(productCategory: string) {
     params.append("search", productCategoryArray[0]);
     params.append("product", "productCategory");
     try {
-        const axiosResponse = await instance.get("/productInfos/", {
+        const axiosResponse = await instance.get("/products/", {
             params: {
                 search : productCategoryArray [0],
                 product: "productCategory"
@@ -85,7 +85,7 @@ export async function getProductsByName(productName: string) {
     params.append("search", finalStringToSearch);
     params.append("product", "productName");
     try {
-        const axiosResponse = await instance.get("/productInfos/", {
+        const axiosResponse = await instance.get("/products/", {
             params: {
                 search: finalStringToSearch,
                 product: "productName"

@@ -17,6 +17,10 @@ import { Modal } from "../../../../shared/components/Modal/Modal";
 
 
 const { width, height } = Dimensions.get('window');
+var contadorCategory = 0;
+var contadorSecurity = 0;
+var filtroCategory = "";
+var filtroSecurity = "";
 
 export function SearchBarResultsPage(props) {
     const { navigation, route } = props;
@@ -26,11 +30,7 @@ export function SearchBarResultsPage(props) {
   const [filteredData, setFilteredData] = useState([]);
   let [isError, setIsError] = useState(false);
 
-  var contadorCategory = 0;
-  var contadorSecurity = 0;
-  var filtroCategory = "";
-  var filtroSecurity = "";
-
+ 
 
   useEffect(() => {
     fetchData();
@@ -108,17 +108,71 @@ export function SearchBarResultsPage(props) {
   
 
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const handleModal = () => setIsModalVisible(() => !isModalVisible);
+  const handleModal = () => {
+    setIsModalVisible(() => !isModalVisible);
+    console.log("contadorCategory: "+contadorCategory);
+  console.log("filtroCategory: " +filtroCategory);
+  console.log("contadorSecurity: "+contadorSecurity);
+  console.log("filtroSecurity: "+filtroSecurity);
+    filtrando();
+  };
+  const filterCancel = () =>{
+    setIsModalVisible(() => !isModalVisible);
+    //console.log(filteredData);
+    console.log("contadorCategory: "+contadorCategory);
+    console.log("filtroCategory: " +filtroCategory);
+    console.log("contadorSecurity: "+contadorSecurity);
+    console.log("filtroSecurity: "+filtroSecurity);
+    contadorCategory = 0;
+    contadorSecurity = 0;
+    filtrando();
+ };
+
+
 
   const [isModalVisible2, setIsModalVisible2] = React.useState(false);
-  const handleModal2 = () => setIsModalVisible2(() => !isModalVisible2);
+  const handleModal2 = () => {
+    setIsModalVisible2(() => !isModalVisible2);
+    console.log("contadorCategory: "+contadorCategory);
+  console.log("filtroCategory: " +filtroCategory);
+  console.log("contadorSecurity: "+contadorSecurity);
+  console.log("filtroSecurity: "+filtroSecurity); 
+  };
+  const filterCancel2 = () =>{
+    setIsModalVisible2(() => !isModalVisible2);
+    //console.log(filteredData);
+    console.log("contadorCategory: "+contadorCategory);
+    console.log("filtroCategory: " +filtroCategory);
+    console.log("contadorSecurity: "+contadorSecurity);
+    console.log("filtroSecurity: "+filtroSecurity);
+    contadorCategory = 0;
+    filtroCategory = "";
+   
+  };
+
+
 
   const [isModalVisible3, setIsModalVisible3] = React.useState(false);
-  const handleModal3 = () => setIsModalVisible3(() => !isModalVisible3);
-  
+  const handleModal3 = () => {
+    setIsModalVisible3(() => !isModalVisible3);
+    console.log("contadorCategory: "+contadorCategory);
+  console.log("filtroCategory: " +filtroCategory);
+  console.log("contadorSecurity: "+contadorSecurity);
+  console.log("filtroSecurity: "+filtroSecurity); 
+  };
+const filterCancel3 = () =>{
+  setIsModalVisible3(() => !isModalVisible3);
+  //console.log(filteredData);
+  console.log("contadorCategory: "+contadorCategory);
+  console.log("filtroCategory: " +filtroCategory);
+  console.log("contadorSecurity: "+contadorSecurity);
+  console.log("filtroSecurity: "+filtroSecurity);
+  contadorSecurity = 0;
+  filtroSecurity = "";
+};
 
   //Filtros Categorias
-  const filterPaes = () =>{setFilteredData(data.filter((value) => {
+  /*const filterPaes = () =>{setFilteredData(data.filter((value) => {
     if (removerAcentos(value.productCategory) == "paes") {
       return value; 
     }
@@ -157,82 +211,124 @@ export function SearchBarResultsPage(props) {
       return value; 
     }
     console.log(filteredData);
-  }))};
+  }))};*/
   
 
 
 
-  /////////////////////////////////////////////////
-  /*function filtrando(filter1,filter2){
-
-  };
+  /////////////////  FILTROS  ////////////////////////////////
 
 
   const filterPaes = () =>{
-    if(contadorCategory == 0){
-      contadorCategory++;
+    if(contadorCategory === 0 ){
+      contadorCategory = 1;
     }
     filtroCategory = "paes"
-    function filtrando(filtroCategory,"")
+    setIsModalVisible2(() => !isModalVisible2);
+    
+
   };
   const filterGraos = () =>{
-    if(contadorCategory == 0){
-      contadorCategory++;
+    if(contadorCategory === 0 ){
+      contadorCategory = 1;
     }
     filtroCategory = "graos"
+    setIsModalVisible2(() => !isModalVisible2);
+    
 
   };
   const filterDoces = () =>{
-    if(contadorCategory == 0){
-      contadorCategory++;
+    if(contadorCategory === 0 ){
+      contadorCategory = 1;
     }
     filtroCategory = "doces"
+    setIsModalVisible2(() => !isModalVisible2);
+    
 
   };
   const filterBiscoito = () =>{
-    if(contadorCategory == 0){
-      contadorCategory++;
+    if(contadorCategory === 0 ){
+      contadorCategory = 1;
     }
     filtroCategory = "biscoitos e salgadinhos"
+    setIsModalVisible2(() => !isModalVisible2);
+    
 
   };
   const filterCarnes = () =>{
-    if(contadorCategory == 0){
-      contadorCategory++;
+    if(contadorCategory === 0 ){
+      contadorCategory = 1;
     }
     filtroCategory = "carnes, aves e peixes"
+    setIsModalVisible2(() => !isModalVisible2);
+    
 
   };
   const filterMolhos = () =>{
-    if(contadorCategory == 0){
-      contadorCategory++;
+    if(contadorCategory === 0 ){
+      contadorCategory = 1;
     }
     filtroCategory = "molhos e condimentos"
-
-  };*/
-
-
-  const filterCancel = () =>{
-      setData(data);
-      setFilteredData(data);
-      setIsLoading(false);
-      setIsModalVisible(() => !isModalVisible);
-      console.log(filteredData);
-   };
-  const filterCancel2 = () =>{
-    setData(data);
-    setFilteredData(data);
-    setIsLoading(false);
     setIsModalVisible2(() => !isModalVisible2);
-    console.log(filteredData);
- };
- const filterCancel3 = () =>{
-  setData(data);
-  setFilteredData(data);
-  setIsLoading(false);
-  setIsModalVisible3(() => !isModalVisible3);
-  console.log(filteredData);
-};
+    
+  };
+    
+
+     
+    
+    
+    const filter0 = () =>{
+    if(contadorSecurity === 0){
+      contadorSecurity = 1;
+    }
+    filtroSecurity = "0"
+    setIsModalVisible3(() => !isModalVisible3);
+  };
+
+     const filter1 = () =>{
+      if(contadorSecurity === 0){
+        contadorSecurity = 1;
+    }
+    filtroSecurity = "1"
+    setIsModalVisible3(() => !isModalVisible3);
+  };
+
+     const filter2 = () =>{
+      if(contadorSecurity === 0){
+        contadorSecurity = 1;
+    }
+    filtroSecurity = "2"
+    setIsModalVisible3(() => !isModalVisible3);
+  };
+
+     const filter3 = () =>{
+      if(contadorSecurity === 0){
+        contadorSecurity = 1;
+    }
+    filtroSecurity = "3"
+    setIsModalVisible3(() => !isModalVisible3);
+  };
+
+     const filter4 = () =>{
+      if(contadorSecurity === 0){
+        contadorSecurity = 1;
+    }
+    filtroSecurity = "4"
+    setIsModalVisible3(() => !isModalVisible3);
+  };
+
+     const filter5 = () =>{
+      if(contadorSecurity === 0){
+        contadorSecurity = 1;
+      }
+      filtroSecurity = "5"
+      setIsModalVisible3(() => !isModalVisible3);
+  };
+
+  
+
+
+// Remover acentos
   
 function removerAcentos(s) {
   var map = { "â": "a", "Â": "A", "à": "a", "À": "A", "á": "a", "Á": "A", "ã": "a", "Ã": "A", "ê": "e", "Ê": "E", "è": "e", "È": "E", "é": "e", "É": "E", "î": "i", "Î": "I", "ì": "i", "Ì": "I", "í": "i", "Í": "I", "õ": "o", "Õ": "O", "ô": "o", "Ô": "O", "ò": "o", "Ò": "O", "ó": "o", "Ó": "O", "ü": "u", "Ü": "U", "û": "u", "Û": "U", "ú": "u", "Ú": "U", "ù": "u", "Ù": "U", "ç": "c", "Ç": "C" };
@@ -241,7 +337,51 @@ function removerAcentos(s) {
 };
 
 
+// Funcao que filtra
+const filtrando = ()=>{
+  
+  if(contadorCategory === 1 && contadorSecurity === 1){   //filtro categoria + seguranca
+  {setFilteredData(data.filter((value) => {   //filtra categoria
+    if (removerAcentos(value.productCategory) == filtroCategory) {
+      return value; 
+    }
+    //console.log(filteredData);
+  }))}
+  {setFilteredData(data.filter((value) => {   //Filtra seguranca
+    if (removerAcentos(value.category) == filtroSecurity) {
+      return value; 
+    }
+    //console.log(filteredData);
+  }))}
+}
+if(contadorCategory === 1 && contadorSecurity === 0){    //filtro categoria
+  {setFilteredData(data.filter((value) => {   //filtra categoria
+    if (removerAcentos(value.productCategory) == filtroCategory) {
+      return value; 
+    }
+    //console.log(filteredData);
+  }))}
+}
+if(contadorCategory === 0 && contadorSecurity === 1){   //filtro seguranca
+  {setFilteredData(data.filter((value) => {   //Filtra seguranca
+    if (removerAcentos(value.category) == filtroSecurity) {
+      return value; 
+    }
+    //console.log(filteredData);
+  }))}
+}
+if(contadorCategory === 0 && contadorSecurity === 0){
+  setData(data);
+  setFilteredData(data);
+  setIsLoading(false);
+}
+};
+//////////////////////////////////////////////////////////////////////////////
+//Filtros aplicados
 
+
+
+///////////////////////////////////////////////////////////////////////////////
   
   return (
     
@@ -277,6 +417,9 @@ function removerAcentos(s) {
                 <EvilIcons name="chevron-down" size={28} color="black" style={{ marginLeft: 1 }}/>
                 </View>
                 </Pressable>
+                <Text style={{marginTop: 15,}}> Filtros aplicados</Text>
+                <Text> Categoria: {filtroCategory}  </Text>
+                <Text> Segurança: {filtroSecurity} </Text>
                 </View>
               
                 
@@ -321,9 +464,6 @@ function removerAcentos(s) {
               </Modal.Body>  
               
               <Modal.Footer>
-              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,backgroundColor: "#35bd3b"}} onPress={(handleModal2) }>
-              <Text style ={ {color: "white"}}>Aplicar</Text>
-              </Pressable>
               <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(filterCancel2) }>
               <Text style ={ {color: "white"}}>Cancelar</Text>
               </Pressable>
@@ -335,12 +475,33 @@ function removerAcentos(s) {
             <Modal.Container>
               <Modal.Header title="Segurança:"/>
               
+              
               <Modal.Body>
+              <View>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter0) }>
+              <Text style ={ {color: "white"}}>0</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter1) }>
+              <Text style ={ {color: "white"}}>1</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter2) }>
+              <Text style ={ {color: "white"}}>2</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter3) }>
+              <Text style ={ {color: "white"}}>3</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter4) }>
+              <Text style ={ {color: "white"}}>4</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter5) }>
+              <Text style ={ {color: "white"}}>5</Text>
+              </Pressable>
+              </View>
               
               </Modal.Body>  
               
               <Modal.Footer>
-              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,backgroundColor: "#bd3535"}} onPress={(filterCancel3) }>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(filterCancel3) }>
               <Text style ={ {color: "white"}}>Cancelar</Text>
               </Pressable>
               </Modal.Footer>
