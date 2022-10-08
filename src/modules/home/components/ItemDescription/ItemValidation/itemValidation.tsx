@@ -8,9 +8,11 @@ import { Button } from "../../../../../shared/components/Button/Button";
 import { SetSafetyCategory } from "../../../types/setSafetyCategory";
 
 export function ItemValidation( props ) {
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [isReportModalVisible, setIsReportModalVisible] = React.useState(false);
+  const [isCriteriaModalVisible, setIsCriteriaModalVisible] = React.useState(false);
 
-  const handleModal = () => setIsModalVisible(() => !isModalVisible);
+  const handleReportModal = () => setIsReportModalVisible(() => !isReportModalVisible);
+  const handleCriteriaModal = () => setIsCriteriaModalVisible(() => !isCriteriaModalVisible);
   return (
       <View style={styles.itemValidationView}>
         <View>
@@ -20,10 +22,24 @@ export function ItemValidation( props ) {
             <Ionicons name="shield-checkmark-outline" color={'green'} size={20}/>
             <Text style={{marginLeft: scale(5)}}>Produto sem glúten</Text>
           </View> */}
-          <Text style={styles.itemValidationLink}>Entenda nossa avaliação</Text>
+          <Text style={styles.itemValidationLink} onPress={handleCriteriaModal}>Entenda nossa avaliação</Text>
+          <Modal isVisible={isCriteriaModalVisible}>
+            <Modal.Container>
+              <Modal.Header title="Entenda Nossa Avaliação"/>
+              <Modal.Body>
+                <View style={styles.imageView}>
+                  <Text>Esta nota não dispensa leitura do rótulo, que pode mudar sem aviso prévio</Text>
+                </View>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button title="Fechar" onPress={handleCriteriaModal}/>
+              </Modal.Footer>
+            </Modal.Container>
+          </Modal>
+
           <Text style={styles.itemValidationLink} 
-              onPress={handleModal}>Laudo</Text>
-          <Modal isVisible={isModalVisible}>
+              onPress={handleReportModal}>Laudo</Text>
+          <Modal isVisible={isReportModalVisible}>
             <Modal.Container>
               <Modal.Header title="Laudo"/>
               <Modal.Body>
@@ -35,7 +51,7 @@ export function ItemValidation( props ) {
                 </View>
               </Modal.Body>
               <Modal.Footer>
-                <Button title="Fechar" onPress={handleModal}/>
+                <Button title="Fechar" onPress={handleReportModal}/>
               </Modal.Footer>
             </Modal.Container>
           </Modal>
