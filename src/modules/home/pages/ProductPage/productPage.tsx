@@ -56,7 +56,7 @@ export function ProductPage( props ) {
       return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
     }  else {
       if (isError || !item) {
-        ShowAlert("O produto não foi encontrado");
+        ShowAlert("Produto não encontrado. Buscaremos informações sobre ele.");
       } else {
         return (
           <View style={styles.container}>
