@@ -13,6 +13,8 @@ function getIconSafetyCategory(safetyCategory: string) {
         return <Ionicons name="shield-outline" color={'yellow'} size={20}/>
     } else if (parseInt(safetyCategory) == 4) {
         return <Ionicons name="shield-outline" color={'green'} size={20}/>
+    } else if (parseInt(safetyCategory) == 5) {
+        return <Ionicons name="shield-outline" color={'green'} size={20}/>
     } else {
         return <Ionicons name="shield-checkmark-outline" color={'green'} size={20}/>
     }

@@ -13,15 +13,15 @@ export function ItemValidation( props ) {
 
   const handleReportModal = () => setIsReportModalVisible(() => !isReportModalVisible);
   const handleCriteriaModal = () => setIsCriteriaModalVisible(() => !isCriteriaModalVisible);
+  const goToCriteriaPage = () => {
+    setIsCriteriaModalVisible(() => !isCriteriaModalVisible);
+    props.navigationProp.navigate(stackRouteNames.CriteriaPage);
+  };
   return (
       <View style={styles.itemValidationView}>
         <View>
           <Text style={styles.itemValidationTitle}>Validação:</Text>
           {SetSafetyCategory(props.safetyCategory)}
-          {/* <View style={styles.itemValidationIconText}>
-            <Ionicons name="shield-checkmark-outline" color={'green'} size={20}/>
-            <Text style={{marginLeft: scale(5)}}>Produto sem glúten</Text>
-          </View> */}
           <Text style={styles.itemValidationLink} onPress={handleCriteriaModal}>Entenda nossa avaliação</Text>
           <Modal isVisible={isCriteriaModalVisible}>
             <Modal.Container>
@@ -33,6 +33,7 @@ export function ItemValidation( props ) {
               </Modal.Body>
               <Modal.Footer>
                 <Button title="Fechar" onPress={handleCriteriaModal}/>
+                <Button title="Critérios de avaliação" onPress={goToCriteriaPage}/>
               </Modal.Footer>
             </Modal.Container>
           </Modal>
@@ -92,4 +93,3 @@ const styles = StyleSheet.create({
     resizeMode: 'center'
   },
 })
-  

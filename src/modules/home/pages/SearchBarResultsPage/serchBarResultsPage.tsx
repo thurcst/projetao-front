@@ -271,12 +271,12 @@ function removerAcentos(s) {
                 <EvilIcons name="chevron-down" size={28} color="black" style={{ marginLeft: 1 }}/>
                 </View>
                 </Pressable>
-                <Pressable style={[styles.button, styles.buttonClose]} onPress={(handleModal3) }>
+                {/* <Pressable style={[styles.button, styles.buttonClose]} onPress={(handleModal3) }>
                 <View style={{flexDirection: 'row',  marginLeft: 10   }}>
                 <Text style ={{fontSize : 15}}>Segurança</Text>
                 <EvilIcons name="chevron-down" size={28} color="black" style={{ marginLeft: 1 }}/>
                 </View>
-                </Pressable>
+                </Pressable> */}
                 </View>
               
                 
