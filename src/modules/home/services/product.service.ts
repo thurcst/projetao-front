@@ -42,9 +42,8 @@ instance.interceptors.response.use(
 export async function getProduct(productId: number) {
     try {
         const axiosResponse = await instance.get("/productInfos/" + productId.toString() + "/");
-        // const axiosSafetyData = await instance.get("/safety/" + axiosResponse.data.idSafety.toString() + "/");
-        // axiosResponse.data["safetyCategory"] = axiosSafetyData.data.description;
-        console.log(axiosResponse);
+        //const axiosSafetyData = await instance.get("/safety/" + axiosResponse.data.idSafety.toString() + "/");
+        //axiosResponse.data["safetyCategory"] = axiosSafetyData.data.description;
         return axiosResponse.data;
     } catch (error) {
         console.log("não achei a database " + error);
