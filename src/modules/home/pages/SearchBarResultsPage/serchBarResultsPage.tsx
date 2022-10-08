@@ -78,7 +78,7 @@ export function SearchBarResultsPage(props) {
                                 <View style={styles.areaButton}>
                                     <View style={styles.imageContainer}>
                                         <Image
-                                        source= {{uri: 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}} 
+                                        source= {{uri: "https://bright-dingo-94.loca.lt/media/picture/" + item.barCode + ".png"}} 
                                         style={styles.image}
                                         />
                                     </View>
@@ -86,10 +86,10 @@ export function SearchBarResultsPage(props) {
                                     <Text>
                                     {item && item.productName}
                                     </Text>
-                                    <View style={styles.areaButton} >
+                                    {/* <View style={styles.areaButton} >
                                     <Ionicons name="reader-outline" color={'#000'} size={25} />
                                     <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
-                                    </View>
+                                    </View> */}
                                 </View>
                                 
                                 </View>
@@ -379,6 +379,7 @@ const styles = StyleSheet.create({
         },
     foodNameAndIcons: {
         flexDirection: 'column',
+        justifyContent: 'center',
         top: verticalScale(5),
         left: moderateScale(5),
         borderBottomWidth: 0.5,

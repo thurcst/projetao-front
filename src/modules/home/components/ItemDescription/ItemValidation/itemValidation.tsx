@@ -27,13 +27,15 @@ export function ItemValidation( props ) {
             <Modal.Container>
               <Modal.Header title="Entenda Nossa Avaliação"/>
               <Modal.Body>
-                <View style={styles.imageView}>
-                  <Text>Esta nota não dispensa leitura do rótulo, que pode mudar sem aviso prévio</Text>
+                <View style={styles.evaluationView}>
+                  <Text style={styles.evaluationText}>Esta nota não dispensa leitura do rótulo, que pode mudar sem aviso prévio</Text>
                 </View>
               </Modal.Body>
               <Modal.Footer>
-                <Button title="Fechar" onPress={handleCriteriaModal}/>
-                <Button title="Critérios de avaliação" onPress={goToCriteriaPage}/>
+                <View style={styles.buttonView}>
+                  <Button title="Critérios de avaliação" onPress={goToCriteriaPage}/>
+                  <Button title="Fechar" onPress={handleCriteriaModal}/>
+                </View>
               </Modal.Footer>
             </Modal.Container>
           </Modal>
@@ -77,11 +79,6 @@ const styles = StyleSheet.create({
   itemValidationView: {
     backgroundColor: 'white',
   },
-  text: {
-    fontSize: 16,
-    fontWeight: "400",
-    textAlign: "center",
-  },
   imageView: {
     width: '100%',
     height: verticalScale(350),
@@ -92,4 +89,20 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'center'
   },
+  buttonView: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  evaluationView: {
+    height: verticalScale(200),
+    width: '100%',
+    justifyContent: 'center'
+  },
+  evaluationText: {
+    fontSize: scale(20),
+    fontWeight: "400",
+    textAlign: "center",
+  }
 })

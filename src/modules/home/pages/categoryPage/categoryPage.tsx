@@ -10,6 +10,7 @@ import { getProductsByCategory } from '../../services/product.service';
 import { stackRouteNames } from '../../types/stackRouteNames';
 import { EvilIcons, Entypo } from '@expo/vector-icons';
 import { Modal } from "../../../../shared/components/Modal/Modal";
+import { ItemName } from '../../components/ItemDescription/ItemName/itemName';
 
 type ParamList = {
     CategoryPage: {
@@ -50,7 +51,7 @@ type ParamList = {
           return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
         }
         if (isError || !productsByCategory)  {
-            ShowAlert();
+            ShowAlert("Não foi possível encontrar produtos para esta categoria");
         } else {
             return (
                 <ScrollView style={styles.container}>
@@ -64,7 +65,7 @@ type ParamList = {
                     <View style={styles.areaButton}>
                       <View style={styles.imageContainer}>
                         <Image
-                        source= {{uri: categoryImageURL}} 
+                        source= {{uri: "https://bright-dingo-94.loca.lt/media/picture/" + item.barCode + ".png"}} 
                         style={styles.image}
                         />
                       </View>
@@ -72,10 +73,10 @@ type ParamList = {
                         <Text>
                         {item && item.productName}
                         </Text>
-                        <View style={styles.areaButton} >
+                        {/* <View style={styles.areaButton} >
                           <Ionicons name="reader-outline" color={'#000'} size={25} />
                           <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
-                        </View>
+                        </View> */}
                       </View>
                      
                     </View>
@@ -278,6 +279,7 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       top: verticalScale(5),
       left: moderateScale(5),
+      justifyContent: 'center',
       borderBottomWidth: 0.5,
       borderBottomColor: '#DADADA'
       },

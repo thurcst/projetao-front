@@ -18,8 +18,9 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(15),
     paddingVertical: verticalScale(15),
     borderRadius: 25,
-    width: "80%",
+    width: "100%",
     alignItems: "center",
+    justifyContent: 'center',
   },
   text: {
     color: "white",

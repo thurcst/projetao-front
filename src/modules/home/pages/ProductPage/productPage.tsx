@@ -62,7 +62,7 @@ export function ProductPage( props ) {
           <View style={styles.container}>
             <View style={styles.imageView}>
               <Image
-                      source= {{uri: 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
+                      source= {{uri: item.picturePath}}
                       style={styles.image}
                 />
             </View>

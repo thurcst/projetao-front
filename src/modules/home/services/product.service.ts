@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: "https://semgluprov.loca.lt"
+    baseURL: "https://bright-dingo-94.loca.lt"
 });
 
-let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1ODg0NzcyLCJpYXQiOjE2NjUwMjA3NzIsImp0aSI6ImJiOTVmMjQ2NzIxNDRmMjBiMGJmMGRhOTE2ZTI1OGViIiwidXNlcl9pZCI6MX0.WUvW14BlzBlg0paq3_GPUgggKJiUEek3YPkAd7wBYVA";
-let refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2NjMxNjc3MiwiaWF0IjoxNjY1MDIwNzcyLCJqdGkiOiIyMmViMjJkZTFjOWI0OGYzOGUwYTllZjg4NGQzMWZjYSIsInVzZXJfaWQiOjF9.hwGEVFDr_DPyY0I_HWtyK43h5xCQHx9xWx67bxfcIkU";
+let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTA1MTQ1LCJpYXQiOjE2NjUyNDExNDUsImp0aSI6IjM3ZTgyMjJkNzc2MjQwYmE5YjRkM2FlZjA4NzZkNDMxIiwidXNlcl9pZCI6MX0.Ly-bmp_j5uESFMiLZn_yIL_RnHcADKPNCbEY2nOxrsI";
+let refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2NjUzNjg2NSwiaWF0IjoxNjY1MjQwODY1LCJqdGkiOiJjYjY0OGU1NjcxYjA0ZWUxOTYwZmMxYzQ1NDZkZDViNCIsInVzZXJfaWQiOjF9.EbfPYrCftJ_N8I3oZ4-OdUasyTKF7CtufLc3ZYNRtWs";
 instance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
 const setNewAccessToken = async () => {
@@ -44,6 +44,7 @@ export async function getProduct(productId: number) {
         const axiosResponse = await instance.get("/productInfos/" + productId.toString() + "/");
         //const axiosSafetyData = await instance.get("/safety/" + axiosResponse.data.idSafety.toString() + "/");
         //axiosResponse.data["safetyCategory"] = axiosSafetyData.data.description;
+        axiosResponse.data.picturePath = "https://bright-dingo-94.loca.lt/media/picture/" + productId + ".png"
         return axiosResponse.data;
     } catch (error) {
         console.log("não achei a database " + error);
@@ -110,7 +111,6 @@ export async function getAuthorizationTokens(): Promise<string> {
     const data = JSON.stringify(jsonToSend);
     try {
         const axiosResponse = await instance.post("/api/token/", data, options);
-        console.log(axiosResponse.data);
         return axiosResponse.data;
     } catch (error) {
         console.log("Deu erro " + error);
