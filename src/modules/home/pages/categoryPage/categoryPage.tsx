@@ -65,7 +65,7 @@ type ParamList = {
                     <View style={styles.areaButton}>
                       <View style={styles.imageContainer}>
                         <Image
-                        source= {{uri: "https://bright-dingo-94.loca.lt/media/picture/" + item.barCode + ".png"}} 
+                        source= {{uri: "https://semgluprov.loca.lt/media/picture/" + item.barCode + ".png"}} 
                         style={styles.image}
                         />
                       </View>

@@ -15,7 +15,7 @@ const SearchBar = ({ navigation }) => {
     const [clicked, setClicked] = useState(false);
     const [searchPhrase, setSearchPhrase] = useState("");
     function onSearch() {
-      if (!searchPhrase) {
+      if (searchPhrase) {
         setSearchPhrase("");
         Keyboard.dismiss();
         setClicked(false);

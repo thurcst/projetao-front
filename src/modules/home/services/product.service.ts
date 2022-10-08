@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: "https://bright-dingo-94.loca.lt"
+    baseURL: "https://semgluprov.loca.lt"
 });
 
 let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTA1MTQ1LCJpYXQiOjE2NjUyNDExNDUsImp0aSI6IjM3ZTgyMjJkNzc2MjQwYmE5YjRkM2FlZjA4NzZkNDMxIiwidXNlcl9pZCI6MX0.Ly-bmp_j5uESFMiLZn_yIL_RnHcADKPNCbEY2nOxrsI";
@@ -44,7 +44,7 @@ export async function getProduct(productId: number) {
         const axiosResponse = await instance.get("/productInfos/" + productId.toString() + "/");
         //const axiosSafetyData = await instance.get("/safety/" + axiosResponse.data.idSafety.toString() + "/");
         //axiosResponse.data["safetyCategory"] = axiosSafetyData.data.description;
-        axiosResponse.data.picturePath = "https://bright-dingo-94.loca.lt/media/picture/" + productId + ".png"
+        axiosResponse.data.picturePath = "https://semgluprov.loca.lt/media/picture/" + productId + ".png"
         return axiosResponse.data;
     } catch (error) {
         console.log("não achei a database " + error);
