@@ -47,7 +47,7 @@ export function ActionsItems( props ){
             <View style={styles.areaButton}>
               <View style={styles.imageContainer}>
                 <Image
-                source= {{uri: 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}} 
+                source= {{uri: item.picturePath}} 
                 style={styles.image}
                 />
               </View>

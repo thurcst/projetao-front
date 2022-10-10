@@ -56,20 +56,20 @@ export function ProductPage( props ) {
       return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
     }  else {
       if (isError || !item) {
-        ShowAlert("O produto não foi encontrado");
+        ShowAlert("Produto não encontrado. Buscaremos informações sobre ele.");
       } else {
         return (
           <View style={styles.container}>
             <View style={styles.imageView}>
               <Image
-                      source= {{uri: 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
+                      source= {{uri: item.picturePath}}
                       style={styles.image}
                 />
             </View>
             <ScrollView style={styles.itemDescriptionView}>
             <ItemName productName={item.productName}/>
             <View style={styles.itemDescriptionFields}>
-              <ItemValidation navigationProp={navigation} safetyCategory={item && item.safetyCategory} productCategory={item && item.productCategory}/>
+              <ItemValidation navigationProp={navigation} safetyCategory={item && item.category} productCategory={item && item.productCategory}/>
             </View>
             </ScrollView>
           </View>

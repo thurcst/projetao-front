@@ -1,23 +1,33 @@
 import React, { useState } from 'react';
 import ReactSearchBar from 'react-native-platform-searchbar';
 import { EvilIcons, Entypo } from '@expo/vector-icons';
-import { Button, StyleSheet, TextInput, View, Keyboard } from "react-native";
+import { StyleSheet, TextInput, View, Keyboard } from "react-native";
 import { scale } from '../../../../shared/styles/scaling_units';
-import { BoxButtonSearch, Input, Container } from '../../styles/searchBarStyles';
+import { Input, Container } from '../../styles/searchBarStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { stackRouteNames } from '../../types/stackRouteNames';
+import { Alert, Text, Pressable} from "react-native";
+import { KeyboardEvent } from "react";
+
 
 
 const SearchBar = ({ navigation }) => {
     const [clicked, setClicked] = useState(false);
     const [searchPhrase, setSearchPhrase] = useState("");
     function onSearch() {
+      if (searchPhrase) {
         setSearchPhrase("");
         Keyboard.dismiss();
         setClicked(false);
         navigation.navigate(stackRouteNames.SearchBarResultsPage, {searchedPhrase: searchPhrase});
+      }
     }
     const [value, setValue] = useState('');
+   
+    
+
+
+    
     return(
     <View style={styles.container}>
       <View
@@ -30,34 +40,42 @@ const SearchBar = ({ navigation }) => {
         {/* search Icon */}
         {
             !clicked &&
-            (<TouchableOpacity>
-                <EvilIcons name="search" size={28} color="black" style={{ marginLeft: 1 }}/>
-            </TouchableOpacity>)
+            (<View style={styles.iconView}>
+              <TouchableOpacity>
+                  <EvilIcons name="search" size={28} color="black" style={{ marginLeft: 1 }}/>
+              </TouchableOpacity>
+            </View>)
         }
         {
             clicked &&
-            (<TouchableOpacity onPress={onSearch}>
+            (<View style={styles.iconView}>
+              <TouchableOpacity onPress={onSearch}>
                 <EvilIcons name="search" size={28} color="black" style={{ marginLeft: 1 }}/>
-            </TouchableOpacity>)
+              </TouchableOpacity>
+            </View>)
         }
-        {/* Input field */}
-        <TextInput
-          style={styles.input}
-          placeholder="Search"
-          value={searchPhrase}
-          onChangeText={setSearchPhrase}
-          onFocus={() => {
-            setClicked(true);
-          }}
-        />
-        {/* cross Icon, depending on whether the search bar is clicked or not */}
-        {clicked && (
-          <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
-            setSearchPhrase("");
-            Keyboard.dismiss();
-            setClicked(false);
-          }}/>
-        )}
+        
+
+        <View style={styles.inputView}>
+          {/* Input field */}
+          <TextInput
+            style={styles.input}
+            placeholder="Buscar"
+            value={searchPhrase}
+            onChangeText={setSearchPhrase}
+            onFocus={() => {
+              setClicked(true);
+            }}
+          />
+          {/* cross Icon, depending on whether the search bar is clicked or not */}
+          {clicked && (
+            <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
+              setSearchPhrase("");
+              Keyboard.dismiss();
+              setClicked(false);
+            }}/>
+          )}
+        </View>
       </View>
     </View>
     );
@@ -73,7 +91,7 @@ const styles = StyleSheet.create({
     
     },
     searchBar__unclicked: {
-        padding: 10,
+        // padding: 10,
         flexDirection: "row",
         width: "95%",
         backgroundColor: "#d9dbda",
@@ -81,18 +99,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     searchBar__clicked: {
-        padding: 10,
+        // padding: 10,
         flexDirection: "row",
         width: "95%",
         backgroundColor: "#d9dbda",
         borderRadius: 15,
         alignItems: "center",
-        justifyContent: "space-evenly",
+        // justifyContent: "space-evenly",
     },
     input: {
         fontSize: 20,
         marginLeft: 10,
-        width: "90%",
+        width: "78%",
     },
     searchBar: {
         backgroundColor: 'white',
@@ -101,6 +119,23 @@ const styles = StyleSheet.create({
     inputField: {
         borderRadius: 15,
         backgroundColor: '#DADADA'
+    },
+    filter: {
+      color: 'green',
+      textDecorationLine: 'underline'
+    },
+    iconView: {
+      backgroundColor: '#7CFC00',
+      height: '100%',
+      padding: scale(10),
+      borderRadius: 15
+    },
+    inputView: {
+      padding: scale(5),
+      fontSize: 20,
+      marginLeft: 10,
+      width: "90%",
+      flexDirection: 'row'
     }
 })
 

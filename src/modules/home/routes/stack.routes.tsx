@@ -8,6 +8,7 @@ import { LaudoPage } from "../pages/LaudoPage/laudoPage";
 import CategoryPage from "../pages/categoryPage/categoryPage";
 import { stackRouteNames } from "../types/stackRouteNames";
 import { SearchBarResultsPage } from "../pages/SearchBarResultsPage/serchBarResultsPage";
+import { CriteriaPage } from "../pages/CriteriaPage/criteriaPage";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ const HomeStackNavigator = () => {
       <Stack.Screen name={stackRouteNames.LaudoPage} component={LaudoPage} />
       <Stack.Screen name={stackRouteNames.CategoryPage} options={categoryHeaderOptions} component={CategoryPage} />
       <Stack.Screen name={stackRouteNames.SearchBarResultsPage} component={SearchBarResultsPage}/>
+      <Stack.Screen name={stackRouteNames.CriteriaPage} component={CriteriaPage}/>
     </Stack.Navigator>
   );
 }
