@@ -6,6 +6,7 @@ import React from "react";
 import { Modal } from "../../../../../shared/components/Modal/Modal";
 import { Button } from "../../../../../shared/components/Button/Button";
 import { SetSafetyCategory } from "../../../types/setSafetyCategory";
+// import Farelo_de_Aveia from '../../../../../shared/assets/Farelo_de_Aveia.jpg';
 
 export function ItemValidation( props ) {
   const [isReportModalVisible, setIsReportModalVisible] = React.useState(false);
@@ -21,7 +22,7 @@ export function ItemValidation( props ) {
       <View style={styles.itemValidationView}>
         <View>
           <Text style={styles.itemValidationTitle}>Validação:</Text>
-          {SetSafetyCategory(props.safetyCategory)}
+          {SetSafetyCategory("6")}
           <Text style={styles.itemValidationLink} onPress={handleCriteriaModal}>Entenda nossa avaliação</Text>
           <Modal isVisible={isCriteriaModalVisible}>
             <Modal.Container>
@@ -48,7 +49,7 @@ export function ItemValidation( props ) {
               <Modal.Body>
                 <View style={styles.imageView}>
                   <Image
-                          source= {{uri: 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
+                          source={require('../../../../../../assets/PITASEMGLUTEN-LAUDODEGLUTEN.png')}
                           style={styles.image}
                     />
                 </View>
@@ -58,7 +59,7 @@ export function ItemValidation( props ) {
               </Modal.Footer>
             </Modal.Container>
           </Modal>
-          <Text>Categoria: {props.productCategory}</Text>
+          {/* <Text>Categoria: {props.productCategory}</Text> */}
         </View>
       </View>
   );
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   imageView: {
+    paddingTop: scale(10),
     width: '100%',
     height: verticalScale(350),
     justifyContent: 'center'

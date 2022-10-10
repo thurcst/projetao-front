@@ -25,7 +25,7 @@ export function SetSafetyCategory(safetyCategory: string) {
     return (
         <View style={styles.itemValidationIconText}>
             {getIconSafetyCategory(safetyCategory)}
-            <Text style={styles.text}>Nota: {safetyCategory}</Text>
+            <Text style={styles.text}>Nota: Star Gold</Text>
         </View>
     );
 }
@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
     },
     text: {
         marginLeft: scale(5),
-        fontSize: scale(20)
+        fontSize: scale(18)
     }
   })

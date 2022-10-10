@@ -78,7 +78,7 @@ export function SearchBarResultsPage(props) {
                                 <View style={styles.areaButton}>
                                     <View style={styles.imageContainer}>
                                         <Image
-                                        source= {{uri: "https://semgluprov.loca.lt/media/picture/" + item.barCode + ".png"}} 
+                                        source= {{uri: "https://semgluten.cin.ufpe.br/media/picture/" + item.barCode + ".png"}} 
                                         style={styles.image}
                                         />
                                     </View>
