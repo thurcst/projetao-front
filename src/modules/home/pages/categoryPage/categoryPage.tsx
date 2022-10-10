@@ -12,6 +12,15 @@ import { EvilIcons, Entypo } from '@expo/vector-icons';
 import { Modal } from "../../../../shared/components/Modal/Modal";
 import { ItemName } from '../../components/ItemDescription/ItemName/itemName';
 
+var contadorCategory = 0;
+var filtroCategory = "";
+var contadorSecurity = 0;
+var filtroSecurity = "";
+var buttonSecurity = "Nenhum";
+
+
+
+
 type ParamList = {
     CategoryPage: {
         productCategory: string,
@@ -89,73 +98,122 @@ type ParamList = {
       }
 
       const [isModalVisible, setIsModalVisible] = React.useState(false);
-      const handleModal = () => setIsModalVisible(() => !isModalVisible);
-    
-      const [isModalVisible2, setIsModalVisible2] = React.useState(false);
-      const handleModal2 = () => setIsModalVisible2(() => !isModalVisible2);
-    
-      const [isModalVisible3, setIsModalVisible3] = React.useState(false);
-      const handleModal3 = () => setIsModalVisible3(() => !isModalVisible3);
-      
-    
-      //Filtros Categorias
-      const filter0 = () =>{setProductsByCategory(filteredItems.filter((value) => {
-        if (value.category == "0") {
-          return value; 
-        }
-        console.log(filteredItems);
-      }))};
-      
-      const filter1 = () =>{setProductsByCategory(filteredItems.filter((value) => {
-        if (value.category == "1") {
-          return value; 
-        }
-        console.log(filteredItems);
-      }))};
-    
-      const filter2 = () =>{setProductsByCategory(filteredItems.filter((value) => {
-        if (value.category == "2") {
-          return value; 
-        }
-        console.log(filteredItems);
-      }))};
-      
-      const filter3 = () =>{setProductsByCategory(filteredItems.filter((value) => {
-        if (value.category == "3") {
-          return value; 
-        }
-        console.log(filteredItems);
-      }))};
-      
-      const filter4 = () =>{setProductsByCategory(filteredItems.filter((value) => {
-        if (value.category == "4") {
-          return value; 
-        }
-        console.log(filteredItems);
-      }))};
-      const filter5 = () =>{setProductsByCategory(filteredItems.filter((value) => {
-        if (value.category == "5") {
-          return value; 
-        }
-        console.log(filteredItems);
-      }))};
-      
-      const filterCancel = () =>{
-        setProductsByCategory(data);
-        setFilteredItems(data);
-        setIsLoading(false);
+      const handleModal = () => {
+        filtrando();
         setIsModalVisible(() => !isModalVisible);
-        console.log(filteredItems);
+        filtrando();
+      };
+      const filterCancel = () =>{
+        contadorSecurity = 0;
+        filtroSecurity = "";
+        buttonSecurity = "Nenhum";
+        console.log("contadorSecurity: "+contadorSecurity);
+        console.log("filtroSecurity: "+filtroSecurity); 
+        setIsModalVisible(() => !isModalVisible);
+        filtrando();
      };
-      const filterCancel2 = () =>{
-        setProductsByCategory(data);
-        setFilteredItems(data);
-        setIsLoading(false);
+    
+      
+     
+     
+     const [isModalVisible2, setIsModalVisible2] = React.useState(false);
+      const handleModal2 = () =>{
+        console.log("contadorSecurity: "+contadorSecurity);
+        console.log("filtroSecurity: "+filtroSecurity); 
         setIsModalVisible2(() => !isModalVisible2);
-        console.log(filteredItems);
+       
+      };
+      const filterCancel2 = () =>{
+        contadorSecurity = 0;
+        filtroSecurity = "";
+        buttonSecurity = "";
+        setIsModalVisible2(() => !isModalVisible2);
      };
-         
+      
+    
 
+
+
+      //Filtros Categorias
+      const filter0 = () =>{
+        if(contadorSecurity === 0){
+          contadorSecurity = 1;
+        }
+        filtroSecurity = "1"
+        buttonSecurity = "0"
+        setIsModalVisible2(() => !isModalVisible2);
+      };
+    
+         const filter1 = () =>{
+          if(contadorSecurity === 0){
+            contadorSecurity = 1;
+        }
+        filtroSecurity = "2"
+        buttonSecurity = "1"
+        setIsModalVisible2(() => !isModalVisible2);
+      };
+    
+         const filter2 = () =>{
+          if(contadorSecurity === 0){
+            contadorSecurity = 1;
+        }
+        filtroSecurity = "3"
+        buttonSecurity = "2"
+        setIsModalVisible2(() => !isModalVisible2);
+      };
+    
+         const filter3 = () =>{
+          if(contadorSecurity === 0){
+            contadorSecurity = 1;
+        }
+        filtroSecurity = "4"
+        buttonSecurity = "3"
+        setIsModalVisible2(() => !isModalVisible2);
+      };
+    
+         const filter4 = () =>{
+          if(contadorSecurity === 0){
+            contadorSecurity = 1;
+        }
+        filtroSecurity = "5"
+        buttonSecurity = "4"
+        setIsModalVisible2(() => !isModalVisible2);
+      };
+    
+         const filter5 = () =>{
+          if(contadorSecurity === 0){
+            contadorSecurity = 1;
+          }
+          filtroSecurity = "6"
+          buttonSecurity = "5"
+          setIsModalVisible2(() => !isModalVisible2);
+      };
+          const filter6 = () =>{
+        if(contadorSecurity === 0){
+          contadorSecurity = 1;
+        }
+        filtroSecurity = "7"
+        buttonSecurity = "Star Gold"
+        setIsModalVisible2(() => !isModalVisible2);
+    };  
+
+
+     const filtrando = ()=>{
+    if(contadorCategory === 0 && contadorSecurity === 1){   //filtro seguranca
+      {setProductsByCategory(filteredItems.filter((value) => {   //Filtra seguranca
+        if (value.idSafety == filtroSecurity) {
+          return value; 
+        }
+        //console.log(filteredData);
+      }))}
+    }
+    if(contadorCategory === 0 && contadorSecurity === 0){
+      setProductsByCategory(data);
+      setFilteredItems(data);
+      setIsLoading(false);
+      setIsModalVisible(() => !isModalVisible);
+    }
+    };
 
 
 
@@ -186,7 +244,7 @@ type ParamList = {
                 <View style={{flexDirection: 'column', alignItems: 'center' }}>
                 <Pressable style={[styles.button, styles.buttonClose]} onPress={(handleModal2) }>
                 <View style={{flexDirection: 'row',  marginLeft: 10   }}>
-                <Text style ={{fontSize : 15}}>Segurança</Text>
+                <Text style ={{fontSize : 15}}>Segurança: {buttonSecurity}</Text>
                 <EvilIcons name="chevron-down" size={28} color="black" style={{ marginLeft: 1 }}/>
                 </View>
                 </Pressable>
@@ -213,30 +271,30 @@ type ParamList = {
               <Modal.Body>
               <View>
               <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter0) }>
-              <Text style ={ {color: "white"}}>0</Text>
+              <Text style ={ {color: "white",textAlign: 'center'}}>0</Text>
               </Pressable>
               <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter1) }>
-              <Text style ={ {color: "white"}}>1</Text>
+              <Text style ={ {color: "white",textAlign: 'center'}}>1</Text>
               </Pressable>
               <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter2) }>
-              <Text style ={ {color: "white"}}>2</Text>
+              <Text style ={ {color: "white",textAlign: 'center'}}>2</Text>
               </Pressable>
               <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter3) }>
-              <Text style ={ {color: "white"}}>3</Text>
+              <Text style ={ {color: "white",textAlign: 'center'}}>3</Text>
               </Pressable>
               <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter4) }>
-              <Text style ={ {color: "white"}}>4</Text>
+              <Text style ={ {color: "white",textAlign: 'center'}}>4</Text>
               </Pressable>
               <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter5) }>
-              <Text style ={ {color: "white"}}>5</Text>
+              <Text style ={ {color: "white",textAlign: 'center'}}>5</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter6) }>
+              <Text style ={ {color: "white",textAlign: 'center'}}>Star Gold</Text>
               </Pressable>
               </View>
               </Modal.Body>  
               
               <Modal.Footer>
-              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,backgroundColor: "#35bd3b"}} onPress={(handleModal2) }>
-              <Text style ={ {color: "white"}}>Aplicar</Text>
-              </Pressable>
               <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(filterCancel2) }>
               <Text style ={ {color: "white"}}>Cancelar</Text>
               </Pressable>
@@ -279,7 +337,6 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       top: verticalScale(5),
       left: moderateScale(5),
-      justifyContent: 'center',
       borderBottomWidth: 0.5,
       borderBottomColor: '#DADADA'
       },
