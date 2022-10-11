@@ -125,12 +125,8 @@ export function SearchBarResultsPage(props) {
     filtroSecurity = "";
     buttonCategory = "Nenhum";
     buttonSecurity = "Nenhum";
-    filtrando();
-    setIsModalVisible(() => !isModalVisible);
-    
+    filtrando(); 
  };
-
-
 
   const [isModalVisible2, setIsModalVisible2] = React.useState(false);
   const handleModal2 = () => {
@@ -142,26 +138,18 @@ export function SearchBarResultsPage(props) {
     buttonCategory = "Nenhum";
     console.log(filteredData)
     setIsModalVisible2(() => !isModalVisible2);
-    
-    
-   
   };
-
-
 
   const [isModalVisible3, setIsModalVisible3] = React.useState(false);
   const handleModal3 = () => {
-    setIsModalVisible3(() => !isModalVisible3);
-     
+    setIsModalVisible3(() => !isModalVisible3); 
   };
-const filterCancel3 = () =>{
+  const filterCancel3 = () =>{
   contadorSecurity = 0;
   filtroSecurity = "";
   buttonSecurity = "Nenhum";
   setIsModalVisible3(() => !isModalVisible3);
-  
 };
-
 
   /////////////////  FILTROS  ////////////////////////////////
 
@@ -381,7 +369,10 @@ if(contadorCategory === 0 && contadorSecurity === 0){
               <Text style ={ {color: "white"}}>Aplicar</Text>
               </Pressable>
               <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#bd3535"}} onPress={(filterCancel) }>
-              <Text style ={ {color: "white"}}>Cancelar</Text>
+              <Text style ={ {color: "white"}}>Limpar filtros</Text>
+              </Pressable>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#bd3535"}} onPress={(handleModal) }>
+              <Text style ={ {color: "white"}}>Voltar</Text>
               </Pressable>
               </Modal.Footer>
             </Modal.Container>
@@ -417,7 +408,10 @@ if(contadorCategory === 0 && contadorSecurity === 0){
               
               <Modal.Footer>
               <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(filterCancel2) }>
-              <Text style ={ {color: "white"}}>Cancelar</Text>
+              <Text style ={ {color: "white"}}>Limpar filtro</Text>
+              </Pressable>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(handleModal2) }>
+              <Text style ={ {color: "white"}}>Voltar</Text>
               </Pressable>
               </Modal.Footer>
             </Modal.Container>
@@ -457,7 +451,10 @@ if(contadorCategory === 0 && contadorSecurity === 0){
               
               <Modal.Footer>
               <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(filterCancel3) }>
-              <Text style ={ {color: "white"}}>Cancelar</Text>
+              <Text style ={ {color: "white"}}>Limpar filtro</Text>
+              </Pressable>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(handleModal3) }>
+              <Text style ={ {color: "white"}}>Voltar</Text>
               </Pressable>
               </Modal.Footer>
             </Modal.Container>

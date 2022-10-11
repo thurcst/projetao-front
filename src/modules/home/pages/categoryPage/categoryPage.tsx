@@ -99,7 +99,6 @@ type ParamList = {
 
       const [isModalVisible, setIsModalVisible] = React.useState(false);
       const handleModal = () => {
-        filtrando();
         setIsModalVisible(() => !isModalVisible);
         filtrando();
       };
@@ -107,9 +106,6 @@ type ParamList = {
         contadorSecurity = 0;
         filtroSecurity = "";
         buttonSecurity = "Nenhum";
-        console.log("contadorSecurity: "+contadorSecurity);
-        console.log("filtroSecurity: "+filtroSecurity); 
-        setIsModalVisible(() => !isModalVisible);
         filtrando();
      };
     
@@ -118,17 +114,16 @@ type ParamList = {
      
      const [isModalVisible2, setIsModalVisible2] = React.useState(false);
       const handleModal2 = () =>{
-        console.log("contadorSecurity: "+contadorSecurity);
-        console.log("filtroSecurity: "+filtroSecurity); 
         setIsModalVisible2(() => !isModalVisible2);
        
       };
       const filterCancel2 = () =>{
         contadorSecurity = 0;
         filtroSecurity = "";
-        buttonSecurity = "";
+        buttonSecurity = "Nenhum";
         setIsModalVisible2(() => !isModalVisible2);
      };
+
       
     
 
@@ -244,7 +239,7 @@ type ParamList = {
                 <View style={{flexDirection: 'column', alignItems: 'center' }}>
                 <Pressable style={[styles.button, styles.buttonClose]} onPress={(handleModal2) }>
                 <View style={{flexDirection: 'row',  marginLeft: 10   }}>
-                <Text style ={{fontSize : 15}}>Segurança: {buttonSecurity}</Text>
+                <Text style ={{fontSize : 15, color: "white"}}>Segurança: {buttonSecurity}</Text>
                 <EvilIcons name="chevron-down" size={28} color="black" style={{ marginLeft: 1 }}/>
                 </View>
                 </Pressable>
@@ -257,7 +252,10 @@ type ParamList = {
               <Text style ={ {color: "white"}}>Aplicar</Text>
               </Pressable>
               <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#bd3535"}} onPress={(filterCancel) }>
-              <Text style ={ {color: "white"}}>Cancelar</Text>
+              <Text style ={ {color: "white"}}>Limpar Filtros</Text>
+              </Pressable>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#bd3535"}} onPress={(handleModal) }>
+              <Text style ={ {color: "white"}}>Voltar</Text>
               </Pressable>
               </Modal.Footer>
             </Modal.Container>
@@ -296,7 +294,10 @@ type ParamList = {
               
               <Modal.Footer>
               <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(filterCancel2) }>
-              <Text style ={ {color: "white"}}>Cancelar</Text>
+              <Text style ={ {color: "white"}}>Limpar filtro</Text>
+              </Pressable>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(handleModal2) }>
+              <Text style ={ {color: "white"}}>Voltar</Text>
               </Pressable>
               </Modal.Footer>
             </Modal.Container>
