@@ -22,8 +22,8 @@ var contadorCategory = 0;
 var contadorSecurity = 0;
 var filtroCategory = "";
 var filtroSecurity = "";
-var buttonCategory = "";
-var buttonSecurity = "";
+var buttonCategory = "Nenhum";
+var buttonSecurity = "Nenhum";
 
 
 export function SearchBarResultsPage(props) {
@@ -140,6 +140,7 @@ export function SearchBarResultsPage(props) {
     contadorCategory = 0;
     filtroCategory = "";
     buttonCategory = "Nenhum";
+    console.log(filteredData)
     setIsModalVisible2(() => !isModalVisible2);
     
     
@@ -295,7 +296,6 @@ const filterCancel3 = () =>{
 
 
 // Remover acentos
-  
 function removerAcentos(s) {
   var map = { "â": "a", "Â": "A", "à": "a", "À": "A", "á": "a", "Á": "A", "ã": "a", "Ã": "A", "ê": "e", "Ê": "E", "è": "e", "È": "E", "é": "e", "É": "E", "î": "i", "Î": "I", "ì": "i", "Ì": "I", "í": "i", "Í": "I", "õ": "o", "Õ": "O", "ô": "o", "Ô": "O", "ò": "o", "Ò": "O", "ó": "o", "Ó": "O", "ü": "u", "Ü": "U", "û": "u", "Û": "U", "ú": "u", "Ú": "U", "ù": "u", "Ù": "U", "ç": "c", "Ç": "C" };
 
@@ -307,13 +307,8 @@ function removerAcentos(s) {
 const filtrando = ()=>{
   
   if(contadorCategory === 1 && contadorSecurity === 1){   //filtro categoria + seguranca
-    {setFilteredData2(data.filter((value) => {   //filtra categoria
-    if (removerAcentos(value.productCategory) == filtroCategory) {
-      return value; 
-    }
-  }))}
-  {setFilteredData(filteredData2.filter((value) => {   //Filtra seguranca
-    if (value.idSafety == filtroSecurity) {
+    {setFilteredData(data.filter((value) => {  
+    if ((removerAcentos(value.productCategory) == filtroCategory) && (value.idSafety == filtroSecurity)) {
       return value; 
     }
   }))}
@@ -340,10 +335,6 @@ if(contadorCategory === 0 && contadorSecurity === 0){
   setIsLoading(false);
 }
 };
-//////////////////////////////////////////////////////////////////////////////
-//Filtros aplicados
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
   
