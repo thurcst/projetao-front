@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "semglu",
+    "name": "SemGlu",
     "slug": "semglu",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,7 +19,7 @@
     ],
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
+        "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.projetao.sem_glu",
@@ -31,7 +31,7 @@
       "bundleIdentifier": "com.projetao.semglu"
     },
     "web": {
-      "favicon": "./assets/icon.png"
+      "favicon": "./assets/logo.png"
     },
     "extra": {
       "eas": {
