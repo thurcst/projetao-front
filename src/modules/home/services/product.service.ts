@@ -42,16 +42,20 @@ instance.interceptors.response.use(
 
 async function getMockedProduct(): Promise<ProductResponse> {
     return {
-        "barCode": 7893500035497,
-        "createdAt": "2022-10-01T22:41:09Z",
-        "idBrand": 623774,
-        "idReport": 1,
+        "barCode": 49753257,
+        "productName": "MOLHO TONKETSW",
+        "productCategory": "MOLHOS E CONDIMENTOS",
+        "picturePath": "http://semgluten.cin.ufpe.br/media/media/picture/49753257.png",
+        "productIngredients": "",
+        "createdAt": "2022-10-21T14:41:07Z",
+        "idBrand": 70,
         "idSafety": 1,
-        "picturePath": "http://semgluserver.cin.ufpe.br/media/ARROZ%20TIO%20JOAO%205K",
-        "productCategory": "paes",
-        "productIngredients": "Trigo sem glúten\nGergelim\nCasca de banana\nInhame\nFermento\nÁcido fólico",
-        "productName": "Pão++",
-        "safetyCategory": "a"
+        "idReport": 1,
+        "brandName": "BULL-DOG",
+        "contact": null,
+        "logoPath": null,
+        "category": "0",
+        "description": "RÓTULO COM GLÚTEN OU PODE CONTER GLÚTEN"
     }
 }
 

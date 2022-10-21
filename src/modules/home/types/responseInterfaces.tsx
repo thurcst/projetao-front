@@ -1,13 +1,17 @@
 // returned by getProduct
 export interface ProductResponse {
   barCode: number,
+  productName: string,
+  productCategory: string,
+  picturePath: string,
+  productIngredients: string,
   createdAt: string,
   idBrand: number,
-  idReport: number,
   idSafety: number,
-  picturePath: string,
-  productCategory: string,
-  productIngredients: string,
-  productName: string,
-  safetyCategory: string
+  idReport: number,
+  brandName: string,
+  contact: string,
+  logoPath: string,
+  category: string,
+  description: string
 }

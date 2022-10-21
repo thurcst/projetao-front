@@ -50,10 +50,10 @@ export function ActionsItems( props: ActionsItemsProps ){
               {
                 props.navigationProp.navigate(
                   stackRouteNames.ProductPage,
-                  { itemId: item.barCode }
+                  { item: item }
                   )
               }
-            } 
+            }
             style={styles.actionButton}
           >
 

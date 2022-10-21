@@ -15,128 +15,72 @@ import { getProduct } from "../../services/product.service";
 import { ProductResponse } from "../../types/responseInterfaces";
 
 const { width, height } = Dimensions.get('window');
-export function ProductPage( props ) {
-  const { navigation, route } = props;
-  const { typeItem, itemId} = route.params;
-  let [item, setItem] = useState<ProductResponse>(null);
-  let [isLoading, setIsLoading] = useState<boolean>(true);
-  let [isError, setIsError] = useState<boolean>(false);
-
-  let isActive = true;
-  useFocusEffect(
-    React.useCallback(() => {
-      isActive = true;      
-      const fetchData = async () => {
-        setIsLoading(true);
-        try {
-          const response = await getProduct(itemId);
-          if (isActive) {
-            setItem(response);
-          }
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 100);
-        } catch (error) {
-          console.log(error);
-          setIsError(true);
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 100);
-        }
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 100);
-      };
-
-      fetchData();
-
-      return () => {
-        isActive = false;
-      }
-    }, [itemId])
-  );
-
-  const getContent = () => {    
-    if (isLoading) {      
-      return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
-    } else if (isError || !item) {
-        ShowAlert("O produto não foi encontrado.");
-        return <View></View>;
-    } else {
-      return (
-        <View style={styles.container}>
-
-          {/* Image */}
-          <View style={styles.imageView}>
-            <Image
-              source= {{uri: item.picturePath}}
-              style={styles.image}
-            />
-          </View>
-
-          {/* Name */}
-          <View style={styles.itemName}>
-            <ItemName productName={item.productName}/>
-          </View>
-
-          <ScrollView style={styles.itemDescriptionView}>
-            
-            <View style={styles.itemDescriptionFieldsContainer}>
-              {/* Price */}
-              <View style={{ width: '100%', marginBottom: scale(10) }}>
-                <ItemPrice/>
-              </View>
-
-              <View style={styles.column}>
-                {/* Nutritional value */}
-                <View style={styles.itemDescriptionField}>
-                  <ItemNutritionalValue/>
-                </View>
-
-                {/* Ingredients */}
-                <View style={styles.itemDescriptionField}>
-                  <ItemIngredients ingredients={item.productIngredients}/>
-                </View>
-              </View>
-
-
-              <View style={styles.column}>
-                {/* Validation */}
-                <View style={styles.itemDescriptionField}>
-                  <ItemValidation
-                    navigationProp={navigation}
-                    safetyCategory={item && item.safetyCategory}
-                    productCategory={item && item.productCategory}
-                  />
-                </View>
-
-                {/* Community */}
-                <View style={styles.itemDescriptionField}>
-                  <ItemCommunity/>
-                </View>
-              </View>
-            </View>
-
-            {/* Similars */}
-            <View style={{marginBottom: verticalScale(15)}}>
-              <ItemSimilars/>
-            </View>
-
-            {/* Recipes */}
-            <View style={{marginBottom: verticalScale(25)}}>
-              <ItemRecipes/>
-            </View>
-
-          </ScrollView>
-
-        </View>
-      );
-    }  
-  }
+export function ProductPage( { navigation, route } ) {
+  const { item } = route.params;
 
   return (
     <View style={styles.container}>
-      {getContent()}
+      {/* Image */}
+      <View style={styles.imageView}>
+        <Image
+          source= {{uri: item.picturePath}}
+          style={styles.image}
+        />
+      </View>
+
+      {/* Name */}
+      <View style={styles.itemName}>
+        <ItemName productName={item.productName}/>
+      </View>
+
+      <ScrollView style={styles.itemDescriptionView}>
+        
+        <View style={styles.itemDescriptionFieldsContainer}>
+          {/* Price */}
+          <View style={{ width: '100%', marginBottom: scale(10) }}>
+            <ItemPrice/>
+          </View>
+
+          <View style={styles.column}>
+            {/* Nutritional value */}
+            <View style={styles.itemDescriptionField}>
+              <ItemNutritionalValue/>
+            </View>
+
+            {/* Ingredients */}
+            <View style={styles.itemDescriptionField}>
+              <ItemIngredients ingredients={item.productIngredients}/>
+            </View>
+          </View>
+
+          <View style={styles.column}>
+            {/* Validation */}
+            <View style={styles.itemDescriptionField}>
+              <ItemValidation
+                navigationProp={navigation}
+                safetyCategory={item && item.category}
+                productCategory={item && item.productCategory}
+              />
+            </View>
+
+            {/* Community */}
+            <View style={styles.itemDescriptionField}>
+              <ItemCommunity/>
+            </View>
+          </View>
+        </View>
+
+        {/* Similars */}
+        <View style={{marginBottom: verticalScale(15)}}>
+          <ItemSimilars/>
+        </View>
+
+        {/* Recipes */}
+        <View style={{marginBottom: verticalScale(25)}}>
+          <ItemRecipes/>
+        </View>
+
+      </ScrollView>
     </View>
   );
 }
