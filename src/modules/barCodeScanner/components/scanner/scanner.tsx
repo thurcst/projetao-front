@@ -24,7 +24,7 @@ export default function Scanner({navigation}) {
   
 
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return <Text></Text>;
   }
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;

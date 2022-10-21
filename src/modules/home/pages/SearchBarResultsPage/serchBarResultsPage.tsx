@@ -18,6 +18,14 @@ import { Modal } from "../../../../shared/components/Modal/Modal";
 
 const { width, height } = Dimensions.get('window');
 
+var contadorCategory = 0;
+var contadorSecurity = 0;
+var filtroCategory = "";
+var filtroSecurity = "";
+var buttonCategory = "Nenhum";
+var buttonSecurity = "Nenhum";
+
+
 export function SearchBarResultsPage(props) {
     const { navigation, route } = props;
   const { searchedPhrase } = route.params;
@@ -25,11 +33,7 @@ export function SearchBarResultsPage(props) {
   let [isLoading, setIsLoading] = useState(true);
   const [filteredData, setFilteredData] = useState([]);
   let [isError, setIsError] = useState(false);
-
-  var contadorCategory = 0;
-  var contadorSecurity = 0;
-  var filtroCategory = "";
-  var filtroSecurity = "";
+  const [filteredData2, setFilteredData2] = useState([]);
 
 
   useEffect(() => {
@@ -45,6 +49,7 @@ export function SearchBarResultsPage(props) {
       setData(response);
       setFilteredData(response);
       setIsLoading(false);
+      
     } catch (error) {
       console.log(error);
       setIsError(true);
@@ -67,8 +72,8 @@ export function SearchBarResultsPage(props) {
             {
                 filteredData.map((item, index) => {
                     return (
-                        <ScrollView style={styles.container}>
-                            {filteredData.map((item) => 
+                        
+                            
                             <TouchableOpacity onPress={() => 
                                 {props.navigation.navigate(stackRouteNames.ProductPage, {
                                 itemId: item.barCode
@@ -91,8 +96,8 @@ export function SearchBarResultsPage(props) {
                                 </View>
                                 
                             </TouchableOpacity>
-                            )}
-                        </ScrollView>
+                            
+                        
                     )
                 })
             }
@@ -104,132 +109,177 @@ export function SearchBarResultsPage(props) {
   
 
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const handleModal = () => setIsModalVisible(() => !isModalVisible);
+  const handleModal = () => {
+    filtrando();
+    setIsModalVisible(() => !isModalVisible);
+    
+  };
+  const filterCancel = () =>{
+    contadorCategory = 0;
+    contadorSecurity = 0;
+    filtroCategory = "";
+    filtroSecurity = "";
+    buttonCategory = "Nenhum";
+    buttonSecurity = "Nenhum";
+    filtrando(); 
+ };
 
   const [isModalVisible2, setIsModalVisible2] = React.useState(false);
-  const handleModal2 = () => setIsModalVisible2(() => !isModalVisible2);
+  const handleModal2 = () => {
+    setIsModalVisible2(() => !isModalVisible2);
+  };
+  const filterCancel2 = () =>{
+    contadorCategory = 0;
+    filtroCategory = "";
+    buttonCategory = "Nenhum";
+    console.log(filteredData)
+    setIsModalVisible2(() => !isModalVisible2);
+  };
 
   const [isModalVisible3, setIsModalVisible3] = React.useState(false);
-  const handleModal3 = () => setIsModalVisible3(() => !isModalVisible3);
-  
-
-  //Filtros Categorias
-  const filterPaes = () =>{setFilteredData(data.filter((value) => {
-    if (removerAcentos(value.productCategory) == "paes") {
-      return value; 
-    }
-    console.log(filteredData);
-  }))};
-  
-  const filterGraos = () =>{setFilteredData(data.filter((value) => {
-    if (removerAcentos(value.productCategory) == "graos") {
-      return value; 
-    }
-    console.log(filteredData);
-  }))};
-
-  const filterDoces = () =>{setFilteredData(data.filter((value) => {
-    if (removerAcentos(value.productCategory) == "doces") {
-      return value; 
-    }
-    console.log(filteredData);
-  }))};
-  
-  const filterBiscoito = () =>{setFilteredData(data.filter((value) => {
-    if (removerAcentos(value.productCategory) == "biscoitos e salgadinhos") {
-      return value; 
-    }
-    console.log(filteredData);
-  }))};
-  
-  const filterCarnes = () =>{setFilteredData(data.filter((value) => {
-    if (removerAcentos(value.productCategory) == "carnes, aves e peixes") {
-      return value; 
-    }
-    console.log(filteredData);
-  }))};
-  const filterMolhos = () =>{setFilteredData(data.filter((value) => {
-    if (removerAcentos(value.productCategory) == "molhos e condimentos") {
-      return value; 
-    }
-    console.log(filteredData);
-  }))};
-  
-
-
-
-  /////////////////////////////////////////////////
-  /*function filtrando(filter1,filter2){
-
+  const handleModal3 = () => {
+    setIsModalVisible3(() => !isModalVisible3); 
   };
+  const filterCancel3 = () =>{
+  contadorSecurity = 0;
+  filtroSecurity = "";
+  buttonSecurity = "Nenhum";
+  setIsModalVisible3(() => !isModalVisible3);
+};
+
+  /////////////////  FILTROS  ////////////////////////////////
 
 
   const filterPaes = () =>{
-    if(contadorCategory == 0){
-      contadorCategory++;
+    if(contadorCategory === 0 ){
+      contadorCategory = 1;
     }
     filtroCategory = "paes"
-    function filtrando(filtroCategory,"")
+    buttonCategory = "Pães e massas";
+    setIsModalVisible2(() => !isModalVisible2);
+    
+
   };
   const filterGraos = () =>{
-    if(contadorCategory == 0){
-      contadorCategory++;
+    if(contadorCategory === 0 ){
+      contadorCategory = 1;
     }
     filtroCategory = "graos"
+    buttonCategory = "Grãos";
+    setIsModalVisible2(() => !isModalVisible2);
+    
 
   };
   const filterDoces = () =>{
-    if(contadorCategory == 0){
-      contadorCategory++;
+    if(contadorCategory === 0 ){
+      contadorCategory = 1;
     }
     filtroCategory = "doces"
+    buttonCategory = "Doces";
+    setIsModalVisible2(() => !isModalVisible2);
+    
 
   };
   const filterBiscoito = () =>{
-    if(contadorCategory == 0){
-      contadorCategory++;
+    if(contadorCategory === 0 ){
+      contadorCategory = 1;
     }
     filtroCategory = "biscoitos e salgadinhos"
+    buttonCategory = "Biscoitos e Salgadinhos";
+    setIsModalVisible2(() => !isModalVisible2);
+    
 
   };
   const filterCarnes = () =>{
-    if(contadorCategory == 0){
-      contadorCategory++;
+    if(contadorCategory === 0 ){
+      contadorCategory = 1;
     }
     filtroCategory = "carnes, aves e peixes"
+    buttonCategory = "Carnes, aves e peixes";
+    setIsModalVisible2(() => !isModalVisible2);
+    
 
   };
   const filterMolhos = () =>{
-    if(contadorCategory == 0){
-      contadorCategory++;
+    if(contadorCategory === 0 ){
+      contadorCategory = 1;
     }
     filtroCategory = "molhos e condimentos"
-
-  };*/
-
-
-  const filterCancel = () =>{
-      setData(data);
-      setFilteredData(data);
-      setIsLoading(false);
-      setIsModalVisible(() => !isModalVisible);
-      console.log(filteredData);
-   };
-  const filterCancel2 = () =>{
-    setData(data);
-    setFilteredData(data);
-    setIsLoading(false);
+    buttonCategory = "Molhos e condimentos";
     setIsModalVisible2(() => !isModalVisible2);
-    console.log(filteredData);
- };
- const filterCancel3 = () =>{
-  setData(data);
-  setFilteredData(data);
-  setIsLoading(false);
-  setIsModalVisible3(() => !isModalVisible3);
-  console.log(filteredData);
+    
+  };
+    
+
+     
+    
+    
+    const filter0 = () =>{
+    if(contadorSecurity === 0){
+      contadorSecurity = 1;
+    }
+    filtroSecurity = "1"
+    buttonSecurity = "0";
+    setIsModalVisible3(() => !isModalVisible3);
+  };
+
+     const filter1 = () =>{
+      if(contadorSecurity === 0){
+        contadorSecurity = 1;
+    }
+    filtroSecurity = "2"
+    buttonSecurity = "1";
+    setIsModalVisible3(() => !isModalVisible3);
+  };
+
+     const filter2 = () =>{
+      if(contadorSecurity === 0){
+        contadorSecurity = 1;
+    }
+    filtroSecurity = "3"
+    buttonSecurity = "2";
+    setIsModalVisible3(() => !isModalVisible3);
+  };
+
+     const filter3 = () =>{
+      if(contadorSecurity === 0){
+        contadorSecurity = 1;
+    }
+    filtroSecurity = "4"
+    buttonSecurity = "3";
+    setIsModalVisible3(() => !isModalVisible3);
+  };
+
+     const filter4 = () =>{
+      if(contadorSecurity === 0){
+        contadorSecurity = 1;
+    }
+    filtroSecurity = "5"
+    buttonSecurity = "4";
+    setIsModalVisible3(() => !isModalVisible3);
+  };
+
+     const filter5 = () =>{
+      if(contadorSecurity === 0){
+        contadorSecurity = 1;
+      }
+      filtroSecurity = "6"
+      buttonSecurity = "5";
+      setIsModalVisible3(() => !isModalVisible3);
+  };
+  const filter6 = () =>{
+    if(contadorSecurity === 0){
+      contadorSecurity = 1;
+    }
+    filtroSecurity = "7"
+    buttonSecurity = "Star Gold";
+    setIsModalVisible3(() => !isModalVisible3);
 };
+
   
+
+
+// Remover acentos
 function removerAcentos(s) {
   var map = { "â": "a", "Â": "A", "à": "a", "À": "A", "á": "a", "Á": "A", "ã": "a", "Ã": "A", "ê": "e", "Ê": "E", "è": "e", "È": "E", "é": "e", "É": "E", "î": "i", "Î": "I", "ì": "i", "Ì": "I", "í": "i", "Í": "I", "õ": "o", "Õ": "O", "ô": "o", "Ô": "O", "ò": "o", "Ò": "O", "ó": "o", "Ó": "O", "ü": "u", "Ü": "U", "û": "u", "Û": "U", "ú": "u", "Ú": "U", "ù": "u", "Ù": "U", "ç": "c", "Ç": "C" };
 
@@ -237,7 +287,40 @@ function removerAcentos(s) {
 };
 
 
+// Funcao que filtra
+const filtrando = ()=>{
+  
+  if(contadorCategory === 1 && contadorSecurity === 1){   //filtro categoria + seguranca
+    {setFilteredData(data.filter((value) => {  
+    if ((removerAcentos(value.productCategory) == filtroCategory) && (value.idSafety == filtroSecurity)) {
+      return value; 
+    }
+  }))}
+}
+if(contadorCategory === 1 && contadorSecurity === 0){    //filtro categoria
+  {setFilteredData(data.filter((value) => {   //filtra categoria
+    if (removerAcentos(value.productCategory) == filtroCategory) {
+      return value; 
+    }
+    //console.log(filteredData);
+  }))}
+}
+if(contadorCategory === 0 && contadorSecurity === 1){   //filtro seguranca
+  {setFilteredData(data.filter((value) => {   //Filtra seguranca
+    if (value.idSafety == filtroSecurity) {
+      return value; 
+    }
+    //console.log(filteredData);
+  }))}
+}
+if(contadorCategory === 0 && contadorSecurity === 0){
+  setData(data);
+  setFilteredData(data);
+  setIsLoading(false);
+}
+};
 
+///////////////////////////////////////////////////////////////////////////////
   
   return (
     
@@ -263,16 +346,16 @@ function removerAcentos(s) {
                 <View style={{flexDirection: 'column', alignItems: 'center' }}>
                 <Pressable style={[styles.button, styles.buttonClose]} onPress={(handleModal2) }>
                 <View style={{flexDirection: 'row',  marginLeft: 10   }}>
-                <Text style ={{fontSize : 15}}>Categorias</Text>
+                <Text style ={{fontSize : 15, color: "white"}}>Categorias: {buttonCategory}</Text>
                 <EvilIcons name="chevron-down" size={28} color="black" style={{ marginLeft: 1 }}/>
                 </View>
                 </Pressable>
-                {/* <Pressable style={[styles.button, styles.buttonClose]} onPress={(handleModal3) }>
+                <Pressable style={[styles.button, styles.buttonClose]} onPress={(handleModal3) }>
                 <View style={{flexDirection: 'row',  marginLeft: 10   }}>
-                <Text style ={{fontSize : 15}}>Segurança</Text>
+                <Text style ={{fontSize : 15, color: "white"}}>Segurança: {buttonSecurity}</Text>
                 <EvilIcons name="chevron-down" size={28} color="black" style={{ marginLeft: 1 }}/>
                 </View>
-                </Pressable> */}
+                </Pressable>
                 </View>
               
                 
@@ -282,7 +365,10 @@ function removerAcentos(s) {
               <Text style ={ {color: "white"}}>Aplicar</Text>
               </Pressable>
               <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#bd3535"}} onPress={(filterCancel) }>
-              <Text style ={ {color: "white"}}>Cancelar</Text>
+              <Text style ={ {color: "white"}}>Limpar filtros</Text>
+              </Pressable>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#bd3535"}} onPress={(handleModal) }>
+              <Text style ={ {color: "white"}}>Voltar</Text>
               </Pressable>
               </Modal.Footer>
             </Modal.Container>
@@ -296,32 +382,32 @@ function removerAcentos(s) {
               <Modal.Body>
               <View>
               <Pressable style={[styles.button, styles.buttonClose]} onPress={(filterPaes) }>
-              <Text style ={ {color: "white"}}>Pães e massas</Text>
+              <Text style ={ {color: "white",textAlign: 'center'}}>Pães e massas</Text>
               </Pressable>
               <Pressable style={[styles.button, styles.buttonClose]} onPress={(filterGraos) }>
-              <Text style ={ {color: "white"}}>Grãos</Text>
+              <Text style ={ {color: "white",textAlign: 'center'}}>Grãos</Text>
               </Pressable>
               <Pressable style={[styles.button, styles.buttonClose]} onPress={(filterDoces) }>
-              <Text style ={ {color: "white"}}>Doces</Text>
+              <Text style ={ {color: "white",textAlign: 'center'}}>Doces</Text>
               </Pressable>
               <Pressable style={[styles.button, styles.buttonClose]} onPress={(filterBiscoito) }>
-              <Text style ={ {color: "white"}}>Biscoitos e salgadinhos</Text>
+              <Text style ={ {color: "white",textAlign: 'center'}}>Biscoitos e salgadinhos</Text>
               </Pressable>
               <Pressable style={[styles.button, styles.buttonClose]} onPress={(filterCarnes) }>
-              <Text style ={ {color: "white"}}>Carnes, aves e peixes</Text>
+              <Text style ={ {color: "white",textAlign: 'center'}}>Carnes, aves e peixes</Text>
               </Pressable>
               <Pressable style={[styles.button, styles.buttonClose]} onPress={(filterMolhos) }>
-              <Text style ={ {color: "white"}}>Molhos e condimentos</Text>
+              <Text style ={ {color: "white",textAlign: 'center'}}>Molhos e condimentos</Text>
               </Pressable>
               </View>
               </Modal.Body>  
               
               <Modal.Footer>
-              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,backgroundColor: "#35bd3b"}} onPress={(handleModal2) }>
-              <Text style ={ {color: "white"}}>Aplicar</Text>
-              </Pressable>
               <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(filterCancel2) }>
-              <Text style ={ {color: "white"}}>Cancelar</Text>
+              <Text style ={ {color: "white"}}>Limpar filtro</Text>
+              </Pressable>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(handleModal2) }>
+              <Text style ={ {color: "white"}}>Voltar</Text>
               </Pressable>
               </Modal.Footer>
             </Modal.Container>
@@ -331,13 +417,40 @@ function removerAcentos(s) {
             <Modal.Container>
               <Modal.Header title="Segurança:"/>
               
+              
               <Modal.Body>
+              <View>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter0) }>
+              <Text style ={ {color: "white",textAlign: 'center'}}>0</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter1) }>
+              <Text style ={ {color: "white",textAlign: 'center'}}>1</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter2) }>
+              <Text style ={ {color: "white",textAlign: 'center'}}>2</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter3) }>
+              <Text style ={ {color: "white",textAlign: 'center'}}>3</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter4) }>
+              <Text style ={ {color: "white",textAlign: 'center'}}>4</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter5) }>
+              <Text style ={ {color: "white",textAlign: 'center'}}>5</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter6) }>
+              <Text style ={ {color: "white",textAlign: 'center'}}>Star Gold</Text>
+              </Pressable>
+              </View>
               
               </Modal.Body>  
               
               <Modal.Footer>
-              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,backgroundColor: "#bd3535"}} onPress={(filterCancel3) }>
-              <Text style ={ {color: "white"}}>Cancelar</Text>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(filterCancel3) }>
+              <Text style ={ {color: "white"}}>Limpar filtro</Text>
+              </Pressable>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(handleModal3) }>
+              <Text style ={ {color: "white"}}>Voltar</Text>
               </Pressable>
               </Modal.Footer>
             </Modal.Container>
@@ -375,7 +488,6 @@ const styles = StyleSheet.create({
         },
     foodNameAndIcons: {
         flexDirection: 'column',
-        justifyContent: 'center',
         top: verticalScale(5),
         left: moderateScale(5),
         borderBottomWidth: 0.5,
@@ -423,4 +535,3 @@ const styles = StyleSheet.create({
       backgroundColor: "#2196F3",
     },
 });
-

@@ -5,8 +5,8 @@ const instance = axios.create({
     baseURL: "https://semgluten.cin.ufpe.br"
 });
 
-let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTA1MTQ1LCJpYXQiOjE2NjUyNDExNDUsImp0aSI6IjM3ZTgyMjJkNzc2MjQwYmE5YjRkM2FlZjA4NzZkNDMxIiwidXNlcl9pZCI6MX0.Ly-bmp_j5uESFMiLZn_yIL_RnHcADKPNCbEY2nOxrsI";
-let refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2NjUzNjg2NSwiaWF0IjoxNjY1MjQwODY1LCJqdGkiOiJjYjY0OGU1NjcxYjA0ZWUxOTYwZmMxYzQ1NDZkZDViNCIsInVzZXJfaWQiOjF9.EbfPYrCftJ_N8I3oZ4-OdUasyTKF7CtufLc3ZYNRtWs";
+let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2OTk0OTkyLCJpYXQiOjE2NjYxMzA5OTIsImp0aSI6IjllNzE4Y2Y1Mjk0NzRhNjc4MjkxMmVhMmJjY2E1ZTFlIiwidXNlcl9pZCI6MX0.qgl7vTUqtjxxNq-vyH_KhF6sIA9tvQZh6ovx_3k1hFU";
+let refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2NzQyNjk5MiwiaWF0IjoxNjY2MTMwOTkyLCJqdGkiOiIxMGMxMWY0ZjExNTY0MDFiOTgxZDRkMTgyN2M5ZGU3ZCIsInVzZXJfaWQiOjF9.7MA-zRZN113HXCPPtIwDJLTGS7KaXZwrUKMlLwIMCKk";
 instance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
 const setNewAccessToken = async () => {
@@ -61,8 +61,8 @@ export async function getProduct(productId: number): Promise<ProductResponse|nul
     if(MOCKED) return getMockedProduct();
 
     try {
-        const axiosResponse = await instance.get("/productInfos/" + productId.toString() + "/");
-        //const axiosSafetyData = await instance.get("/safety/" + axiosResponse.data.idSafety.toString() + "/");
+        const axiosResponse = await instance.get("/api/detail/productInfos/" + productId.toString() + "/");
+        //const axiosSafetyData = await instance.get("/api/detail/safety/" + axiosResponse.data.idSafety.toString() + "/");
         //axiosResponse.data["safetyCategory"] = axiosSafetyData.data.description;
         axiosResponse.data.picturePath = "https://semgluten.cin.ufpe.br/media/picture/" + productId + ".png"
         return axiosResponse.data;
@@ -78,13 +78,13 @@ export async function getProductsByCategory(productCategory: string) {
     params.append("search", productCategoryArray[0]);
     params.append("product", "productCategory");
     try {
-        const axiosResponse = await instance.get("/products/", {
+        const axiosResponse = await instance.get("/api/list/product/", {
             params: {
                 search: productCategoryArray[0],
                 product: "productCategory"
             }
         });
-        // url do get = baseURL + "/products/?search=" + productCategoryArray[0] + "&product=productCategory"
+        // url do get = baseURL + "/api/list/product/?search=" + productCategoryArray[0] + "&product=productCategory"
         return axiosResponse.data;
     } catch (error) {
         console.log("não achei a database " + error);
@@ -106,13 +106,13 @@ export async function getProductsByName(productName: string) {
     params.append("search", finalStringToSearch);
     params.append("product", "productName");
     try {
-        const axiosResponse = await instance.get("/products/", {
+        const axiosResponse = await instance.get("/api/list/product/", {
             params: {
                 search: finalStringToSearch,
                 product: "productName"
             }
         });
-        // url do get = baseURL + "/products/?search=" + finalStringToSearch + "&product=productName"
+        // url do get = baseURL + "/api/list/product/?search=" + finalStringToSearch + "&product=productName"
         return axiosResponse.data;
     } catch (error) {
         console.log("não achei a database " + error);
