@@ -15,3 +15,8 @@ export interface ProductResponse {
   category: string,
   description: string
 }
+
+export interface TokensResponse {
+  access: string,
+  refresh: string
+}

@@ -5,7 +5,7 @@ import { scale, verticalScale } from "../../../../../shared/styles/scaling_units
 export function ItemIngredients( { ingredients } ) {
   return (
       <View style={styles.container}>  
-        <Text style={styles.title}>Ingredientes:</Text>
+        <Text style={styles.title}>Ingredientes</Text>
         <Text>{ingredients}</Text>
       </View>
   );

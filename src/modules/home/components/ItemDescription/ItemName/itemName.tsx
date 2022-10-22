@@ -15,16 +15,16 @@ export function ItemName( props: ItemNameProps ) {
 
 const styles = StyleSheet.create({
     itemNameCard: {
-        backgroundColor: '#44bb6e',
-        paddingVertical: verticalScale(8),
-        paddingHorizontal: scale(20),
+        backgroundColor: 'white',
         borderRadius: scale(50),
-        alignSelf: 'baseline'
+        alignSelf: 'baseline',
+        elevation: 4,
       },
       itemNameTitle: {
-        fontSize: scale(24),
-        color: 'white',
+        fontSize: scale(19),
+        color: 'black',
         fontWeight: 'bold',
-        paddingBottom: scale(5)
+        paddingVertical: verticalScale(10),
+        paddingHorizontal: scale(30),
       }
 })

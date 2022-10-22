@@ -1650,6 +1650,13 @@
     "mkdirp" "^1.0.4"
     "rimraf" "^3.0.2"
 
+"@openspacelabs/react-native-zoomable-view@^2.0.4":
+  "integrity" "sha512-/mtLvqpP99NdYsskD+e+mNivBY+y/JzufxS2GWHeJE6H4NF63jDAfuBFV2gVmr1YIF3clZGlXqdvuqLIOk/H4g=="
+  "resolved" "https://registry.npmjs.org/@openspacelabs/react-native-zoomable-view/-/react-native-zoomable-view-2.0.4.tgz"
+  "version" "2.0.4"
+  dependencies:
+    "prop-types" "^15.7.2"
+
 "@react-native-community/cli-clean@^8.0.4":
   "integrity" "sha512-IwS1M1NHg6+qL8PThZYMSIMYbZ6Zbx+lIck9PLBskbosFo24M3lCOflOl++Bggjakp6mR+sRXxLMexid/GeOsQ=="
   "resolved" "https://registry.npmjs.org/@react-native-community/cli-clean/-/cli-clean-8.0.4.tgz"
@@ -8879,7 +8886,7 @@
     "postcss-value-parser" "^4.2.0"
     "styleq" "^0.1.2"
 
-"react-native@*", "react-native@>=0.50.0", "react-native@>=0.57", "react-native@>=0.59.0", "react-native@>=0.63.2", "react-native@>=0.65.0", "react-native@0.69.5":
+"react-native@*", "react-native@>=0.50.0", "react-native@>=0.54.0", "react-native@>=0.57", "react-native@>=0.59.0", "react-native@>=0.63.2", "react-native@>=0.65.0", "react-native@0.69.5":
   "integrity" "sha512-4Psrj1nDMLQjBXVH8n3UikzOHQc8+sa6NbxZQR0XKtpx8uC3HiJBgX+/FIum/RWxfi5J/Dt/+A2gLGmq2Hps8g=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.69.5.tgz"
   "version" "0.69.5"

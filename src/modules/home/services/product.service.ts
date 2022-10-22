@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ProductResponse } from "../types/responseInterfaces";
+import { ProductResponse, TokensResponse } from "../types/responseInterfaces";
 
 const instance = axios.create({
     baseURL: "https://semgluten.cin.ufpe.br"
@@ -14,7 +14,7 @@ const setNewAccessToken = async () => {
 }
 
 const setNewRefreshToken = async () => {
-    refreshToken = await getAuthorizationTokens();
+    refreshToken = (await getAuthorizationTokens()).refresh;
 }
 
 const getNewAccessToken = async (): Promise<string> => {
@@ -59,7 +59,7 @@ async function getMockedProduct(): Promise<ProductResponse> {
     }
 }
 
-export async function getProduct(productId: number): Promise<ProductResponse|null> {
+export async function getProduct(productId: number): Promise<ProductResponse> {
     // set to true if the server is offline
     const MOCKED = false;
     if(MOCKED) return getMockedProduct();
@@ -124,17 +124,18 @@ export async function getProductsByName(productName: string) {
     }
 }
 
-export async function getAuthorizationTokens(): Promise<string> {
+export async function getAuthorizationTokens(): Promise<TokensResponse> {
     const jsonToSend = {
-                            "username": "",
-                            "password": ""
-                        };
+        username: "adminsemglu",
+        password: "j=c@w4G%$ASnkc&8*d287asd"
+    };
     const options = {
         headers: {'content-type': 'application/json'}
     };
     const data = JSON.stringify(jsonToSend);
     try {
         const axiosResponse = await instance.post("/api/token/", data, options);
+        console.log(axiosResponse);
         return axiosResponse.data;
     } catch (error) {
         console.log("Deu erro " + error);

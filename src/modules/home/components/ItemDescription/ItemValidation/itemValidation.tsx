@@ -1,5 +1,4 @@
-import { View, Text, StyleSheet, Image } from "react-native";
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text, StyleSheet, Image, Animated } from "react-native";
 import { scale, verticalScale } from "../../../../../shared/styles/scaling_units";
 import { stackRouteNames } from "../../../types/stackRouteNames";
 import React from "react";
@@ -7,11 +6,11 @@ import { Modal } from "../../../../../shared/components/Modal/Modal";
 import { Button } from "../../../../../shared/components/Button/Button";
 import { SetSafetyCategory } from "../../../types/setSafetyCategory";
 import { NavigationScreenProp } from "react-navigation";
+import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
 
 interface ItemValidationProps {
   navigationProp:  NavigationScreenProp<any,any>,
-  safetyCategory:  string,
-  productCategory: string
+  safetyCategory:  string
 }
 export function ItemValidation( props: ItemValidationProps ) {
   const [isReportModalVisible, setIsReportModalVisible] = React.useState(false);
@@ -25,16 +24,35 @@ export function ItemValidation( props: ItemValidationProps ) {
   };
   return (
       <View style={styles.itemValidationView}>
-        <View>
-          <Text style={styles.itemValidationTitle}>Validação:</Text>
-          {SetSafetyCategory("6")}
-          <Text style={styles.itemValidationReport} onPress={handleCriteriaModal}>Entenda nossa avaliação</Text>
-          <Modal isVisible={isCriteriaModalVisible}>
-            <Modal.Container>
+
+        {/* Title */}
+        <Text style={styles.itemValidationTitle}>Segurança</Text>
+
+        {/* Security */}
+        <View style={styles.itemValidationItem}>
+          {SetSafetyCategory(props.safetyCategory)}
+        </View>
+
+        {/* Learn more */}
+        <View style={styles.itemValidationItem}>
+          <Text style={styles.itemValidationLearnMore} onPress={handleCriteriaModal}>Entenda nossa avaliação</Text>
+        </View>
+
+        {/* Report */}
+        <View style={styles.itemValidationItem}>
+          <Text
+            style={styles.itemValidationReport} 
+            onPress={handleReportModal}>LAUDO
+          </Text>
+        </View>
+
+        <Modal isVisible={isCriteriaModalVisible}>
+          <Modal.Container>
+            <View style={styles.modalContainer}>
               <Modal.Header title="Entenda Nossa Avaliação"/>
               <Modal.Body>
                 <View style={styles.evaluationView}>
-                  <Text style={styles.evaluationText}>Esta nota não dispensa leitura do rótulo, que pode mudar sem aviso prévio</Text>
+                  <Text style={styles.evaluationText}>Atenção: esta nota não dispensa leitura do rótulo, que pode mudar sem aviso prévio.</Text>
                 </View>
               </Modal.Body>
               <Modal.Footer>
@@ -43,28 +61,27 @@ export function ItemValidation( props: ItemValidationProps ) {
                   <Button title="Fechar" onPress={handleCriteriaModal}/>
                 </View>
               </Modal.Footer>
-            </Modal.Container>
-          </Modal>
-        </View>
-
-        <Text
-          style={styles.itemValidationReport} 
-          onPress={handleReportModal}>LAUDO</Text>
-
-        <Text>
-          <Text>Segurança: </Text>
-          <Text style={ {fontStyle: 'italic'} }>{props.safetyCategory}</Text>
-        </Text>
+            </View>
+          </Modal.Container>
+        </Modal>
 
         <Modal isVisible={isReportModalVisible}>
           <Modal.Container>
             <Modal.Header title="Laudo"/>
             <Modal.Body>
               <View style={styles.imageView}>
-                <Image
-                  source= {require('../../../../../../assets/PITASEMGLUTEN-LAUDODEGLUTEN.png')}
-                  style={styles.image}
-                />
+                <ReactNativeZoomableView
+                  maxZoom={3.5}
+                  minZoom={1}
+                  zoomStep={1.75}
+                  initialZoom={1}
+                  bindToBorders={true}
+                  >
+                  <Image
+                    source= {require('../../../../../../assets/PITASEMGLUTEN-LAUDODEGLUTEN.png')}
+                    style={[styles.image]}
+                  />
+                </ReactNativeZoomableView>
               </View>
             </Modal.Body>
             <Modal.Footer>
@@ -81,6 +98,9 @@ const styles = StyleSheet.create({
   itemValidationView: {
     backgroundColor: 'white',
   },
+  itemValidationItem: {
+    marginTop: verticalScale(5)
+  },
   itemValidationTitle: {
     fontSize: scale(18),
     fontWeight: 'bold',
@@ -90,9 +110,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: scale(5)
   },
-  itemValidationAbout: {
-    color: 'blue',
+  itemValidationLearnMore: {
+    color: 'green',
     textDecorationLine: 'underline',
+    fontStyle: 'italic',
+    fontWeight: 'bold',
     marginBottom: scale(5)
   },
   itemValidationReport: {
@@ -106,12 +128,13 @@ const styles = StyleSheet.create({
     paddingTop: scale(10),
     width: '100%',
     height: verticalScale(350),
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   image: {
+    flex: 1,
     width: '100%',
-    height: verticalScale(300),
-    resizeMode: 'center'
+    height: verticalScale(600),
+    resizeMode: 'contain'
   },
   buttonView: {
     flex: 1,
@@ -128,5 +151,9 @@ const styles = StyleSheet.create({
     fontSize: scale(20),
     fontWeight: "400",
     textAlign: "center",
+  },
+  modalContainer: {
+    backgroundColor: 'white',
+    borderRadius: 15,
   }
 })

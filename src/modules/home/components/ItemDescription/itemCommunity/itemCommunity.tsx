@@ -8,7 +8,7 @@ import { ItemReview } from "./itemReview";
 export function ItemCommunity( props ) {
   return (
       <View style={styles.container}>  
-        <Text style={styles.title}>Comunidade:</Text>
+        <Text style={styles.title}>Comunidade</Text>
         <ItemReviewStars size={1}/>
         <View style={styles.itemReviewContainer}>
           <View style={styles.itemReview}>

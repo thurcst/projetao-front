@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { View, Text, StyleSheet } from "react-native";
-import { scale } from "../../../shared/styles/scaling_units";
+import { scale, verticalScale } from "../../../shared/styles/scaling_units";
 
 export function getIconSafetyCategory(safetyCategory: string) {
     if (parseInt(safetyCategory) == 0) {
@@ -25,14 +25,15 @@ export function SetSafetyCategory(safetyCategory: string) {
     return (
         <View style={styles.itemValidationIconText}>
             {getIconSafetyCategory(safetyCategory)}
-            <Text style={styles.text}>Nota: Star Gold</Text>
+            {/* gambiarra pra capitalizar a primeira letra */}     
+            <Text style={styles.text}> {safetyCategory.charAt(0) + safetyCategory.slice(1).toLowerCase() } </Text>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     itemValidationIconText: {
-      flexDirection: 'row',
+      flexDirection: 'row'
     },
     text: {
         marginLeft: scale(5),
