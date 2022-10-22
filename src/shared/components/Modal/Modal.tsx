@@ -49,10 +49,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   header: {
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "center",
-    paddingStart: scale(15),
-    paddingTop: scale(5)
+    paddingTop: scale(5),
   },
   text: {
     paddingTop: verticalScale(10),

@@ -22,6 +22,22 @@ export function ItemValidation( props: ItemValidationProps ) {
     setIsCriteriaModalVisible(() => !isCriteriaModalVisible);
     props.navigationProp.navigate(stackRouteNames.CriteriaPage);
   };
+
+  const resolveReport = () => {
+    if(props.safetyCategory in ["0", "1"]) {
+      return (
+        <Text style={{fontStyle: 'italic'}}>
+          Não há laudo disponível para este produto
+        </Text>
+      )
+    } else return (
+      <Text
+        style={styles.itemValidationReport} 
+        onPress={handleReportModal}>
+        LAUDO
+      </Text>
+    );
+  }
   return (
       <View style={styles.itemValidationView}>
 
@@ -35,24 +51,21 @@ export function ItemValidation( props: ItemValidationProps ) {
 
         {/* Learn more */}
         <View style={styles.itemValidationItem}>
-          <Text style={styles.itemValidationLearnMore} onPress={handleCriteriaModal}>Entenda nossa avaliação</Text>
+          <Text style={styles.itemValidationLearnMore} onPress={handleCriteriaModal}>Entenda os níveis de segurança</Text>
         </View>
 
         {/* Report */}
         <View style={styles.itemValidationItem}>
-          <Text
-            style={styles.itemValidationReport} 
-            onPress={handleReportModal}>LAUDO
-          </Text>
+          { resolveReport() }
         </View>
 
         <Modal isVisible={isCriteriaModalVisible}>
           <Modal.Container>
             <View style={styles.modalContainer}>
-              <Modal.Header title="Entenda Nossa Avaliação"/>
+              <Modal.Header title="Entenda os níveis de segurança"/>
               <Modal.Body>
                 <View style={styles.evaluationView}>
-                  <Text style={styles.evaluationText}>Atenção: esta nota não dispensa leitura do rótulo, que pode mudar sem aviso prévio.</Text>
+                  <Text style={styles.evaluationText}>Atenção: o nível de segurança não dispensa leitura do rótulo, que pode mudar sem aviso prévio.</Text>
                 </View>
               </Modal.Body>
               <Modal.Footer>
@@ -122,7 +135,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     fontStyle: 'italic',
     fontWeight: 'bold',
-    marginBottom: scale(5)
   },
   imageView: {
     paddingTop: scale(10),

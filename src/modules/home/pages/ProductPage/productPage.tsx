@@ -41,7 +41,7 @@ export class ProductPage extends Component<{}, ProductPageState> {
       {/* Image */}
       <View style={styles.imageView}>
         <Image
-          source= {{uri: this.item.picturePath}}
+          source= {{uri: this.item.picturePath? this.item.picturePath : 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
           style={styles.image}
         />
       </View>

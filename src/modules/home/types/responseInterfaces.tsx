@@ -16,6 +16,20 @@ export interface ProductResponse {
   description: string
 }
 
+export interface ProductResponseFromList {
+  barCode: number,
+  brandName: string,
+  safetyCategory: string,
+  productName: string,
+  productCategory: string,
+  picturePath: string,
+  productIngredients: string,
+  createdAt: string,
+  idBrand: number,
+  idSafety: number,
+  idReport: number
+}
+
 export interface TokensResponse {
   access: string,
   refresh: string

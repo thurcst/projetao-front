@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ProductResponse, TokensResponse } from "../types/responseInterfaces";
+import { ProductResponse, ProductResponseFromList, TokensResponse } from "../types/responseInterfaces";
 
 const instance = axios.create({
     baseURL: "https://semgluten.cin.ufpe.br"
@@ -76,7 +76,7 @@ export async function getProduct(productId: number): Promise<ProductResponse> {
     }
 }
 
-export async function getProductsByCategory(productCategory: string) {
+export async function getProductsByCategory(productCategory: string): Promise<ProductResponseFromList[]> {
     const productCategoryArray = productCategory.split(" ");
     var params = new URLSearchParams();
     params.append("search", productCategoryArray[0]);

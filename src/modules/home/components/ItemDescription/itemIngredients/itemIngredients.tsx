@@ -6,7 +6,7 @@ export function ItemIngredients( { ingredients } ) {
   return (
       <View style={styles.container}>  
         <Text style={styles.title}>Ingredientes</Text>
-        <Text>{ingredients}</Text>
+        <Text>{ingredients ? ingredients : "Não foi possível encontrar ingredientes para este produto."}</Text>
       </View>
   );
 }

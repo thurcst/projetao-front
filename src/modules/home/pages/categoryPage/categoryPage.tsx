@@ -6,11 +6,12 @@ import { ShowAlert } from '../../../../shared/pages/showAlert';
 import categoriesDB from '../../../../../categoriesDB';
 import mockDataBase from '../../../../../mockDataBase';
 import { moderateScale, scale, verticalScale } from '../../../../shared/styles/scaling_units';
-import { getProductsByCategory } from '../../services/product.service';
+import { getProduct, getProductsByCategory } from '../../services/product.service';
 import { stackRouteNames } from '../../types/stackRouteNames';
 import { EvilIcons, Entypo } from '@expo/vector-icons';
 import { Modal } from "../../../../shared/components/Modal/Modal";
 import { ItemName } from '../../components/ItemDescription/ItemName/itemName';
+import { withRepeat } from 'react-native-reanimated';
 
 var contadorCategory = 0;
 var filtroCategory = "";
@@ -30,6 +31,7 @@ type ParamList = {
   export default function CategoryPage( props ) {
     const route = useRoute<RouteProp<ParamList, stackRouteNames.CategoryPage>>();
     let categoryImageURL = categoriesDB.find(item => item.productCategory === route.params.productCategory).urlImage;
+    let [fullItemLoaded, setFullItemLoaded] = useState(false);
     let [isLoading, setIsLoading] = useState(true);
     let [productsByCategory, setProductsByCategory] = useState([]);
     let [isError, setIsError] = useState(false);
@@ -39,23 +41,23 @@ type ParamList = {
         async function fetchData() {
           setIsLoading(true);
           try {
-            const response = await getProductsByCategory(route.params.productCategory);  
+            const response = await getProductsByCategory(route.params.productCategory);
             setData(response)
             setProductsByCategory(response);
             setFilteredItems(response);
-            setIsLoading(false);
           } catch (error) {
             console.log(error);
             setIsError(true);
+          } finally {
             setIsLoading(false);
           }
-          setIsLoading(false);
         }
   
         fetchData();
       }, [setProductsByCategory]);
 
-    const getContent = () => {    
+    const getContent = () => {  
+        if (fullItemLoaded) return <View></View>  
         if (isLoading) {      
           return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
         }
@@ -64,13 +66,29 @@ type ParamList = {
         } else {
             return (
                 <ScrollView style={styles.container}>
-                {productsByCategory.map((item) => 
-                <TouchableOpacity onPress={() => 
-                    {props.navigation.navigate(stackRouteNames.ProductPage, {
-                      itemId: item.barCode
-                    })}} 
+                {productsByCategory.map(item => 
+                  <TouchableOpacity
+                    onPress={async () => {
+                      setIsLoading(true);
+                      try {
+                        const fullItem = await getProduct(item.barCode);
+                        props.navigation.navigate(
+                          stackRouteNames.ProductPage,
+                          { item: fullItem }
+                        );
+                        setFullItemLoaded(true);
+                        setTimeout(() => setFullItemLoaded(false), 500)
+                      } catch (e) {
+                        console.log(e);
+                        setIsError(true);
+                        setFullItemLoaded(false);
+                      } finally {
+                        setIsLoading(false);
+                      }
+                    }
+                    }
                     style={styles.actionButton}>
-                    
+                      
                     <View style={styles.areaButton}>
                       <View style={styles.imageContainer}>
                         <Image
@@ -87,9 +105,9 @@ type ParamList = {
                           <Ionicons name="chatbubbles-outline" color={'#000'} size={25} />
                         </View> */}
                       </View>
-                     
-                    </View>
                     
+                    </View>
+                      
                   </TouchableOpacity>
                   )}
             </ScrollView>

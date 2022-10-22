@@ -26,17 +26,18 @@ export function SetSafetyCategory(safetyCategory: string) {
         <View style={styles.itemValidationIconText}>
             {getIconSafetyCategory(safetyCategory)}
             {/* gambiarra pra capitalizar a primeira letra */}     
-            <Text style={styles.text}> {safetyCategory.charAt(0) + safetyCategory.slice(1).toLowerCase() } </Text>
+            <Text style={styles.text}> Nível de segurança: {safetyCategory.charAt(0) + safetyCategory.slice(1).toLowerCase() } </Text>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     itemValidationIconText: {
-      flexDirection: 'row'
+      flexDirection: 'row',
+      marginBottom: verticalScale(5),
     },
     text: {
         marginLeft: scale(5),
-        fontSize: scale(18)
+        fontSize: scale(16)
     }
   })
