@@ -88,7 +88,7 @@ export function SearchBarResultsPage(props) {
                                         />
                                     </View>
                                 <View style={styles.foodNameAndIcons}>
-                                    <Text>
+                                    <Text style={styles.foodNameAndIcons}>
                                     {item && item.productName}
                                     </Text>
                                 </View>
@@ -491,7 +491,8 @@ const styles = StyleSheet.create({
         top: verticalScale(5),
         left: moderateScale(5),
         borderBottomWidth: 0.5,
-        borderBottomColor: '#DADADA'
+        borderBottomColor: '#DADADA',
+        textTransform: 'capitalize'
         },
   container: {
     backgroundColor: 'white',
