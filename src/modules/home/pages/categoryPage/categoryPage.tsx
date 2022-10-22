@@ -68,6 +68,7 @@ type ParamList = {
                 <ScrollView style={styles.container}>
                 {productsByCategory.map(item => 
                   <TouchableOpacity
+                    key={item.barCode}
                     onPress={async () => {
                       setIsLoading(true);
                       try {
