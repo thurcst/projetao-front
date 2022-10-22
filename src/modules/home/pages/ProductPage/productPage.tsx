@@ -3,7 +3,7 @@ import React, { Component, useState } from "react";
 import { Text, View, Image, StyleSheet, ActivityIndicator, ScrollView, Dimensions } from "react-native";
 import { ShowAlert } from "../../../../shared/pages/showAlert";
 import { scale, verticalScale } from "../../../../shared/styles/scaling_units";
-import { ItemCommunity } from "../../components/ItemDescription/itemCommunity/itemCommunity";
+import { ItemCommunityPreview } from "../../components/ItemDescription/itemCommunity/itemCommunityPreview";
 import { ItemIngredients } from "../../components/ItemDescription/itemIngredients/itemIngredients";
 import { ItemName } from "../../components/ItemDescription/ItemName/itemName";
 import { ItemNutritionalValue } from "../../components/ItemDescription/itemNutritionalValue/itemNutritionalValue";
@@ -78,20 +78,13 @@ export class ProductPage extends Component<{}, ProductPageState> {
 
               {/* Community */}
               <View style={styles.itemDescriptionField}>
-                <ItemCommunity/>
+                <ItemCommunityPreview/>
               </View>
 
             </View>
 
           </View>
         </View>
-
-        {/*
-        Similars
-        <View style={{marginBottom: verticalScale(15)}}>
-          <ItemSimilars/>
-        </View>
-        */}
 
       </ScrollView>
     </View>

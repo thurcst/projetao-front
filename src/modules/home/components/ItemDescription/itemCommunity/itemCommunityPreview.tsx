@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { ItemReviewStars } from "./itemReviewStars";
 import { ItemReview } from "./itemReview";
 
-export function ItemCommunity( props ) {
+export function ItemCommunityPreview( props ) {
   return (
       <View style={styles.container}>  
         <Text style={styles.title}>Comunidade</Text>
@@ -27,13 +27,11 @@ export function ItemCommunity( props ) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    flexWrap: 'wrap',
   },
   title: {
     fontSize: scale(18),
     fontWeight: 'bold',
-    marginBottom: scale(5)
+    marginBottom: verticalScale(15),
   },
   itemReviewContainer: {
     marginTop: verticalScale(15),

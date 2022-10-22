@@ -5,36 +5,32 @@ import { Ionicons } from '@expo/vector-icons';
 
 export function ItemReviewStars({ size }) {
   return (
-    <View style={styles.starsContainer}>
-      <Ionicons name='star' style={styles.brightStar(size)}/>
-      <Ionicons name='star' style={styles.brightStar(size)}/>
-      <Ionicons name='star' style={styles.brightStar(size)}/>
-      <Ionicons name='star' style={styles.brightStar(size)}/>
-      <Ionicons name='star' style={styles.dullStar(size)}/>
+    <View style={styles.container}>
+      <Ionicons name='star' style={[styles.star(size), styles.brightStar]}/>
+      <Ionicons name='star' style={[styles.star(size), styles.brightStar]}/>
+      <Ionicons name='star' style={[styles.star(size), styles.brightStar]}/>
+      <Ionicons name='star' style={[styles.star(size), styles.brightStar]}/>
+      <Ionicons name='star' style={[styles.star(size), styles.dullStar]}/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    flexDirection: 'column',
-  },
-  starsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
+    justifyContent: 'flex-start'
   },
-  brightStar: (size) => {
+  star: (size) => {
     return {
+      fontSize: scale(16*size),
+      marginHorizontal: scale(6)
+    }
+  },
+  brightStar: {
       color: '#44bb6e',
-      fontSize: scale(16*size)
-    }
   },
-  dullStar: (size) => {
-    return {
-      color: 'rgb(170, 170, 170)',
-      fontSize: scale(16*size)
-    }
+  dullStar: {
+    color: 'rgb(170, 170, 170)',
   }
 });
   

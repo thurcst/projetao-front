@@ -5,8 +5,8 @@ const instance = axios.create({
     baseURL: "https://semgluten.cin.ufpe.br"
 });
 
-let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2OTk0OTkyLCJpYXQiOjE2NjYxMzA5OTIsImp0aSI6IjllNzE4Y2Y1Mjk0NzRhNjc4MjkxMmVhMmJjY2E1ZTFlIiwidXNlcl9pZCI6MX0.qgl7vTUqtjxxNq-vyH_KhF6sIA9tvQZh6ovx_3k1hFU";
-let refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2NzQyNjk5MiwiaWF0IjoxNjY2MTMwOTkyLCJqdGkiOiIxMGMxMWY0ZjExNTY0MDFiOTgxZDRkMTgyN2M5ZGU3ZCIsInVzZXJfaWQiOjF9.7MA-zRZN113HXCPPtIwDJLTGS7KaXZwrUKMlLwIMCKk";
+let accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY3MzM1MDQwLCJpYXQiOjE2NjY0NzEwNDAsImp0aSI6IjY5MjE0M2VlMTQ1YjRhMWVhMDg1OTQ5NzRlOTU5YWZmIiwidXNlcl9pZCI6MX0.cr890IY_J31Aqq2fBIHgfZB9mr-4krwIYAVoNFbjCgs";
+let refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2Nzc2NzA0MCwiaWF0IjoxNjY2NDcxMDQwLCJqdGkiOiIxNzBjNDViMmUwYzg0YjRiOTY0MDViMjFhNjA5OGI2NCIsInVzZXJfaWQiOjF9.4admLeoC0dhxdoImmqMUoe8YySZ1-oCwhzVVSGuotZM";
 instance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
 const setNewAccessToken = async () => {
@@ -135,7 +135,6 @@ export async function getAuthorizationTokens(): Promise<TokensResponse> {
     const data = JSON.stringify(jsonToSend);
     try {
         const axiosResponse = await instance.post("/api/token/", data, options);
-        console.log(axiosResponse);
         return axiosResponse.data;
     } catch (error) {
         console.log("Deu erro " + error);
