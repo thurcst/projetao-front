@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
   image: {
     width: scale(50),
     height: scale(50),
+    top: verticalScale(5),
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 15
@@ -114,7 +115,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: '#DADADA',
     textTransform: 'capitalize',
-    marginBottom:4
+    marginBottom: 4,
+    marginRight: moderateScale(5),
+    flexShrink: 1
   },
   imageContainer: {
       padding: 4
