@@ -56,7 +56,6 @@ async function getMockedProduct(): Promise<ProductResponse> {
         "logoPath": null,
         "category": "0",
         "description": "RÓTULO COM GLÚTEN OU PODE CONTER GLÚTEN",
-        "filePath": "",
     }
 }
 
@@ -98,22 +97,10 @@ export async function getProductsByCategory(productCategory: string): Promise<Pr
 }
 
 export async function getProductsByName(productName: string) {
-    const productNameArray = productName.split(" ");
-    let finalStringToSearch = "";
-    productNameArray.forEach((item) => {
-    if (item === productNameArray[0]) {
-        finalStringToSearch = finalStringToSearch + item;
-    } else {
-        finalStringToSearch = finalStringToSearch + "+" + item;
-    }
-    });
-    var params = new URLSearchParams();
-    params.append("search", finalStringToSearch);
-    params.append("product", "productName");
     try {
         const axiosResponse = await instance.get("/api/list/product/", {
             params: {
-                search: finalStringToSearch,
+                search: productName,
                 product: "productName"
             }
         });

@@ -56,7 +56,7 @@ export function SearchBarResultsPage(props) {
       setIsLoading(false);
     }
     setIsLoading(false);
-    console.log(filteredData);
+    // console.log(filteredData);
   };
 
   const getContent = () => {    
@@ -132,7 +132,7 @@ export function SearchBarResultsPage(props) {
     contadorCategory = 0;
     filtroCategory = "";
     buttonCategory = "Nenhum";
-    console.log(filteredData)
+    // console.log(filteredData)
     setIsModalVisible2(() => !isModalVisible2);
   };
 
