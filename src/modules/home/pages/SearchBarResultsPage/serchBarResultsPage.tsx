@@ -322,16 +322,12 @@ if(contadorCategory === 0 && contadorSecurity === 0){
 
 ///////////////////////////////////////////////////////////////////////////////
   
-  return (
-    
-    
-    
-    <View style={styles.container}>
-      
-        {/*Filtro*/} 
+    return (
+        <View style={styles.container}>
+             {/*Filtro*/} 
       
       <TouchableOpacity  onPress={handleModal}>
-                <View style={{flexDirection: 'row',borderBottomWidth: 0.5,borderBottomColor: '#DADADA',  marginLeft: 10   }}>
+                <View style={styles.customFilter}>
                 <Text style ={{fontSize : 20}}>Filtros Personalizados</Text>
                 <EvilIcons name = "chevron-down" size={28} color="black" style={{ marginLeft: 1 }}/>
                 </View>
@@ -341,198 +337,205 @@ if(contadorCategory === 0 && contadorSecurity === 0){
             
       <Modal isVisible={isModalVisible}>
             <Modal.Container>
-              <Modal.Header title="Filtros:"/>
-              <Modal.Body>
+              <View style={{backgroundColor: '#f0f0f0', borderRadius: 15}}>
+                <Text style={{fontSize: 20, left: moderateScale(10), marginTop: verticalScale(10)}}>Filtros</Text>
+                <View style={{borderBottomWidth: 2, borderBottomColor: 'grey',}}></View>
+                <Modal.Body>
                 <View style={{flexDirection: 'column', alignItems: 'center' }}>
                 <Pressable style={[styles.button, styles.buttonClose]} onPress={(handleModal2) }>
                 <View style={{flexDirection: 'row',  marginLeft: 10   }}>
-                <Text style ={{fontSize : 15, color: "white"}}>Categorias: {buttonCategory}</Text>
+                <Text style ={{fontSize : 15, color: "black"}}>Categorias: {buttonCategory}</Text>
                 <EvilIcons name="chevron-down" size={28} color="black" style={{ marginLeft: 1 }}/>
                 </View>
                 </Pressable>
+                </View>
+                <View style={{flexDirection: 'column', alignItems: 'center' }}>
                 <Pressable style={[styles.button, styles.buttonClose]} onPress={(handleModal3) }>
                 <View style={{flexDirection: 'row',  marginLeft: 10   }}>
-                <Text style ={{fontSize : 15, color: "white"}}>Segurança: {buttonSecurity}</Text>
+                <Text style ={{fontSize : 15, color: "black"}}>Segurança: {buttonSecurity}</Text>
                 <EvilIcons name="chevron-down" size={28} color="black" style={{ marginLeft: 1 }}/>
                 </View>
                 </Pressable>
                 </View>
-              
                 
               </Modal.Body>
               <Modal.Footer>
-              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,backgroundColor: "#35bd3b"}} onPress={(handleModal) }>
-              <Text style ={ {color: "white"}}>Aplicar</Text>
+              <Pressable style={{borderRadius: 10,padding: 10,elevation: 2,marginTop: 15,backgroundColor: "#66cc66"}} onPress={(handleModal) }>
+              <Text style ={ {color: "black"}}>Aplicar</Text>
               </Pressable>
-              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#bd3535"}} onPress={(filterCancel) }>
-              <Text style ={ {color: "white"}}>Limpar filtros</Text>
+              <Pressable style={{borderRadius: 10,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#ff3333"}} onPress={(filterCancel) }>
+              <Text style ={ {color: "white"}}>Limpar Filtros</Text>
               </Pressable>
-              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#bd3535"}} onPress={(handleModal) }>
-              <Text style ={ {color: "white"}}>Voltar</Text>
+              <Pressable style={{borderRadius: 10,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#dcdcdc"}} onPress={(handleModal) }>
+              <Text style ={ {color: "black"}}>Voltar</Text>
               </Pressable>
               </Modal.Footer>
+              </View>
             </Modal.Container>
       </Modal>
 
       <Modal isVisible={isModalVisible2}>
             <Modal.Container>
-              <Modal.Header title="Categorias:"/>
-              
+              <View style={{backgroundColor: '#f0f0f0', borderRadius: 15}}>
+              <Text style={{fontSize: 20, left: moderateScale(10), marginTop: verticalScale(10)}}>Categorias</Text>
+              <View style={{borderBottomWidth: 2, borderBottomColor: 'grey',}}></View>
               
               <Modal.Body>
               <View>
-              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filterPaes) }>
-              <Text style ={ {color: "white",textAlign: 'center'}}>Pães e massas</Text>
+              <Pressable style={[styles.button, styles.buttonClose, styles.buttonCategories]} onPress={(filterPaes) }>
+              <Text style ={ {color: "black",textAlign: 'center'}}>Pães e massas</Text>
               </Pressable>
-              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filterGraos) }>
-              <Text style ={ {color: "white",textAlign: 'center'}}>Grãos</Text>
+              <Pressable style={[styles.button, styles.buttonClose, styles.buttonCategories]} onPress={(filterGraos) }>
+              <Text style ={ {color: "black",textAlign: 'center'}}>Grãos</Text>
               </Pressable>
-              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filterDoces) }>
-              <Text style ={ {color: "white",textAlign: 'center'}}>Doces</Text>
+              <Pressable style={[styles.button, styles.buttonClose, styles.buttonCategories]} onPress={(filterDoces) }>
+              <Text style ={ {color: "black",textAlign: 'center'}}>Doces</Text>
               </Pressable>
-              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filterBiscoito) }>
-              <Text style ={ {color: "white",textAlign: 'center'}}>Biscoitos e salgadinhos</Text>
+              <Pressable style={[styles.button, styles.buttonClose, styles.buttonCategories]} onPress={(filterBiscoito) }>
+              <Text style ={ {color: "black",textAlign: 'center'}}>Biscoitos e salgadinhos</Text>
               </Pressable>
-              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filterCarnes) }>
-              <Text style ={ {color: "white",textAlign: 'center'}}>Carnes, aves e peixes</Text>
+              {/*<Pressable style={[styles.button, styles.buttonClose]} onPress={(filterCarnes) }>
+              <Text style ={ {color: "black",textAlign: 'center'}}>Carnes, aves e peixes</Text>
+              </Pressable> */}
+              <Pressable style={[styles.button, styles.buttonClose, styles.buttonCategories]} onPress={(filterMolhos) }>
+              <Text style ={ {color: "black",textAlign: 'center'}}>Molhos e condimentos</Text>
               </Pressable>
-              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filterMolhos) }>
-              <Text style ={ {color: "white",textAlign: 'center'}}>Molhos e condimentos</Text>
+              </View>
+              </Modal.Body>  
+              </View>
+              <Modal.Footer>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#ff3333"}} onPress={(filterCancel2) }>
+              <Text style ={ {color: "white"}}>Limpar filtro</Text>
+              </Pressable>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#dcdcdc"}} onPress={(handleModal2) }>
+              <Text style ={ {color: "black"}}>Voltar</Text>
+              </Pressable>
+              </Modal.Footer>
+            </Modal.Container>
+            </Modal>
+              <Modal isVisible={isModalVisible3}>
+                <Modal.Container>
+                   
+                <View style={{backgroundColor: '#f0f0f0', borderRadius: 15}}>
+                <Text style={{fontSize: 20, left: moderateScale(10), marginTop: verticalScale(10)}}>Segurança</Text>
+                  <View style={{borderBottomWidth: 2, borderBottomColor: 'grey',}}></View>
+              
+              <Modal.Body>
+              <View>
+              <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter0) }>
+              <Ionicons style={styles.icons} name="shield-sharp" color={'red'} size={20}/>
+              <Text style ={ {marginLeft: moderateScale(10), color: "black", textAlign: 'center'}}>Nível: 0</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter1) }>
+              <Ionicons style={styles.icons} name="shield-sharp" color={'#FF4500'} size={20}/>
+              <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 1</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter2) }>
+              <Ionicons style={styles.icons} name="shield-sharp" color={'#FFA500'} size={20}/>
+              <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 2</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter3) }>
+              <Ionicons style={styles.icons} name="shield-sharp" color={'yellow'} size={20}/>
+              <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 3</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter4) }>
+              <Ionicons style={styles.icons} name="shield-sharp" color={'#9ACD32'} size={20}/>
+              <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 4</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter5) }>
+              <Ionicons style={styles.icons} name="shield-sharp" color={'#9ACD32'} size={20}/>
+              <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 5</Text>
+              </Pressable>
+              <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter6) }>
+              <Ionicons style={styles.icons} name="shield-checkmark-sharp" color={'#008000'} size={20}/>
+              <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: Star Gold</Text>
               </Pressable>
               </View>
               </Modal.Body>  
               
               <Modal.Footer>
-              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(filterCancel2) }>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#ff3333"}} onPress={(filterCancel3) }>
               <Text style ={ {color: "white"}}>Limpar filtro</Text>
               </Pressable>
-              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(handleModal2) }>
-              <Text style ={ {color: "white"}}>Voltar</Text>
+              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#dcdcdc"}} onPress={(handleModal3) }>
+              <Text style ={ {color: "black"}}>Voltar</Text>
               </Pressable>
               </Modal.Footer>
-            </Modal.Container>
-      </Modal>
-
-      <Modal isVisible={isModalVisible3}>
-            <Modal.Container>
-              <Modal.Header title="Segurança:"/>
-              
-              
-              <Modal.Body>
-              <View>
-              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter0) }>
-              <Text style ={ {color: "white",textAlign: 'center'}}>0</Text>
-              </Pressable>
-              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter1) }>
-              <Text style ={ {color: "white",textAlign: 'center'}}>1</Text>
-              </Pressable>
-              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter2) }>
-              <Text style ={ {color: "white",textAlign: 'center'}}>2</Text>
-              </Pressable>
-              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter3) }>
-              <Text style ={ {color: "white",textAlign: 'center'}}>3</Text>
-              </Pressable>
-              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter4) }>
-              <Text style ={ {color: "white",textAlign: 'center'}}>4</Text>
-              </Pressable>
-              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter5) }>
-              <Text style ={ {color: "white",textAlign: 'center'}}>5</Text>
-              </Pressable>
-              <Pressable style={[styles.button, styles.buttonClose]} onPress={(filter6) }>
-              <Text style ={ {color: "white",textAlign: 'center'}}>Star Gold</Text>
-              </Pressable>
               </View>
-              
-              </Modal.Body>  
-              
-              <Modal.Footer>
-              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(filterCancel3) }>
-              <Text style ={ {color: "white"}}>Limpar filtro</Text>
-              </Pressable>
-              <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#bd3535"}} onPress={(handleModal3) }>
-              <Text style ={ {color: "white"}}>Voltar</Text>
-              </Pressable>
-              </Modal.Footer>
             </Modal.Container>
       </Modal>
-      
 
       
       
-      
-      {/* <SearchBar navigation={props.navigation} /> */}
-      {getContent()}
-  
-    </View>
-  );
-};
+
+
+            {getContent()}
+        </View>
+    )
+}
 
 const styles = StyleSheet.create({
     activityIndicator: {
         marginTop: width / 2,
     },
+    container: {
+      backgroundColor: '#f0f0f0',
+      flex: 1,
+    },
     actionButton: {
-        flex: 1,
-        backgroundColor: '#fff',
+      flex: 1,
+      backgroundColor: '#fff',
     },
     areaButton: {
         flex:1,
         flexDirection: 'row',  
     },
     image: {
-        width: scale(50),
-        height: scale(50),
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderRadius: 15
-        },
+      width: scale(50),
+      height: scale(50),
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderRadius: 15
+      },
     foodNameAndIcons: {
-        flexDirection: 'column',
-        top: verticalScale(5),
-        left: moderateScale(5),
-        borderBottomWidth: 0.5,
-        borderBottomColor: '#DADADA',
-        textTransform: 'capitalize'
-        },
-  container: {
-    backgroundColor: 'white',
-    flex: 1,
-  },
-  textFriends: {
-    fontSize: 20,
-    textAlign: 'left',
-    marginLeft: 10,
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10,
-    marginLeft: 10
-  },
-  textName: {
-    fontSize: 17,
-    marginLeft: 10,
-    fontWeight: "600",
-  },
-  textEmail: {
-    fontSize: 14,
-    marginLeft: 10,
-    color: 'gray'
-  },
+      flexDirection: 'column',
+      top: verticalScale(5),
+      left: moderateScale(5),
+      borderBottomWidth: 0.5,
+      borderBottomColor: '#DADADA',
+      textTransform: 'capitalize'
+      },
     imageContainer: {
         padding: 4,
     },
     button: {
-      borderRadius: 20,
+      borderRadius: 10,
       padding: 10,
       elevation: 2,
       marginTop: 15,
-
-      
     },
     buttonClose: {
-      backgroundColor: "#2196F3",
+      backgroundColor: "#bababa",
     },
-});
+    buttonSecurity: {
+      marginHorizontal: moderateScale(75),
+      flexDirection: 'row'
+    },
+    buttonCategories: {
+      marginHorizontal: moderateScale(50),
+    },
+    icons: {
+      marginLeft: moderateScale(5)
+    },
+    customFilter: {
+      marginVertical: 10,
+      left: moderateScale(10),
+      flexDirection: 'row',
+      borderRadius: 5,
+      paddingHorizontal: scale(7),
+      paddingVertical: scale(3),
+      marginLef: moderateScale(10),
+      marginRight: moderateScale(145),
+      backgroundColor: 'white',
+    },
+  });
