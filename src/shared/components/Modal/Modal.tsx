@@ -45,7 +45,7 @@ const ModalFooter = ({ children }: { children?: React.ReactNode }) => (
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#DADADA",
+    backgroundColor: "#F2F2F2",
     borderRadius: 15,
   },
   header: {
