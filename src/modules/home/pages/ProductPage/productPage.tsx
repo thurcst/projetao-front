@@ -1,5 +1,5 @@
 import { useFocusEffect } from "@react-navigation/native";
-import React, { Component, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { Text, View, Image, StyleSheet, ActivityIndicator, ScrollView, Dimensions } from "react-native";
 import { ShowAlert } from "../../../../shared/pages/showAlert";
 import { scale, verticalScale } from "../../../../shared/styles/scaling_units";
@@ -15,7 +15,9 @@ import { getProduct } from "../../services/product.service";
 import { ProductResponse } from "../../types/responseInterfaces";
 
 interface ProductPageState {
-  itemNameCardHeight: number
+  itemNameCardHeight: number,
+  isLoading: boolean,
+  isError: boolean,
 }
 
 const { width, height } = Dimensions.get('window');
@@ -28,67 +30,100 @@ export class ProductPage extends Component<{}, ProductPageState> {
     super(props);
     this.navigation = props.navigation;
     this.route = props.route;
-    this.state = { itemNameCardHeight: 0 };
-    this.item = this.route.params.item;
+    this.state = {
+      itemNameCardHeight: 0,
+      isLoading: true,
+      isError: false,
+    };
+
+    const x = this.route.params.item;
+    if(typeof x == 'number') this.fetchData(x);
+    else {
+      this.item = x;
+      this.state = {
+        itemNameCardHeight: 0,
+        isLoading: false,
+        isError: false,
+      };
+    } 
   }
 
   onLayout(event) {
     this.setState({ itemNameCardHeight: event.nativeEvent.layout.height });
-  } 
+  }
 
-  render() { return (
-    <View style={styles.container}>
-      {/* Image */}
-      <View style={styles.imageView}>
-        <Image
-          source= {{uri: this.item.picturePath? this.item.picturePath : 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
-          style={styles.image}
-        />
-      </View>
+  async fetchData(barCode: number) {
+    try {
+      this.item = await getProduct(barCode);
+    } catch(e) {
+      console.log(e);
+      this.setState({ isError: true });
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  }
 
-      {/* Name */}
-      <View style={styles.itemName} onLayout={(event) => this.onLayout(event)}>
-        <ItemName productName={this.item.productName}/>
-      </View>
+  render() {
+    if (this.state.isLoading) {      
+      return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
+    }
+    if (this.state.isError || !this.item)  {
+        ShowAlert("Não foi possível encontrar produtos para esta categoria");
+    } else return (
+      <View style={styles.container}>
+        {/* Image */}
+        <View style={styles.imageView}>
+          <Image
+            source= {{uri: this.item.picturePath? this.item.picturePath : 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
+            style={styles.image}
+          />
+        </View>
 
-      <ScrollView style={styles.itemDescriptionView}>
-        
-        {/* Margin for the item name */}
-        <View style={{marginTop: Math.max(0, this.state.itemNameCardHeight-verticalScale(35))}}>
-          <View style={styles.itemDescriptionFieldsContainer}>
+        {/* Name */}
+        <View style={styles.itemName} onLayout={(event) => this.onLayout(event)}>
+          <ItemName productName={this.item.productName}/>
+        </View>
 
-            <View style={styles.column}>
+        <ScrollView style={styles.itemDescriptionView}>
+          
+          {/* Margin for the item name */}
+          <View style={{marginTop: Math.max(0, this.state.itemNameCardHeight-verticalScale(35))}}>
+            <View style={styles.itemDescriptionFieldsContainer}>
 
-              {/* Validation */}
-              <View style={styles.itemDescriptionField}>
-                <ItemValidation
-                  navigationProp={this.navigation}
-                  safetyCategory={this.item && this.item.category}
-                />
-              </View>
+              <View style={styles.column}>
 
-              <View style={styles.lineStyle} />
+                {/* Validation */}
+                <View style={styles.itemDescriptionField}>
+                  <ItemValidation
+                    navigationProp={this.navigation}
+                    safetyCategory={this.item && this.item.category}
+                    reportPath={this.item.idReport == 100? "" : "https://semgluten.cin.ufpe.br/media/reports/" + this.item.barCode + ".png"}
+                  />
+                </View>
 
-              {/* Ingredients */}
-              <View style={styles.itemDescriptionField}>
-                <ItemIngredients ingredients={this.item.productIngredients}/>
-              </View>
+                <View style={styles.lineStyle} />
 
-              <View style={styles.lineStyle} />
+                {/* Ingredients */}
+                <View style={styles.itemDescriptionField}>
+                  <ItemIngredients ingredients={this.item.productIngredients}/>
+                </View>
 
-              {/* Community */}
-              <View style={styles.itemDescriptionField}>
-                <ItemCommunityPreview/>
+                <View style={styles.lineStyle} />
+
+                {/* Community */}
+                <View style={styles.itemDescriptionField}>
+                  <ItemCommunityPreview/>
+                </View>
+
               </View>
 
             </View>
-
           </View>
-        </View>
 
-      </ScrollView>
-    </View>
-  );}
+        </ScrollView>
+      </View>
+    );
+  }
 }
 
 

@@ -3,14 +3,17 @@ import { View, StyleSheet } from "react-native";
 import { scale } from "../../../../../shared/styles/scaling_units";
 import { Ionicons } from '@expo/vector-icons';
 
-export function ItemReviewStars({ size }) {
+export function ItemReviewStars({ size, numStars }) {
+  const numBright = numStars;
+  const numDull = 5 - numStars;
   return (
     <View style={styles.container}>
-      <Ionicons name='star' style={[styles.star(size), styles.brightStar]}/>
-      <Ionicons name='star' style={[styles.star(size), styles.brightStar]}/>
-      <Ionicons name='star' style={[styles.star(size), styles.brightStar]}/>
-      <Ionicons name='star' style={[styles.star(size), styles.brightStar]}/>
-      <Ionicons name='star' style={[styles.star(size), styles.dullStar]}/>
+      {new Array(numBright).map( (value, i) =>
+        <Ionicons key={i} name='star' style={[styles.star(size), styles.brightStar]}/>
+      )}
+      {new Array(numDull).map( (value, i) =>
+        <Ionicons key={numBright+i} name='star' style={[styles.star(size), styles.dullStar]}/>
+      )}
     </View>
   );
 }

@@ -55,7 +55,8 @@ async function getMockedProduct(): Promise<ProductResponse> {
         "contact": null,
         "logoPath": null,
         "category": "0",
-        "description": "RÓTULO COM GLÚTEN OU PODE CONTER GLÚTEN"
+        "description": "RÓTULO COM GLÚTEN OU PODE CONTER GLÚTEN",
+        "filePath": "",
     }
 }
 

@@ -10,7 +10,8 @@ import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/s
 
 interface ItemValidationProps {
   navigationProp:  NavigationScreenProp<any,any>,
-  safetyCategory:  string
+  safetyCategory:  string,
+  reportPath: string
 }
 export function ItemValidation( props: ItemValidationProps ) {
   const [isReportModalVisible, setIsReportModalVisible] = React.useState(false);
@@ -24,12 +25,16 @@ export function ItemValidation( props: ItemValidationProps ) {
   };
 
   const resolveReport = () => {
-    if(props.safetyCategory in ["0", "1"]) {
+    if(!props.reportPath && props.safetyCategory.toLowerCase() != "star gold") {
       return (
         <Text style={{fontStyle: 'italic'}}>
           Não há laudo disponível para este produto
         </Text>
       )
+    } else if(!props.reportPath && props.safetyCategory.toLowerCase() == "star gold") {
+      return (<Text style={{fontStyle: 'italic'}}>
+        A segurança deste produto é certificada pela ACELPAR
+      </Text>)
     } else return (
       <Text
         style={styles.itemValidationReport} 
@@ -91,7 +96,7 @@ export function ItemValidation( props: ItemValidationProps ) {
                   bindToBorders={true}
                   >
                   <Image
-                    source= {require('../../../../../../assets/PITASEMGLUTEN-LAUDODEGLUTEN.png')}
+                    source={{uri: props.reportPath}}
                     style={[styles.image]}
                   />
                 </ReactNativeZoomableView>

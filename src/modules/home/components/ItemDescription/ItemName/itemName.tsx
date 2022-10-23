@@ -14,17 +14,17 @@ export function ItemName( props: ItemNameProps ) {
 }
 
 const styles = StyleSheet.create({
-    itemNameCard: {
-        backgroundColor: 'white',
-        borderRadius: scale(50),
-        alignSelf: 'baseline',
-        elevation: 4,
-      },
-      itemNameTitle: {
-        fontSize: scale(19),
-        color: 'black',
-        fontWeight: 'bold',
-        paddingVertical: verticalScale(10),
-        paddingHorizontal: scale(30),
-      }
+  itemNameCard: {
+    backgroundColor: 'white',
+    borderRadius: scale(50),
+    alignSelf: 'baseline',
+    elevation: 4,
+  },
+  itemNameTitle: {
+    fontSize: scale(19),
+    color: 'black',
+    fontWeight: 'bold',
+    paddingVertical: verticalScale(10),
+    paddingHorizontal: scale(30),
+  }
 })

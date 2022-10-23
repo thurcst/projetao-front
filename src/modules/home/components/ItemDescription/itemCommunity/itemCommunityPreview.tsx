@@ -9,7 +9,7 @@ export function ItemCommunityPreview( props ) {
   return (
       <View style={styles.container}>  
         <Text style={styles.title}>Comunidade</Text>
-        <ItemReviewStars size={1}/>
+        <ItemReviewStars size={1} numStars={4}/>
         <View style={styles.itemReviewContainer}>
           <View style={styles.itemReview}>
             <ItemReview/>

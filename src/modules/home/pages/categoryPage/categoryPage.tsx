@@ -31,7 +31,6 @@ type ParamList = {
   export default function CategoryPage( props ) {
     const route = useRoute<RouteProp<ParamList, stackRouteNames.CategoryPage>>();
     let categoryImageURL = categoriesDB.find(item => item.productCategory === route.params.productCategory).urlImage;
-    let [fullItemLoaded, setFullItemLoaded] = useState(false);
     let [isLoading, setIsLoading] = useState(true);
     let [productsByCategory, setProductsByCategory] = useState([]);
     let [isError, setIsError] = useState(false);
@@ -56,8 +55,7 @@ type ParamList = {
         fetchData();
       }, [setProductsByCategory]);
 
-    const getContent = () => {  
-        if (fullItemLoaded) return <View></View>  
+    const getContent = () => {
         if (isLoading) {      
           return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
         }
@@ -69,23 +67,11 @@ type ParamList = {
                 {productsByCategory.map(item => 
                   <TouchableOpacity
                     key={item.barCode}
-                    onPress={async () => {
-                      setIsLoading(true);
-                      try {
-                        const fullItem = await getProduct(item.barCode);
-                        props.navigation.navigate(
-                          stackRouteNames.ProductPage,
-                          { item: fullItem }
-                        );
-                        setFullItemLoaded(true);
-                        setTimeout(() => setFullItemLoaded(false), 500)
-                      } catch (e) {
-                        console.log(e);
-                        setIsError(true);
-                        setFullItemLoaded(false);
-                      } finally {
-                        setIsLoading(false);
-                      }
+                    onPress={() => {
+                      props.navigation.navigate(
+                        stackRouteNames.ProductPage,
+                        { item: item.barCode }
+                      );
                     }
                     }
                     style={styles.actionButton}>

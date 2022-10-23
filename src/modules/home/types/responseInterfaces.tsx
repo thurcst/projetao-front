@@ -13,7 +13,7 @@ export interface ProductResponse {
   contact: string,
   logoPath: string,
   category: string,
-  description: string
+  description: string,
 }
 
 export interface ProductResponseFromList {

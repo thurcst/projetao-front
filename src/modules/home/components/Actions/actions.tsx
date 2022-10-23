@@ -2,7 +2,7 @@ import { StyleSheet, ScrollView } from 'react-native';
 import React from 'react';
 import { ActionsItems } from '../ActionsItems/actionsItems';
 
-const listOfBarCodes = [7891100794905, 7892300001473, 7893500023425, 7622210496607, 7898568900565, 67420001, 7898113940015];
+const listOfBarCodes = [7891100794905, 16, 7893500023425, 7622210496607, 7898568900565, 67420001, 7898113940015];
 
 export function Action({ navigationProp }) {
     return ( 

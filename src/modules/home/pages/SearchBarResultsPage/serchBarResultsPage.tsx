@@ -76,7 +76,7 @@ export function SearchBarResultsPage(props) {
                             
                             <TouchableOpacity onPress={() => 
                                 {props.navigation.navigate(stackRouteNames.ProductPage, {
-                                itemId: item.barCode
+                                item: item.barCode
                                 })}} 
                                 style={styles.actionButton}>
                                 

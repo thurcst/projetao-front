@@ -21,7 +21,7 @@ export function ItemReview( props ) {
           {/* Reviewer name */}
           <Text style={styles.reviewerName}>Cleybson</Text>
           {/* Rating */}
-          <ItemReviewStars size={0.5}/>
+          <ItemReviewStars size={0.5} numStars={4}/>
         </View>
 
         {/* Message */}
