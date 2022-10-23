@@ -15,8 +15,10 @@ export interface SectionProps {
 const Section = ({ productCategory, urlImage, navigation }: SectionProps) => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.button} activeOpacity={0.8}
-                              onPress={() => navigation.navigate(stackRouteNames.CategoryPage, { productCategory, urlImage })}
+            <TouchableOpacity
+                style={styles.button}
+                activeOpacity={0.8}
+                onPress={() => navigation.navigate(stackRouteNames.CategoryPage, { productCategory, urlImage })}
             >
                 <Image
                     style={styles.image}
@@ -27,7 +29,6 @@ const Section = ({ productCategory, urlImage, navigation }: SectionProps) => {
             </TouchableOpacity>
         </View>
     )
-
 };
 
 
