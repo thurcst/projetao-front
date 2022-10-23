@@ -8,7 +8,9 @@ interface ItemNameProps {
 export function ItemName( props: ItemNameProps ) {
     return (
       <View style={styles.itemNameCard}>
-        <Text style={styles.itemNameTitle}>{props.productName}</Text>
+        <Text style={styles.itemNameTitle}>
+          {props.productName.split(' ').map(word => word.charAt(0) + word.slice(1).toLowerCase()).join(' ').replace('\n', '')}
+        </Text>
       </View>
     );
 }

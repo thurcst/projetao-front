@@ -21,6 +21,7 @@ export default function MainSection({ navigation }: MainSectionProps) {
     return(
         <View style={styles.container}>
             <FlatList
+                contentContainerStyle={{alignItems: 'center'}}
                 horizontal={false}
                 numColumns={2}
                 showsHorizontalScrollIndicator = {false}

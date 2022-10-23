@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Animated } from "react-native";
+import { View, Text, StyleSheet, Image, Animated, Modal as RNModal, Pressable } from "react-native";
 import { scale, verticalScale } from "../../../../../shared/styles/scaling_units";
 import { stackRouteNames } from "../../../types/stackRouteNames";
 import React from "react";
@@ -7,6 +7,8 @@ import { Button } from "../../../../../shared/components/Button/Button";
 import { SetSafetyCategory } from "../../../types/setSafetyCategory";
 import { NavigationScreenProp } from "react-navigation";
 import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
 
 interface ItemValidationProps {
   navigationProp:  NavigationScreenProp<any,any>,
@@ -15,9 +17,9 @@ interface ItemValidationProps {
 }
 export function ItemValidation( props: ItemValidationProps ) {
   const [isReportModalVisible, setIsReportModalVisible] = React.useState(false);
-  const [isCriteriaModalVisible, setIsCriteriaModalVisible] = React.useState(false);
-
   const handleReportModal = () => setIsReportModalVisible(() => !isReportModalVisible);
+  
+  const [isCriteriaModalVisible, setIsCriteriaModalVisible] = React.useState(false);
   const handleCriteriaModal = () => setIsCriteriaModalVisible(() => !isCriteriaModalVisible);
   const goToCriteriaPage = () => {
     setIsCriteriaModalVisible(() => !isCriteriaModalVisible);
@@ -31,10 +33,12 @@ export function ItemValidation( props: ItemValidationProps ) {
           Não há laudo disponível para este produto
         </Text>
       )
+
     } else if(!props.reportPath && props.safetyCategory.toLowerCase() == "star gold") {
       return (<Text style={{fontStyle: 'italic'}}>
         A segurança deste produto é certificada pela ACELPAR
       </Text>)
+
     } else return (
       <Text
         style={styles.itemValidationReport} 
@@ -43,6 +47,7 @@ export function ItemValidation( props: ItemValidationProps ) {
       </Text>
     );
   }
+
   return (
       <View style={styles.itemValidationView}>
 
@@ -85,30 +90,32 @@ export function ItemValidation( props: ItemValidationProps ) {
           </Modal.Container>
         </Modal>
 
-        <Modal isVisible={isReportModalVisible}>
-          <Modal.Container>
-            <Modal.Header title="Laudo"/>
-            <Modal.Body>
-              <View style={styles.imageView}>
-                <ReactNativeZoomableView
-                  maxZoom={3.5}
-                  minZoom={1}
-                  zoomStep={1.75}
-                  initialZoom={1}
-                  bindToBorders={true}
-                  >
-                  <Image
-                    source={{uri: props.reportPath}}
-                    style={[styles.image]}
-                  />
-                </ReactNativeZoomableView>
-              </View>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button title="Fechar" onPress={handleReportModal}/>
-            </Modal.Footer>
-          </Modal.Container>
-        </Modal>
+        <RNModal
+          visible={isReportModalVisible}
+          animationType={'slide'}
+          hardwareAccelerated={true}
+          transparent={true}
+        >
+          <View style={styles.reportView}>
+            <View style={styles.reportCloseButton}>
+              <Pressable onPress={handleReportModal}>
+                <Ionicons name='close' color='white' size={scale(30)}/>
+              </Pressable>
+            </View>
+            <ReactNativeZoomableView
+              maxZoom={3.5}
+              minZoom={1}
+              zoomStep={1.75}
+              initialZoom={1}
+              bindToBorders={true}
+            >
+              <Image
+                source={{uri: props.reportPath}}
+                style={[styles.image]}
+              />
+            </ReactNativeZoomableView>
+          </View>
+        </RNModal>
 
       </View>
   );
@@ -137,22 +144,32 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: scale(5)
   },
+  reportCloseButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 2,
+    backgroundColor: 'gray',
+    // opacity: 0.75,
+    elevation: 5,
+    alignSelf: 'baseline',
+  },
   itemValidationReport: {
     color: 'green',
     textDecorationLine: 'underline',
     fontStyle: 'italic',
     fontWeight: 'bold',
   },
-  imageView: {
-    paddingTop: scale(10),
-    width: '100%',
-    height: verticalScale(350),
+  reportView: {
     justifyContent: 'center',
+    flex: 1,
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'black',
   },
   image: {
-    flex: 1,
+    height: '100%',
     width: '100%',
-    height: verticalScale(600),
     resizeMode: 'contain'
   },
   buttonView: {
