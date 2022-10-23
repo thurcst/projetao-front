@@ -20,6 +20,27 @@ interface ProductPageState {
   isError: boolean,
 }
 
+const fetchData = async (productPage: ProductPage, barCode: number) => {
+  try {
+    productPage.item = await getProduct(barCode);
+  } catch (e) {
+    console.log(e);
+    productPage.setState({ isError: true });
+  } finally {
+    productPage.setState({ isLoading: false });
+  }
+};
+
+function FetchWithUseFocusEffect(productPage: ProductPage, barCode: number) {
+  let state;
+  useFocusEffect(
+    React.useCallback(() => {  
+      fetchData(productPage, barCode);
+      return () => {};
+    }, [barCode])
+  );
+}
+
 const { width, height } = Dimensions.get('window');
 export class ProductPage extends Component<{}, ProductPageState> {
   navigation;
@@ -37,7 +58,7 @@ export class ProductPage extends Component<{}, ProductPageState> {
     };
 
     const x = this.route.params.item;
-    if(typeof x == 'number') this.fetchData(x);
+    if(typeof x == 'number') FetchWithUseFocusEffect(this, x);
     else {
       this.item = x;
       this.state = {
@@ -52,16 +73,18 @@ export class ProductPage extends Component<{}, ProductPageState> {
     this.setState({ itemNameCardHeight: event.nativeEvent.layout.height });
   }
 
-  async fetchData(barCode: number) {
-    try {
-      this.item = await getProduct(barCode);
-    } catch(e) {
-      console.log(e);
-      this.setState({ isError: true });
-    } finally {
-      this.setState({ isLoading: false });
-    }
-  }
+  
+
+  // async fetchData(barCode: number) {
+  //   try {
+  //     this.item = await getProduct(barCode);
+  //   } catch(e) {
+  //     console.log(e);
+  //     this.setState({ isError: true });
+  //   } finally {
+  //     this.setState({ isLoading: false });
+  //   }
+  // }
 
   render() {
     if (this.state.isLoading) {      
