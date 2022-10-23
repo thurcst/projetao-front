@@ -30,6 +30,26 @@ const SearchBar = ({ navigation }) => {
     
     return(
     <View style={styles.container}>
+      <View style={styles.inputView}>
+          {/* Input field */}
+          <TextInput
+            style={styles.input}
+            placeholder="Buscar"
+            placeholderTextColor="#505050" 
+            value={searchPhrase}
+            onChangeText={setSearchPhrase}
+            onFocus={() => {
+              setClicked(true);
+            }}
+          />
+          {/* cross Icon, depending on whether the search bar is clicked or not
+          {clicked && (
+            <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
+              setSearchPhrase("");
+              Keyboard.dismiss();
+              setClicked(false);
+            }}/>
+          )} */}
       <View
         style={
           clicked
@@ -37,12 +57,11 @@ const SearchBar = ({ navigation }) => {
             : styles.searchBar__unclicked
         }
       >
-        {/* search Icon */}
-        {
+      {
             !clicked &&
             (<View style={styles.iconView}>
               <TouchableOpacity>
-                  <EvilIcons name="search" size={28} color="black" style={{ marginLeft: 1 }}/>
+                  <EvilIcons name="search" size={30} color="black" style={{ marginLeft: 1 }}/>
               </TouchableOpacity>
             </View>)
         }
@@ -50,33 +69,15 @@ const SearchBar = ({ navigation }) => {
             clicked &&
             (<View style={styles.iconView}>
               <TouchableOpacity onPress={onSearch}>
-                <EvilIcons name="search" size={28} color="black" style={{ marginLeft: 1 }}/>
+                <EvilIcons name="search" size={30} color="black" style={{ marginLeft: 1 }}/>
               </TouchableOpacity>
             </View>)
-        }
-        
+      }
 
-        <View style={styles.inputView}>
-          {/* Input field */}
-          <TextInput
-            style={styles.input}
-            placeholder="Buscar"
-            value={searchPhrase}
-            onChangeText={setSearchPhrase}
-            onFocus={() => {
-              setClicked(true);
-            }}
-          />
-          {/* cross Icon, depending on whether the search bar is clicked or not */}
-          {clicked && (
-            <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
-              setSearchPhrase("");
-              Keyboard.dismiss();
-              setClicked(false);
-            }}/>
-          )}
-        </View>
+        {/* search Icon */}
+
       </View>
+    </View>
     </View>
     );
 };
@@ -87,30 +88,30 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
         flexDirection: "row",
-        width: "95%",
-    
+        width: "91.5%",
     },
     searchBar__unclicked: {
         // padding: 10,
         flexDirection: "row",
-        width: "95%",
-        backgroundColor: "#d9dbda",
+        width: "100%",
         borderRadius: 15,
         alignItems: "center",
+        height: "100%",
     },
     searchBar__clicked: {
         // padding: 10,
         flexDirection: "row",
-        width: "95%",
-        backgroundColor: "#d9dbda",
+        width: "100%",
         borderRadius: 15,
         alignItems: "center",
+        height: "100%",
         // justifyContent: "space-evenly",
     },
     input: {
-        fontSize: 20,
+        fontSize: 16,
         marginLeft: 10,
-        width: "78%",
+        color: '#000000',
+        width: "83%",
     },
     searchBar: {
         backgroundColor: 'white',
@@ -131,11 +132,14 @@ const styles = StyleSheet.create({
       borderRadius: 15
     },
     inputView: {
-      padding: scale(5),
+      padding: scale(0),
       fontSize: 20,
-      marginLeft: 10,
+      marginLeft: 17,
       width: "90%",
-      flexDirection: 'row'
+      flexDirection: 'row',
+      //backgroundColor: '#DADADA',
+      backgroundColor: "#d9dbda",
+      borderRadius: 8,
     }
 })
 
