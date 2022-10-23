@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start'
   },
-  star: (size) => {
+  star: (size: number) => {
     return {
       fontSize: scale(16*size),
       marginHorizontal: scale(6)

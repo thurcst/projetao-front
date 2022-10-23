@@ -31,7 +31,7 @@ export default function Scanner({navigation}) {
   }
 
   const parar = ({ type, data }) =>{
-    {navigation.navigate(stackRouteNames.ProductPage, {item: data})}
+    {navigation.navigate(stackRouteNames.ProductPage, {item: parseInt(data)})}
   };
 
   return (
