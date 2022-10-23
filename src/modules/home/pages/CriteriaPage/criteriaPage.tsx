@@ -9,7 +9,7 @@ export function CriteriaPage() {
     <ScrollView style={styles.container}>
       <View style={styles.headerTextContainer}>
         <Text style={styles.headerText}>
-          Atenção: a nota de segurança de um produto refere-se à sua segurança para pessoas com doença celíaca. Quanto maior a nota, maior a segurança, sendo "Star Gold" a maior nota.
+          <Text style={{fontWeight: "bold"}}>Atenção:</Text> a nota de segurança de um produto refere-se à sua segurança para pessoas com doença celíaca. Quanto maior a nota, maior a segurança, sendo "Star Gold" a maior nota.
         </Text>
       </View>
       <View style={styles.bodyContainer}>
@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
   text: {
     padding: scale(5),
     fontSize: scale(14),
+    marginBottom: scale(4)
   },
   textView: {
     flexDirection: 'column',
@@ -115,5 +116,6 @@ const styles = StyleSheet.create({
   },
   classificationAndIcon: {
     flexDirection: 'row',
+    alignItems: 'center'
   }
 });

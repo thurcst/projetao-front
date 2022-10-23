@@ -4,19 +4,19 @@ import { scale, verticalScale } from "../../../shared/styles/scaling_units";
 
 export function getIconSafetyCategory(safetyCategory: string) {
     if (parseInt(safetyCategory) == 0) {
-        return <Ionicons name="shield-outline" color={'red'} size={20}/>
+        return <Ionicons name="shield-sharp" color={'red'} size={20}/>
     } else if (parseInt(safetyCategory) == 1) {
-        return <Ionicons name="shield-outline" color={'#FF4500'} size={20}/>
+        return <Ionicons name="shield-sharp" color={'#FF4500'} size={20}/>
     } else if (parseInt(safetyCategory) == 2) {
-        return <Ionicons name="shield-outline" color={'#FFA500'} size={20}/>
+        return <Ionicons name="shield-sharp" color={'#FFA500'} size={20}/>
     } else if (parseInt(safetyCategory) == 3) {
-        return <Ionicons name="shield-outline" color={'yellow'} size={20}/>
+        return <Ionicons name="shield-sharp" color={'yellow'} size={20}/>
     } else if (parseInt(safetyCategory) == 4) {
-        return <Ionicons name="shield-outline" color={'#9ACD32'} size={20}/>
+        return <Ionicons name="shield-sharp" color={'#9ACD32'} size={20}/>
     } else if (parseInt(safetyCategory) == 5) {
-        return <Ionicons name="shield-outline" color={'#9ACD32'} size={20}/>
+        return <Ionicons name="shield-sharp" color={'#9ACD32'} size={20}/>
     } else {
-        return <Ionicons name="shield-checkmark-outline" color={'#008000'} size={20}/>
+        return <Ionicons name="shield-checkmark-sharp" color={'#008000'} size={20}/>
     }
 }
 

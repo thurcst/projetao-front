@@ -70,7 +70,9 @@ export function ItemValidation( props: ItemValidationProps ) {
               <Modal.Header title="Entenda os níveis de segurança"/>
               <Modal.Body>
                 <View style={styles.evaluationView}>
-                  <Text style={styles.evaluationText}>Atenção: o nível de segurança não dispensa leitura do rótulo, que pode mudar sem aviso prévio.</Text>
+                  <Text style={styles.evaluationText}>
+                    <Text style={{fontWeight: "bold"}}>Atenção:</Text> o nível de segurança não dispensa leitura do rótulo, que pode mudar sem aviso prévio.
+                  </Text>
                 </View>
               </Modal.Body>
               <Modal.Footer>
