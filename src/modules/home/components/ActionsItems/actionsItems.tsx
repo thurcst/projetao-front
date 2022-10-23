@@ -65,7 +65,7 @@ export function ActionsItems( props: ActionsItemsProps ){
                 />
               </View>
               <View style={styles.foodNameAndIcons}>
-                <Text>
+                <Text style={styles.foodNameAndIcons}>
                 {item && item.productName}
                 </Text>
                 <View style={styles.areaButton} >
@@ -112,9 +112,11 @@ const styles = StyleSheet.create({
     top: verticalScale(5),
     left: moderateScale(5),
     borderBottomWidth: 0.5,
-    borderBottomColor: '#DADADA'
-    },
+    borderBottomColor: '#DADADA',
+    textTransform: 'capitalize',
+    marginBottom:4
+  },
   imageContainer: {
-      padding: 4,
+      padding: 4
   }
 });
