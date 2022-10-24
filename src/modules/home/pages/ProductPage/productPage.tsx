@@ -150,7 +150,7 @@ export function ProductPage(props) {
 
                 {/* Community */}
                 <View style={styles.itemDescriptionField}>
-                  <ItemCommunityPreview />
+                  <ItemCommunityPreview barCode={this.item.barCode}/>
                 </View>
               </View>
             </View>
