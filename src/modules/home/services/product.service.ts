@@ -1,5 +1,6 @@
 import axios from "axios";
-import { ProductResponse, ProductResponseFromList, TokensResponse } from "../types/responseInterfaces";
+import { Float } from "react-native/Libraries/Types/CodegenTypes";
+import { ProductResponse, ProductResponseFromList, Review, TokensResponse } from "../types/responseInterfaces";
 
 const instance = axios.create({
     baseURL: "https://semgluten.cin.ufpe.br"
@@ -109,6 +110,41 @@ export async function getProductsByName(productName: string) {
     } catch (error) {
         console.log("não achei a database " + error);
         return null;
+    }
+}
+
+export async function postReview(
+    barcode: number,
+    username: string,
+    grade: Float,
+    text: string): Promise<any> {
+    const axiosResponse = await instance.post("/api/token/refresh/", {
+        idProduct: barcode,
+        user: username,
+        grade: grade,
+        text: text,
+    });
+    return axiosResponse.data;
+}
+
+export async function getReviewsWithBarCode(barCode: number): Promise<Review[]> {
+    // url do get = <baseURL>/api/list/review/?search=<barCode>&review=idProduct
+    try {
+        const axiosResponse = await instance.get("/api/list/review/", {
+            params: {
+                search: barCode,
+                review: "idProduct"
+            }
+        });
+        return axiosResponse.data;
+    } catch (e) {
+        console.log(e);
+        return [{
+            idProduct: barCode,
+            user: "",
+            grade: 5,
+            text: "Avaliação não encontrada",
+        }]
     }
 }
 
