@@ -8,10 +8,10 @@ export function ItemReviewStars({ size, numStars }) {
   const [numDull, setNumDull] = useState(5 - numStars);
   return (
     <View style={styles.container}>
-      {(new Array(numBright)).fill(0).map( (value, i) =>
+      {new Array(Math.floor(numBright)).fill(0).map( (value, i) =>
         <Ionicons key={i} name='star' style={[styles.star(size), styles.brightStar]}/>
       )}
-      {(new Array(numDull)).fill(0).map( (value, i) =>
+      {new Array(Math.floor(numDull)).fill(0).map( (value, i) =>
         <Ionicons key={numBright+i} name='star' style={[styles.star(size), styles.dullStar]}/>
       )}
     </View>

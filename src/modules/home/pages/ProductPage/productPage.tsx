@@ -29,6 +29,8 @@ export function ProductPage(props) {
   let [item, setItem] = useState<ProductResponse>(null)
   let [found, setFound] = useState<boolean>(false)
   let [isLoading, setLoading] = useState<boolean>(true)
+  let [isError, setError] = useState<boolean>(false);
+  let [itemNameCardHeight, setItemNameCardHeight] = useState<number>(0);
 
   const { navigation, route } = props
 
@@ -41,27 +43,29 @@ export function ProductPage(props) {
     try {
       getProduct(route.params.item)
         .then((value) => {
-          setItem(value)
-          setFound(true)
-          setLoading(false)
-
           if (!value) {
-            ShowAlert('Não foi possível encontrar produtos para esta categoria')
+            setError(true);
+            // ShowAlert('Não foi possível encontrar produtos para esta categoria')
+          } else {
+            setItem(value)
+            setFound(true)
+            setLoading(false)
+            setError(false)
           }
         })
         .catch((e) => {
           console.log(e)
           isLoading = false
-          state.hasFound = false
+          setError(true);
         })
     } catch (e) {
       console.log(e)
-      state.isError = true
+      setError(true);
     }
   }
 
   const onLayout = (event) => {
-    state.itemNameCardHeight = event.nativeEvent.layout.height
+    setItemNameCardHeight(event.nativeEvent.layout.height)
   }
 
   useFocusEffect(
@@ -79,19 +83,15 @@ export function ProductPage(props) {
     }, [route.params.item])
   )
 
-  if (state.isError) {
+  if (isError) {
     ShowAlert('Houve um erro na procura do item, tente novamente.')
-  }
-
-  if (isLoading) {
+  } else if (isLoading) {
     return (
       <View>
         <ActivityIndicator size="large" style={styles.activityIndicator} />
       </View>
     )
-  }
-
-  if (found) {
+  } else if (found) {
     console.log('found: ', found)
     return (
       <View style={styles.container}>
@@ -118,7 +118,7 @@ export function ProductPage(props) {
             style={{
               marginTop: Math.max(
                 0,
-                state.itemNameCardHeight - verticalScale(35)
+                itemNameCardHeight - verticalScale(35)
               ),
             }}
           >
@@ -150,7 +150,7 @@ export function ProductPage(props) {
 
                 {/* Community */}
                 <View style={styles.itemDescriptionField}>
-                  <ItemCommunityPreview barCode={this.item.barCode}/>
+                  <ItemCommunityPreview barCode={item.barCode}/>
                 </View>
               </View>
             </View>
