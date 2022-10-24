@@ -1,7 +1,15 @@
+import React, { useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
-import React, { Component, useEffect, useState } from 'react'
+import { getProduct } from '../../services/product.service'
+import { ShowAlert } from '../../../../shared/pages/showAlert'
+import { ProductResponse } from '../../types/responseInterfaces'
+import { ItemName } from '../../components/ItemDescription/ItemName/itemName'
+import { scale, verticalScale } from '../../../../shared/styles/scaling_units'
+import { ItemValidation } from '../../components/ItemDescription/ItemValidation/itemValidation'
+import { ItemIngredients } from '../../components/ItemDescription/itemIngredients/itemIngredients'
+import { ItemCommunityPreview } from '../../components/ItemDescription/itemCommunity/itemCommunityPreview'
+
 import {
-  Text,
   View,
   Image,
   StyleSheet,
@@ -9,18 +17,6 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native'
-import { ShowAlert } from '../../../../shared/pages/showAlert'
-import { scale, verticalScale } from '../../../../shared/styles/scaling_units'
-import { ItemCommunityPreview } from '../../components/ItemDescription/itemCommunity/itemCommunityPreview'
-import { ItemIngredients } from '../../components/ItemDescription/itemIngredients/itemIngredients'
-import { ItemName } from '../../components/ItemDescription/ItemName/itemName'
-import { ItemNutritionalValue } from '../../components/ItemDescription/itemNutritionalValue/itemNutritionalValue'
-import { ItemPrice } from '../../components/ItemDescription/itemPrice/itemPrice'
-import { ItemValidation } from '../../components/ItemDescription/ItemValidation/itemValidation'
-import { ItemRecipes } from '../../components/ItemRecipes/itemRecipes'
-import { ItemSimilars } from '../../components/ItemSimilars/itemSimilars'
-import { getProduct } from '../../services/product.service'
-import { ProductResponse } from '../../types/responseInterfaces'
 
 interface ProductPageState {
   itemNameCardHeight: number
@@ -74,12 +70,11 @@ export function ProductPage(props) {
         fetchData(route.params.item)
         console.log(item + ' item')
       } else {
-        console.log('else')
         item = route.params.item
-        state = {
-          itemNameCardHeight: 0,
-          isError: false,
-        }
+        console.log(item)
+        setItem(item)
+        setFound(true)
+        setLoading(false)
       }
     }, [route.params.item])
   )
