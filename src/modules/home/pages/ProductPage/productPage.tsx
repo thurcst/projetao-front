@@ -18,99 +18,134 @@ interface ProductPageState {
   itemNameCardHeight: number,
   isLoading: boolean,
   isError: boolean,
+  hasFound: boolean,
 }
 
-const fetchData = async (productPage: ProductPage, barCode: number) => {
-  try {
-    productPage.item = await getProduct(barCode);
-  } catch (e) {
-    console.log(e);
-    productPage.setState({ isError: true });
-  } finally {
-    productPage.setState({ isLoading: false });
-  }
-};
-
-function FetchWithUseFocusEffect(productPage: ProductPage, barCode: number) {
-  let state;
-  useFocusEffect(
-    React.useCallback(() => {  
-      fetchData(productPage, barCode);
-      return () => {};
-    }, [barCode])
-  );
-}
 
 const { width, height } = Dimensions.get('window');
-export class ProductPage extends Component<{}, ProductPageState> {
-  navigation;
-  route;
-  item: ProductResponse;
 
-  constructor(props) {
-    super(props);
-    this.navigation = props.navigation;
-    this.route = props.route;
-    this.state = {
-      itemNameCardHeight: 0,
-      isLoading: true,
-      isError: false,
-    };
+// const fetchData = async (productPage: ProductPage, barCode: number) => {
+//   try {
+//     productPage.item = await getProduct(barCode);
+//   } catch (e) {
+//     console.log(e);
+//     productPage.setState({ isError: true });
+//   } finally {
+//     productPage.setState({ isLoading: false });
+//   }
+// };
 
-    const x = this.route.params.item;
-    if(typeof x == 'number') FetchWithUseFocusEffect(this, x);
-    else {
-      this.item = x;
-      this.state = {
-        itemNameCardHeight: 0,
-        isLoading: false,
-        isError: false,
-      };
-    } 
+// function FetchWithUseFocusEffect({productPage, barCode}) {
+//   useFocusEffect(
+//     React.useCallback(() => {
+//       if (typeof barCode == 'number') fetchData(productPage, barCode);
+//       else {
+//         productPage.item = barCode;
+//         productPage.state = {
+//           itemNameCardHeight: 0,
+//           isLoading: false,
+//           isError: false
+//         }
+//       }
+//       return undefined;
+//     }, [barCode])
+//   );
+//   return null;
+// }
+
+export function ProductPage(props) {
+  let [item, setItem] = useState<ProductResponse>(null);
+  const {navigation, route} = props;
+  let state: ProductPageState = {
+    itemNameCardHeight: 0,
+    isLoading: true,
+    isError: false,
+    hasFound: false,
   }
 
-  onLayout(event) {
-    this.setState({ itemNameCardHeight: event.nativeEvent.layout.height });
-  }
+  const fetchData = async (barCode: number) => {
+    try {
+      state.isLoading = true;
+      getProduct(route.params.item).then((value)=>{
+        setItem(value);
+        if(!value) {
+          ShowAlert("Não foi possível encontrar produtos para esta categoria");
+        }
+        state.isLoading = false;
+        state.hasFound = true;
+        setTimeout(() => {
+          state.isLoading = false;
+        }, 100);
 
-  
-
-  // async fetchData(barCode: number) {
-  //   try {
-  //     this.item = await getProduct(barCode);
-  //   } catch(e) {
-  //     console.log(e);
-  //     this.setState({ isError: true });
-  //   } finally {
-  //     this.setState({ isLoading: false });
-  //   }
-  // }
-
-  render() {
-    if (this.state.isLoading) {      
-      return <ActivityIndicator size="large" style={styles.activityIndicator}/>;
+        console.log("PP: " + value.picturePath)
+      }).catch((e)=>{
+        console.log(e);
+        setTimeout(() => {
+          state.isLoading = false;
+        }, 100);
+      })
+    } catch (e) {
+      console.log(e);
+      state.isError = true;
+      setTimeout(() => {
+        state.isLoading = false;
+      }, 100);
     }
-    if (this.state.isError || !this.item)  {
-        ShowAlert("Não foi possível encontrar produtos para esta categoria");
-    } else return (
+  };
+
+  const onLayout = (event) => {
+    state.itemNameCardHeight = event.nativeEvent.layout.height;
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+
+      if (typeof route.params.item == 'number') {
+        fetchData(route.params.item);
+        console.log(item + " item");
+      }
+      else {
+        console.log('else');
+        item = route.params.item;
+        state = {
+          itemNameCardHeight: 0,
+          isLoading: false,
+          isError: false,
+          hasFound: true
+        }
+      }
+    }, [route.params.item])
+  );
+  
+  if (state.isError)  {
+    ShowAlert("Houve um erro na procura do item, tente novamente.");
+  }
+
+  if (state.isLoading){
+    return (
+        <View>
+          <ActivityIndicator size="large" style={styles.activityIndicator}/>
+        </View>
+    )
+  } else if(state.hasFound) return (
       <View style={styles.container}>
         {/* Image */}
         <View style={styles.imageView}>
           <Image
-            source= {{uri: this.item.picturePath? this.item.picturePath : 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
+            source= {{uri: item.picturePath ? item.picturePath : 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
             style={styles.image}
           />
         </View>
 
         {/* Name */}
-        <View style={styles.itemName} onLayout={(event) => this.onLayout(event)}>
-          <ItemName productName={this.item.productName}/>
+        <View style={styles.itemName} onLayout={(event) => onLayout(event)}>
+          <ItemName productName={item.productName}/>
         </View>
 
         <ScrollView style={styles.itemDescriptionView}>
           
           {/* Margin for the item name */}
-          <View style={{marginTop: Math.max(0, this.state.itemNameCardHeight-verticalScale(35))}}>
+          <View style={{marginTop: Math.max(0, state.itemNameCardHeight-verticalScale(35))}}>
             <View style={styles.itemDescriptionFieldsContainer}>
 
               <View style={styles.column}>
@@ -118,9 +153,9 @@ export class ProductPage extends Component<{}, ProductPageState> {
                 {/* Validation */}
                 <View style={styles.itemDescriptionField}>
                   <ItemValidation
-                    navigationProp={this.navigation}
-                    safetyCategory={this.item && this.item.category}
-                    reportPath={this.item.idReport == 100? "" : "https://semgluten.cin.ufpe.br/media/reports/" + this.item.barCode + ".png"}
+                    navigationProp={navigation}
+                    safetyCategory={item && item.category}
+                    reportPath={item.idReport == 100? "" : "https://semgluten.cin.ufpe.br/media/reports/" + item.barCode + ".png"}
                   />
                 </View>
 
@@ -128,7 +163,7 @@ export class ProductPage extends Component<{}, ProductPageState> {
 
                 {/* Ingredients */}
                 <View style={styles.itemDescriptionField}>
-                  <ItemIngredients ingredients={this.item.productIngredients}/>
+                  <ItemIngredients ingredients={item.productIngredients}/>
                 </View>
 
                 <View style={styles.lineStyle} />
@@ -145,9 +180,122 @@ export class ProductPage extends Component<{}, ProductPageState> {
 
         </ScrollView>
       </View>
-    );
-  }
+  )
+
 }
+
+
+
+// export class ProductPage extends Component<{}, ProductPageState> {
+//   navigation;
+//   route;
+//   item: ProductResponse;
+
+//   constructor(props) {
+//     super(props);
+//     this.navigation = props.navigation;
+//     this.route = props.route;
+//     this.state = {
+//       itemNameCardHeight: 0,
+//       isLoading: true,
+//       isError: false,
+//     };
+
+//     // const x = this.route.params.item;
+//     // if(typeof x == 'number') fetchData(this, x);
+//     // else {
+//     //   this.item = x;
+//     //   this.state = {
+//     //     itemNameCardHeight: 0,
+//     //     isLoading: false,
+//     //     isError: false,
+//     //   };
+//     // } 
+//   }
+
+//   onLayout(event) {
+//     this.setState({ itemNameCardHeight: event.nativeEvent.layout.height });
+//   }
+
+  
+
+//   // async fetchData(barCode: number) {
+//   //   try {
+//   //     this.item = await getProduct(barCode);
+//   //   } catch(e) {
+//   //     console.log(e);
+//   //     this.setState({ isError: true });
+//   //   } finally {
+//   //     this.setState({ isLoading: false });
+//   //   }
+//   // }
+
+//   render() {
+//     if (this.state.isLoading) {      
+//       return (
+//         <View>
+//           <FetchWithUseFocusEffect productPage={this} barCode={this.route.params.item}/>
+//           <ActivityIndicator size="large" style={styles.activityIndicator}/>
+//         </View>)
+//     }
+//     if (this.state.isError || !this.item)  {
+//         ShowAlert("Não foi possível encontrar produtos para esta categoria");
+//     } else return (
+//       <View style={styles.container}>
+//         {/* Image */}
+//         <View style={styles.imageView}>
+//           <Image
+//             source= {{uri: this.item.picturePath? this.item.picturePath : 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
+//             style={styles.image}
+//           />
+//         </View>
+
+//         {/* Name */}
+//         <View style={styles.itemName} onLayout={(event) => this.onLayout(event)}>
+//           <ItemName productName={this.item.productName}/>
+//         </View>
+
+//         <ScrollView style={styles.itemDescriptionView}>
+          
+//           {/* Margin for the item name */}
+//           <View style={{marginTop: Math.max(0, this.state.itemNameCardHeight-verticalScale(35))}}>
+//             <View style={styles.itemDescriptionFieldsContainer}>
+
+//               <View style={styles.column}>
+
+//                 {/* Validation */}
+//                 <View style={styles.itemDescriptionField}>
+//                   <ItemValidation
+//                     navigationProp={this.navigation}
+//                     safetyCategory={this.item && this.item.category}
+//                     reportPath={this.item.idReport == 100? "" : "https://semgluten.cin.ufpe.br/media/reports/" + this.item.barCode + ".png"}
+//                   />
+//                 </View>
+
+//                 <View style={styles.lineStyle} />
+
+//                 {/* Ingredients */}
+//                 <View style={styles.itemDescriptionField}>
+//                   <ItemIngredients ingredients={this.item.productIngredients}/>
+//                 </View>
+
+//                 <View style={styles.lineStyle} />
+
+//                 {/* Community */}
+//                 <View style={styles.itemDescriptionField}>
+//                   <ItemCommunityPreview/>
+//                 </View>
+
+//               </View>
+
+//             </View>
+//           </View>
+
+//         </ScrollView>
+//       </View>
+//     );
+//   }
+// }
 
 
 const styles = StyleSheet.create({

@@ -319,11 +319,6 @@ type ParamList = {
               </View>
             </Modal.Container>
       </Modal>
-
-      
-      
-
-
             {getContent()}
         </View>
     )
