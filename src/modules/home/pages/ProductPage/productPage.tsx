@@ -24,77 +24,47 @@ import { ProductResponse } from '../../types/responseInterfaces'
 
 interface ProductPageState {
   itemNameCardHeight: number
-  isLoading: boolean
   isError: boolean
-  hasFound: boolean
 }
 
 const { width, height } = Dimensions.get('window')
 
-// const fetchData = async (productPage: ProductPage, barCode: number) => {
-//   try {
-//     productPage.item = await getProduct(barCode);
-//   } catch (e) {
-//     console.log(e);
-//     productPage.setState({ isError: true });
-//   } finally {
-//     productPage.setState({ isLoading: false });
-//   }
-// };
-
-// function FetchWithUseFocusEffect({productPage, barCode}) {
-//   useFocusEffect(
-//     React.useCallback(() => {
-//       if (typeof barCode == 'number') fetchData(productPage, barCode);
-//       else {
-//         productPage.item = barCode;
-//         productPage.state = {
-//           itemNameCardHeight: 0,
-//           isLoading: false,
-//           isError: false
-//         }
-//       }
-//       return undefined;
-//     }, [barCode])
-//   );
-//   return null;
-// }
-
 export function ProductPage(props) {
   let [item, setItem] = useState<ProductResponse>(null)
+  let [found, setFound] = useState<boolean>(false)
+  let [isLoading, setLoading] = useState<boolean>(true)
+
   const { navigation, route } = props
+
   let state: ProductPageState = {
     itemNameCardHeight: 0,
-    isLoading: false,
     isError: false,
-    hasFound: false,
   }
 
   const fetchData = async (barCode: number) => {
     try {
-      state.isLoading = true
+      isLoading = true
       getProduct(route.params.item)
         .then((value) => {
           setItem(value)
+          setFound(true)
+          setLoading(false)
+
           if (!value) {
             ShowAlert('Não foi possível encontrar produtos para esta categoria')
           }
-          state.isLoading = false
-          state.hasFound = true
+
+          console.log('state: ' + found)
           console.log('PP: ' + value.picturePath)
         })
         .catch((e) => {
           console.log(e)
-          setTimeout(() => {
-            state.isLoading = false
-          }, 100)
+          isLoading = false
+          state.hasFound = false
         })
     } catch (e) {
       console.log(e)
       state.isError = true
-      setTimeout(() => {
-        state.isLoading = false
-      }, 100)
     }
   }
 
@@ -112,9 +82,7 @@ export function ProductPage(props) {
         item = route.params.item
         state = {
           itemNameCardHeight: 0,
-          isLoading: false,
           isError: false,
-          hasFound: true,
         }
       }
     }, [route.params.item])
@@ -124,13 +92,16 @@ export function ProductPage(props) {
     ShowAlert('Houve um erro na procura do item, tente novamente.')
   }
 
-  if (state.isLoading) {
+  if (isLoading) {
     return (
       <View>
         <ActivityIndicator size="large" style={styles.activityIndicator} />
       </View>
     )
-  } else if (state.hasFound || !state.isLoading)
+  }
+
+  if (found) {
+    console.log('found: ', found)
     return (
       <View style={styles.container}>
         {/* Image */}
@@ -196,116 +167,8 @@ export function ProductPage(props) {
         </ScrollView>
       </View>
     )
+  }
 }
-
-// export class ProductPage extends Component<{}, ProductPageState> {
-//   navigation;
-//   route;
-//   item: ProductResponse;
-
-//   constructor(props) {
-//     super(props);
-//     this.navigation = props.navigation;
-//     this.route = props.route;
-//     this.state = {
-//       itemNameCardHeight: 0,
-//       isLoading: true,
-//       isError: false,
-//     };
-
-//     // const x = this.route.params.item;
-//     // if(typeof x == 'number') fetchData(this, x);
-//     // else {
-//     //   this.item = x;
-//     //   this.state = {
-//     //     itemNameCardHeight: 0,
-//     //     isLoading: false,
-//     //     isError: false,
-//     //   };
-//     // }
-//   }
-
-//   onLayout(event) {
-//     this.setState({ itemNameCardHeight: event.nativeEvent.layout.height });
-//   }
-
-//   // async fetchData(barCode: number) {
-//   //   try {
-//   //     this.item = await getProduct(barCode);
-//   //   } catch(e) {
-//   //     console.log(e);
-//   //     this.setState({ isError: true });
-//   //   } finally {
-//   //     this.setState({ isLoading: false });
-//   //   }
-//   // }
-
-//   render() {
-//     if (this.state.isLoading) {
-//       return (
-//         <View>
-//           <FetchWithUseFocusEffect productPage={this} barCode={this.route.params.item}/>
-//           <ActivityIndicator size="large" style={styles.activityIndicator}/>
-//         </View>)
-//     }
-//     if (this.state.isError || !this.item)  {
-//         ShowAlert("Não foi possível encontrar produtos para esta categoria");
-//     } else return (
-//       <View style={styles.container}>
-//         {/* Image */}
-//         <View style={styles.imageView}>
-//           <Image
-//             source= {{uri: this.item.picturePath? this.item.picturePath : 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
-//             style={styles.image}
-//           />
-//         </View>
-
-//         {/* Name */}
-//         <View style={styles.itemName} onLayout={(event) => this.onLayout(event)}>
-//           <ItemName productName={this.item.productName}/>
-//         </View>
-
-//         <ScrollView style={styles.itemDescriptionView}>
-
-//           {/* Margin for the item name */}
-//           <View style={{marginTop: Math.max(0, this.state.itemNameCardHeight-verticalScale(35))}}>
-//             <View style={styles.itemDescriptionFieldsContainer}>
-
-//               <View style={styles.column}>
-
-//                 {/* Validation */}
-//                 <View style={styles.itemDescriptionField}>
-//                   <ItemValidation
-//                     navigationProp={this.navigation}
-//                     safetyCategory={this.item && this.item.category}
-//                     reportPath={this.item.idReport == 100? "" : "https://semgluten.cin.ufpe.br/media/reports/" + this.item.barCode + ".png"}
-//                   />
-//                 </View>
-
-//                 <View style={styles.lineStyle} />
-
-//                 {/* Ingredients */}
-//                 <View style={styles.itemDescriptionField}>
-//                   <ItemIngredients ingredients={this.item.productIngredients}/>
-//                 </View>
-
-//                 <View style={styles.lineStyle} />
-
-//                 {/* Community */}
-//                 <View style={styles.itemDescriptionField}>
-//                   <ItemCommunityPreview/>
-//                 </View>
-
-//               </View>
-
-//             </View>
-//           </View>
-
-//         </ScrollView>
-//       </View>
-//     );
-//   }
-// }
 
 const styles = StyleSheet.create({
   container: {
