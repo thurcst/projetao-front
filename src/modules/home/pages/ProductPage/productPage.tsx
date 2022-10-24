@@ -112,7 +112,7 @@ export class ProductPage extends Component<{}, ProductPageState> {
 
                 {/* Community */}
                 <View style={styles.itemDescriptionField}>
-                  <ItemCommunityPreview/>
+                  <ItemCommunityPreview barCode={this.item.barCode}/>
                 </View>
 
               </View>

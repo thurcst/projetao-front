@@ -118,7 +118,7 @@ export async function postReview(
     username: string,
     grade: Float,
     text: string): Promise<any> {
-    const axiosResponse = await instance.post("/api/token/refresh/", {
+    const axiosResponse = await instance.post("/api/list/review/", {
         idProduct: barcode,
         user: username,
         grade: grade,
@@ -133,18 +133,14 @@ export async function getReviewsWithBarCode(barCode: number): Promise<Review[]> 
         const axiosResponse = await instance.get("/api/list/review/", {
             params: {
                 search: barCode,
-                review: "idProduct"
+                review: "idProduct__barCode"
             }
         });
+        console.log(axiosResponse.data);
         return axiosResponse.data;
     } catch (e) {
         console.log(e);
-        return [{
-            idProduct: barCode,
-            user: "",
-            grade: 5,
-            text: "Avaliação não encontrada",
-        }]
+        throw e;
     }
 }
 
