@@ -1,28 +1,35 @@
-import { useFocusEffect } from "@react-navigation/native";
-import React, { Component, useEffect, useState } from "react";
-import { Text, View, Image, StyleSheet, ActivityIndicator, ScrollView, Dimensions } from "react-native";
-import { ShowAlert } from "../../../../shared/pages/showAlert";
-import { scale, verticalScale } from "../../../../shared/styles/scaling_units";
-import { ItemCommunityPreview } from "../../components/ItemDescription/itemCommunity/itemCommunityPreview";
-import { ItemIngredients } from "../../components/ItemDescription/itemIngredients/itemIngredients";
-import { ItemName } from "../../components/ItemDescription/ItemName/itemName";
-import { ItemNutritionalValue } from "../../components/ItemDescription/itemNutritionalValue/itemNutritionalValue";
-import { ItemPrice } from "../../components/ItemDescription/itemPrice/itemPrice";
-import { ItemValidation } from "../../components/ItemDescription/ItemValidation/itemValidation";
-import { ItemRecipes } from "../../components/ItemRecipes/itemRecipes";
-import { ItemSimilars } from "../../components/ItemSimilars/itemSimilars";
-import { getProduct } from "../../services/product.service";
-import { ProductResponse } from "../../types/responseInterfaces";
+import { useFocusEffect } from '@react-navigation/native'
+import React, { Component, useEffect, useState } from 'react'
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  ActivityIndicator,
+  ScrollView,
+  Dimensions,
+} from 'react-native'
+import { ShowAlert } from '../../../../shared/pages/showAlert'
+import { scale, verticalScale } from '../../../../shared/styles/scaling_units'
+import { ItemCommunityPreview } from '../../components/ItemDescription/itemCommunity/itemCommunityPreview'
+import { ItemIngredients } from '../../components/ItemDescription/itemIngredients/itemIngredients'
+import { ItemName } from '../../components/ItemDescription/ItemName/itemName'
+import { ItemNutritionalValue } from '../../components/ItemDescription/itemNutritionalValue/itemNutritionalValue'
+import { ItemPrice } from '../../components/ItemDescription/itemPrice/itemPrice'
+import { ItemValidation } from '../../components/ItemDescription/ItemValidation/itemValidation'
+import { ItemRecipes } from '../../components/ItemRecipes/itemRecipes'
+import { ItemSimilars } from '../../components/ItemSimilars/itemSimilars'
+import { getProduct } from '../../services/product.service'
+import { ProductResponse } from '../../types/responseInterfaces'
 
 interface ProductPageState {
-  itemNameCardHeight: number,
-  isLoading: boolean,
-  isError: boolean,
-  hasFound: boolean,
+  itemNameCardHeight: number
+  isLoading: boolean
+  isError: boolean
+  hasFound: boolean
 }
 
-
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window')
 
 // const fetchData = async (productPage: ProductPage, barCode: number) => {
 //   try {
@@ -54,108 +61,119 @@ const { width, height } = Dimensions.get('window');
 // }
 
 export function ProductPage(props) {
-  let [item, setItem] = useState<ProductResponse>(null);
-  const {navigation, route} = props;
+  let [item, setItem] = useState<ProductResponse>(null)
+  const { navigation, route } = props
   let state: ProductPageState = {
     itemNameCardHeight: 0,
-    isLoading: true,
+    isLoading: false,
     isError: false,
     hasFound: false,
   }
 
   const fetchData = async (barCode: number) => {
     try {
-      state.isLoading = true;
-      getProduct(route.params.item).then((value)=>{
-        setItem(value);
-        if(!value) {
-          ShowAlert("Não foi possível encontrar produtos para esta categoria");
-        }
-        state.isLoading = false;
-        state.hasFound = true;
-        setTimeout(() => {
-          state.isLoading = false;
-        }, 100);
-
-        console.log("PP: " + value.picturePath)
-      }).catch((e)=>{
-        console.log(e);
-        setTimeout(() => {
-          state.isLoading = false;
-        }, 100);
-      })
+      state.isLoading = true
+      getProduct(route.params.item)
+        .then((value) => {
+          setItem(value)
+          if (!value) {
+            ShowAlert('Não foi possível encontrar produtos para esta categoria')
+          }
+          state.isLoading = false
+          state.hasFound = true
+          console.log('PP: ' + value.picturePath)
+        })
+        .catch((e) => {
+          console.log(e)
+          setTimeout(() => {
+            state.isLoading = false
+          }, 100)
+        })
     } catch (e) {
-      console.log(e);
-      state.isError = true;
+      console.log(e)
+      state.isError = true
       setTimeout(() => {
-        state.isLoading = false;
-      }, 100);
+        state.isLoading = false
+      }, 100)
     }
-  };
+  }
 
   const onLayout = (event) => {
-    state.itemNameCardHeight = event.nativeEvent.layout.height;
+    state.itemNameCardHeight = event.nativeEvent.layout.height
   }
 
   useFocusEffect(
     React.useCallback(() => {
-
       if (typeof route.params.item == 'number') {
-        fetchData(route.params.item);
-        console.log(item + " item");
-      }
-      else {
-        console.log('else');
-        item = route.params.item;
+        fetchData(route.params.item)
+        console.log(item + ' item')
+      } else {
+        console.log('else')
+        item = route.params.item
         state = {
           itemNameCardHeight: 0,
           isLoading: false,
           isError: false,
-          hasFound: true
+          hasFound: true,
         }
       }
     }, [route.params.item])
-  );
-  
-  if (state.isError)  {
-    ShowAlert("Houve um erro na procura do item, tente novamente.");
+  )
+
+  if (state.isError) {
+    ShowAlert('Houve um erro na procura do item, tente novamente.')
   }
 
-  if (state.isLoading){
+  if (state.isLoading) {
     return (
-        <View>
-          <ActivityIndicator size="large" style={styles.activityIndicator}/>
-        </View>
+      <View>
+        <ActivityIndicator size="large" style={styles.activityIndicator} />
+      </View>
     )
-  } else if(state.hasFound) return (
+  } else if (state.hasFound || !state.isLoading)
+    return (
       <View style={styles.container}>
         {/* Image */}
         <View style={styles.imageView}>
           <Image
-            source= {{uri: item.picturePath ? item.picturePath : 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
+            source={{
+              uri: item.picturePath
+                ? item.picturePath
+                : 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png',
+            }}
             style={styles.image}
           />
         </View>
 
         {/* Name */}
         <View style={styles.itemName} onLayout={(event) => onLayout(event)}>
-          <ItemName productName={item.productName}/>
+          <ItemName productName={item.productName} />
         </View>
 
         <ScrollView style={styles.itemDescriptionView}>
-          
           {/* Margin for the item name */}
-          <View style={{marginTop: Math.max(0, state.itemNameCardHeight-verticalScale(35))}}>
+          <View
+            style={{
+              marginTop: Math.max(
+                0,
+                state.itemNameCardHeight - verticalScale(35)
+              ),
+            }}
+          >
             <View style={styles.itemDescriptionFieldsContainer}>
-
               <View style={styles.column}>
-
                 {/* Validation */}
                 <View style={styles.itemDescriptionField}>
                   <ItemValidation
                     navigationProp={navigation}
                     safetyCategory={item && item.category}
-                    reportPath={item.idReport == 100? "" : "https://semgluten.cin.ufpe.br/media/reports/" + item.barCode + ".png"}
+                    reportPath={
+                      item.idReport == 100
+                        ? ''
+                        : 'https://semgluten.cin.ufpe.br/media/reports/' +
+                          item.barCode +
+                          '.png'
+                    }
                   />
                 </View>
 
@@ -163,28 +181,22 @@ export function ProductPage(props) {
 
                 {/* Ingredients */}
                 <View style={styles.itemDescriptionField}>
-                  <ItemIngredients ingredients={item.productIngredients}/>
+                  <ItemIngredients ingredients={item.productIngredients} />
                 </View>
 
                 <View style={styles.lineStyle} />
 
                 {/* Community */}
                 <View style={styles.itemDescriptionField}>
-                  <ItemCommunityPreview/>
+                  <ItemCommunityPreview />
                 </View>
-
               </View>
-
             </View>
           </View>
-
         </ScrollView>
       </View>
-  )
-
+    )
 }
-
-
 
 // export class ProductPage extends Component<{}, ProductPageState> {
 //   navigation;
@@ -210,14 +222,12 @@ export function ProductPage(props) {
 //     //     isLoading: false,
 //     //     isError: false,
 //     //   };
-//     // } 
+//     // }
 //   }
 
 //   onLayout(event) {
 //     this.setState({ itemNameCardHeight: event.nativeEvent.layout.height });
 //   }
-
-  
 
 //   // async fetchData(barCode: number) {
 //   //   try {
@@ -231,7 +241,7 @@ export function ProductPage(props) {
 //   // }
 
 //   render() {
-//     if (this.state.isLoading) {      
+//     if (this.state.isLoading) {
 //       return (
 //         <View>
 //           <FetchWithUseFocusEffect productPage={this} barCode={this.route.params.item}/>
@@ -256,7 +266,7 @@ export function ProductPage(props) {
 //         </View>
 
 //         <ScrollView style={styles.itemDescriptionView}>
-          
+
 //           {/* Margin for the item name */}
 //           <View style={{marginTop: Math.max(0, this.state.itemNameCardHeight-verticalScale(35))}}>
 //             <View style={styles.itemDescriptionFieldsContainer}>
@@ -297,7 +307,6 @@ export function ProductPage(props) {
 //   }
 // }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -311,14 +320,14 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-    resizeMode: 'center'
+    resizeMode: 'center',
   },
   itemName: {
     position: 'absolute',
     elevation: 2,
     zIndex: 2,
     top: scale(170),
-    paddingHorizontal: scale(25)
+    paddingHorizontal: scale(25),
   },
   itemDescriptionView: {
     backgroundColor: 'white',
@@ -326,7 +335,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: scale(25),
     flex: 1,
     paddingVertical: verticalScale(8),
-    paddingHorizontal: scale(8)
+    paddingHorizontal: scale(8),
   },
   itemDescriptionFieldsContainer: {
     flex: 1,
@@ -334,20 +343,20 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'flex-start',
     marginRight: scale(10),
-    marginLeft: scale(18)
+    marginLeft: scale(18),
   },
   column: {
-    width: '100%'
+    width: '100%',
   },
   itemDescriptionField: {
-    marginBottom: scale(20)
+    marginBottom: scale(20),
   },
   activityIndicator: {
     marginTop: width / 2,
   },
-  lineStyle:{
+  lineStyle: {
     borderWidth: 0.25,
     borderColor: 'rgba(0, 0, 0, 0.1)',
     marginBottom: verticalScale(15),
-  }
+  },
 })
