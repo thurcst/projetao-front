@@ -43,7 +43,6 @@ export function ProductPage(props) {
 
   const fetchData = async (barCode: number) => {
     try {
-      isLoading = true
       getProduct(route.params.item)
         .then((value) => {
           setItem(value)
@@ -53,9 +52,6 @@ export function ProductPage(props) {
           if (!value) {
             ShowAlert('Não foi possível encontrar produtos para esta categoria')
           }
-
-          console.log('state: ' + found)
-          console.log('PP: ' + value.picturePath)
         })
         .catch((e) => {
           console.log(e)
