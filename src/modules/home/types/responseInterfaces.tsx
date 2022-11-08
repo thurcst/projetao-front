@@ -1,3 +1,6 @@
+import { StringifyOptions } from "querystring"
+import { Float } from "react-native/Libraries/Types/CodegenTypes"
+
 // returned by getProduct
 export interface ProductResponse {
   barCode: number,
@@ -33,4 +36,12 @@ export interface ProductResponseFromList {
 export interface TokensResponse {
   access: string,
   refresh: string
+}
+
+export interface Review {
+  idReview?: number,
+  idProduct: number,
+  user: string,
+  text: string,
+  grade: Float,
 }

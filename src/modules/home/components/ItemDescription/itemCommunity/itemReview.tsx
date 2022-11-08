@@ -1,69 +1,89 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, SafeAreaView } from "react-native";
-import { scale } from "../../../../../shared/styles/scaling_units";
+import { scale, verticalScale } from "../../../../../shared/styles/scaling_units";
 import { ItemReviewStars } from "./itemReviewStars";
+import { Ionicons } from '@expo/vector-icons';
+import { Review } from "../../../types/responseInterfaces";
 
-export function ItemReview( props ) {
+const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+const clampGrade = grade => clamp(grade, 1, 5);
+
+export function ItemReview( { review } ) {
   return (
     <View style={styles.container}>
       
       {/* Profile picture */}
-      <Image
-        source={{uri: 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png'}}
-        style={styles.image}
-      />
+      <View style={styles.imageContainer}>
+        <Ionicons name='person-circle' size={60} color='green'/>
+      </View>
 
       {/* Review info */}
       <View style={styles.info}>
 
         {/* Header */}
-        <View style={styles.header}>
+        <View style={styles.headerContainer}>
           {/* Reviewer name */}
-          <Text style={styles.reviewerName}>Cleybson</Text>
+          <View style={styles.reviewerNameContainer}>
+            <Text style={styles.reviewerName}>{review.user}</Text>
+          </View>
           {/* Rating */}
-          <ItemReviewStars size={0.5} numStars={4}/>
+          <View style={styles.reviewerRatingContainer}>
+            <ItemReviewStars size={0.525} numStars={clampGrade(Math.round(review.grade))}/>
+          </View>
         </View>
-
+        
         {/* Message */}
         <View style={styles.reviewerMessageContainer}>
-          <Text style={styles.reviewerMessage}>O sucessor moderno do pão. Adiciona forte suporte a orientação...</Text>
+          <Text style={styles.reviewerMessage}>
+            {review.text}
+          </Text>
         </View>
 
       </View>
+
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    flex: 1,
   },
-  image: {
-    aspectRatio: 1.3,
-    width: '40%',
-    borderRadius: 10,
-    marginRight: scale(8)
+  imageContainer: {
+    marginRight: scale(10),
+    flex: 0.2,
   },
   info: {
     flexDirection: 'column',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    flex: 0.8,
   },
-  header: {
+  headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    flex: 1,
+  },
+  reviewerNameContainer: {
+    alignItems: 'flex-start',
+    flex: 1,
   },
   reviewerName: {
     fontWeight: 'bold',
-    fontSize: 10
+    fontSize: scale(12),
+    //flex: 1,
+  },
+  reviewerRatingContainer: {
+    alignItems: 'flex-end',
+    flex: 1,
   },
   reviewerMessageContainer: {
-    flexGrow: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    flex:1
   },
   reviewerMessage: {
-    fontSize: 8,
+    fontSize: scale(12),
     flex: 1
   }
 });
