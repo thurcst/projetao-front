@@ -1,4 +1,4 @@
-[
+const reviewsDB = [
     {
         "idproductid": 7897942100096,
         "user": "Eduardo",
@@ -5999,4 +5999,6 @@
         "grade": "3.74",
         "text": "Recomendo fortemente"
     }
-]
+];
+
+export default reviewsDB;

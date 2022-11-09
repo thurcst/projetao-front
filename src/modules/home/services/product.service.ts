@@ -2,6 +2,7 @@ import axios from "axios";
 import { Float } from "react-native/Libraries/Types/CodegenTypes";
 import { ProductResponse, ProductResponseFromList, Review, TokensResponse } from "../types/responseInterfaces";
 import database from "../../../../database";
+import reviewsDB from "../../../../reviews";
 
 const instance = axios.create({
     baseURL: "https://semgluten.cin.ufpe.br"
@@ -198,20 +199,37 @@ export async function postReview(
 }
 
 export async function getReviewsWithBarCode(barCode: number): Promise<Review[]> {
-    // url do get = <baseURL>/api/list/review/?search=<barCode>&review=idProduct
     try {
-        const axiosResponse = await instance.get("/api/list/review/", {
-            params: {
-                search: barCode,
-                review: "idProduct__barCode"
+        let response = reviewsDB.filter(item => item.idproductid == barCode);
+        let listResponses = new Array();
+        response.forEach(product => listResponses.push(
+            {
+                "idProduct": product.idproductid,
+                "user": product.user,
+                "text": product.text,
+                "grade": parseFloat(product.grade)
             }
-        });
-        console.log(axiosResponse.data);
-        return axiosResponse.data;
-    } catch (e) {
-        console.log(e);
-        throw e;
+        ));
+        return listResponses;
+    } catch (error) {
+        console.log(error);
+        return null;
     }
+
+    // url do get = <baseURL>/api/list/review/?search=<barCode>&review=idProduct
+    // try {
+    //     const axiosResponse = await instance.get("/api/list/review/", {
+    //         params: {
+    //             search: barCode,
+    //             review: "idProduct__barCode"
+    //         }
+    //     });
+    //     console.log(axiosResponse.data);
+    //     return axiosResponse.data;
+    // } catch (e) {
+    //     console.log(e);
+    //     throw e;
+    // }
 }
 
 export async function getAuthorizationTokens(): Promise<TokensResponse> {
