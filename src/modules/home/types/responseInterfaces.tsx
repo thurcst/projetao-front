@@ -7,30 +7,30 @@ export interface ProductResponse {
   productName: string,
   productCategory: string,
   picturePath: string,
-  productIngredients: string,
-  createdAt: string,
-  idBrand: number,
+  productIngredients: string | null,
+  // createdAt: string | null,
+  idBrand: string,
   idSafety: number,
-  idReport: number,
-  brandName: string,
-  contact: string,
-  logoPath: string,
-  category: string,
-  description: string,
+  idReport: string,
+  // brandName: string | null,
+  // contact: string | null,
+  // logoPath: string | null,
+  // category: string | null,
+  // description: string | null,
 }
 
 export interface ProductResponseFromList {
   barCode: number,
-  brandName: string,
-  safetyCategory: string,
+  // brandName: string,
+  // safetyCategory: string,
   productName: string,
   productCategory: string,
   picturePath: string,
   productIngredients: string,
-  createdAt: string,
-  idBrand: number,
+  // createdAt: string,
+  idBrand: string,
   idSafety: number,
-  idReport: number
+  idReport: string
 }
 
 export interface TokensResponse {

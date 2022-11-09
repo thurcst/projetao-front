@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Float } from "react-native/Libraries/Types/CodegenTypes";
 import { ProductResponse, ProductResponseFromList, Review, TokensResponse } from "../types/responseInterfaces";
+import database from "../../../../database";
 
 const instance = axios.create({
     baseURL: "https://semgluten.cin.ufpe.br"
@@ -41,40 +42,60 @@ instance.interceptors.response.use(
     }
 );
 
-async function getMockedProduct(): Promise<ProductResponse> {
-    return {
-        "barCode": 49753257,
-        "productName": "MOLHO TONKETSW",
-        "productCategory": "MOLHOS E CONDIMENTOS",
-        "picturePath": "http://semgluten.cin.ufpe.br/media/media/picture/49753257.png",
-        "productIngredients": "",
-        "createdAt": "2022-10-21T14:41:07Z",
-        "idBrand": 70,
-        "idSafety": 1,
-        "idReport": 1,
-        "brandName": "BULL-DOG",
-        "contact": null,
-        "logoPath": null,
-        "category": "0",
-        "description": "RÓTULO COM GLÚTEN OU PODE CONTER GLÚTEN",
-    }
-}
+// async function getMockedProduct(): Promise<ProductResponse> {
+//     return {
+//         "barCode": 49753257,
+//         "productName": "MOLHO TONKETSW",
+//         "productCategory": "MOLHOS E CONDIMENTOS",
+//         "picturePath": "http://semgluten.cin.ufpe.br/media/media/picture/49753257.png",
+//         "productIngredients": "",
+//         // "createdAt": "2022-10-21T14:41:07Z",
+//         "idBrand": '70',
+//         "idSafety": 1,
+//         // "idReport": 1,
+//         // "brandName": "BULL-DOG",
+//         // "contact": null,
+//         // "logoPath": null,
+//         // "category": "0",
+//         // "description": "RÓTULO COM GLÚTEN OU PODE CONTER GLÚTEN",
+//     }
+// }
 
 export async function getProduct(productId: number): Promise<ProductResponse> {
     // set to true if the server is offline
-    const MOCKED = false;
-    if(MOCKED) return getMockedProduct();
-
+    // const MOCKED = false;
+    // if(MOCKED) return getMockedProduct();
+    
     try {
-        const axiosResponse = await instance.get("/api/detail/productInfos/" + productId.toString() + "/");
-        //const axiosSafetyData = await instance.get("/api/detail/safety/" + axiosResponse.data.idSafety.toString() + "/");
-        //axiosResponse.data["safetyCategory"] = axiosSafetyData.data.description;
-        axiosResponse.data.picturePath = "https://semgluten.cin.ufpe.br/media/picture/" + productId + ".png"
-        return axiosResponse.data;
+        let response = database.find(item => item.barcode == productId);
+        console.log(response);
+        let responseJson = {
+            "barCode": response.barcode,
+            "productName": response.productname,
+            "productCategory": response.productcategory,
+            "picturePath": response.picturepath,
+            "productIngredients": response.productingredients,
+            "idBrand": response.idbrandid,
+            "idSafety": response.idsafetyid,
+            "idReport": response.idreportid
+        };
+        console.log(responseJson);
+        return responseJson;
     } catch (error) {
-        console.log("não achei a database " + error);
+        console.log(error);
         return null;
     }
+
+    // try {
+    //     const axiosResponse = await instance.get("/api/detail/productInfos/" + productId.toString() + "/");
+    //     //const axiosSafetyData = await instance.get("/api/detail/safety/" + axiosResponse.data.idSafety.toString() + "/");
+    //     //axiosResponse.data["safetyCategory"] = axiosSafetyData.data.description;
+    //     axiosResponse.data.picturePath = "https://semgluten.cin.ufpe.br/media/picture/" + productId + ".png"
+    //     return axiosResponse.data;
+    // } catch (error) {
+    //     console.log("não achei a database " + error);
+    //     return null;
+    // }
 }
 
 export async function getProductsByCategory(productCategory: string): Promise<ProductResponseFromList[]> {
@@ -82,35 +103,84 @@ export async function getProductsByCategory(productCategory: string): Promise<Pr
     var params = new URLSearchParams();
     params.append("search", productCategoryArray[0]);
     params.append("product", "productCategory");
+
     try {
-        const axiosResponse = await instance.get("/api/list/product/", {
-            params: {
-                search: productCategoryArray[0],
-                product: "productCategory"
+        let response = database.filter(item => item.productcategory.split(" ")[0].toLowerCase() == productCategoryArray[0].toLowerCase());
+        let listResponses = new Array();
+        response.forEach(product => listResponses.push(
+            {
+                "barCode": product.barcode,
+                "productName": product.productname,
+                "productCategory": product.productcategory,
+                "picturePath": product.picturepath,
+                "productIngredients": product.productingredients,
+                "idBrand": product.idbrandid,
+                "idSafety": product.idsafetyid,
+                "idReport": product.idreportid
             }
-        });
-        // url do get = baseURL + "/api/list/product/?search=" + productCategoryArray[0] + "&product=productCategory"
-        return axiosResponse.data;
+
+        ));
+        console.log(listResponses);
+        return listResponses;
     } catch (error) {
         console.log("não achei a database " + error);
         return null;
     }
+
+    // try {
+    //     const axiosResponse = await instance.get("/api/list/product/", {
+    //         params: {
+    //             search: productCategoryArray[0],
+    //             product: "productCategory"
+    //         }
+    //     });
+    //     // url do get = baseURL + "/api/list/product/?search=" + productCategoryArray[0] + "&product=productCategory"
+    //     return axiosResponse.data;
+    // } catch (error) {
+    //     console.log("não achei a database " + error);
+    //     return null;
+    // }
 }
 
 export async function getProductsByName(productName: string) {
+    const productNameArray = productName.split(" ");
     try {
-        const axiosResponse = await instance.get("/api/list/product/", {
-            params: {
-                search: productName,
-                product: "productName"
+        let response = database.filter(item => item.productname.split(" ")[0].toLowerCase() == productNameArray[0].toLowerCase());
+        let listResponses = new Array();
+        response.forEach(product => listResponses.push(
+            {
+                "barCode": product.barcode,
+                "productName": product.productname,
+                "productCategory": product.productcategory,
+                "picturePath": product.picturepath,
+                "productIngredients": product.productingredients,
+                "idBrand": product.idbrandid,
+                "idSafety": product.idsafetyid,
+                "idReport": product.idreportid
             }
-        });
-        // url do get = baseURL + "/api/list/product/?search=" + finalStringToSearch + "&product=productName"
-        return axiosResponse.data;
+
+        ));
+        console.log(listResponses);
+        return listResponses;
     } catch (error) {
         console.log("não achei a database " + error);
         return null;
     }
+
+
+    // try {
+    //     const axiosResponse = await instance.get("/api/list/product/", {
+    //         params: {
+    //             search: productName,
+    //             product: "productName"
+    //         }
+    //     });
+    //     // url do get = baseURL + "/api/list/product/?search=" + finalStringToSearch + "&product=productName"
+    //     return axiosResponse.data;
+    // } catch (error) {
+    //     console.log("não achei a database " + error);
+    //     return null;
+    // }
 }
 
 export async function postReview(

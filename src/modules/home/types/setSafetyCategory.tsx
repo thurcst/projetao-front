@@ -21,12 +21,20 @@ export function getIconSafetyCategory(safetyCategory: string) {
 }
 
 export function SetSafetyCategory(safetyCategory: string) {
+    let safetyCategoryMinus1 = (parseInt(safetyCategory) - 1).toString();
 
+    function getSafetyLevel(safetyCategory: string) {
+        if (safetyCategory === '6') {
+            return 'Star Gold';
+        } else {
+            return safetyCategory;
+        }
+    }
     return (
         <View style={styles.itemValidationIconText}>
-            {getIconSafetyCategory(safetyCategory)}
+            {getIconSafetyCategory(safetyCategoryMinus1)}
             {/* gambiarra pra capitalizar a primeira letra */}     
-            <Text style={styles.text}> Nível de segurança: {safetyCategory.charAt(0) + safetyCategory.slice(1).toLowerCase() } </Text>
+            <Text style={styles.text}> Nível de segurança: {getSafetyLevel(safetyCategoryMinus1)} </Text>
         </View>
     );
 }

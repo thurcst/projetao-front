@@ -41,6 +41,7 @@ export function ProductPage(props) {
 
   const fetchData = async (barCode: number) => {
     try {
+      console.log("PRODUCT PAGE: " + route.params.item);
       getProduct(route.params.item)
         .then((value) => {
           if (!value) {
@@ -92,7 +93,8 @@ export function ProductPage(props) {
       </View>
     )
   } else if (found) {
-    console.log('found: ', found)
+    console.log('idReport: ', item.idReport);
+    // let hasReport = fs.exists(path);
     return (
       <View style={styles.container}>
         {/* Image */}
@@ -128,13 +130,9 @@ export function ProductPage(props) {
                 <View style={styles.itemDescriptionField}>
                   <ItemValidation
                     navigationProp={navigation}
-                    safetyCategory={item && item.category}
+                    safetyCategory={item && item.idSafety.toString()}
                     reportPath={
-                      item.idReport == 100
-                        ? ''
-                        : 'https://semgluten.cin.ufpe.br/media/reports/' +
-                          item.barCode +
-                          '.png'
+                      item.idReport.toString() === "100" ? '' : item.barCode.toString()
                     }
                   />
                 </View>
