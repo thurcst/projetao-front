@@ -28,100 +28,83 @@ export function ItemValidation( props: ItemValidationProps ) {
   };
 
   const getLaudoPath = (laudoId: string) => {
-    switch (laudoId) {
-      case '1':
-        require(laudosImages.find(item => item.name === '1').path);
-        break;
-      case '2':
-        require(laudosImages.find(item => item.name === '2').path);
-        break;
-      case '3':
-        require(laudosImages.find(item => item.name === '3').path);
-        break;
-      case '4':
-        require(laudosImages.find(item => item.name === '4').path);
-        break;
-      case '5':
-        require(laudosImages.find(item => item.name === '5').path);
-        break;
-      case '6':
-        require(laudosImages.find(item => item.name === '6').path);
-        break;
-      case '7':
-        require(laudosImages.find(item => item.name === '7').path);
-        break;
-      case '8':
-        require(laudosImages.find(item => item.name === '8').path);
-        break;
-      case '9':
-        require(laudosImages.find(item => item.name === '9').path);
-        break;
-      case '10':
-        require(laudosImages.find(item => item.name === '10').path);
-        break;
-      case '11':
-        require(laudosImages.find(item => item.name === '11').path);
-        break;
-      case '12':
-        require(laudosImages.find(item => item.name === '12').path);
-        break;
-      case '13':
-        require(laudosImages.find(item => item.name === '13').path);
-        break;
-      case '14':
-        require(laudosImages.find(item => item.name === '14').path);
-        break;
-      case '15':
-        require(laudosImages.find(item => item.name === '15').path);
-        break;
-      case '16':
-        require(laudosImages.find(item => item.name === '16').path);
-        break;
-      case '17':
-        require(laudosImages.find(item => item.name === '17').path);
-        break;
-      case '606529582999':
-        require(laudosImages.find(item => item.name === '606529582999').path);
-        break;
-      case '742832823340':
-        require(laudosImages.find(item => item.name === '742832823340').path);
-        break;
-      case '742832823357':
-        require(laudosImages.find(item => item.name === '742832823357').path);
-        break;
-      case '742832823364':
-        require(laudosImages.find(item => item.name === '742832823364').path);
-        break;
-      case '742832823371':
-        require(laudosImages.find(item => item.name === '742832823371').path);
-        break;
-      case '751320841056':
-        require(laudosImages.find(item => item.name === '751320841056').path);
-        break;
-      case '751320841070':
-        require(laudosImages.find(item => item.name === '751320841070').path);
-        break;
-      case '7898951177277':
-        require(laudosImages.find(item => item.name === '7898951177277').path);
-        break;
-      case '7898961803005':
-        require(laudosImages.find(item => item.name === '7898961803005').path);
-        break;
-      case '7898961803067':
-        require(laudosImages.find(item => item.name === '7898961803067').path);
-        break;
-      case '7898961803074':
-        require(laudosImages.find(item => item.name === '7898961803074').path);
-        break;
-      case '7898961803159':
-        require(laudosImages.find(item => item.name === '7898961803159').path);
-        break;
-      case '7898961803166':
-        require(laudosImages.find(item => item.name === '7898961803166').path);
-        break;  
-      default:
-        require(laudosImages.find(item => item.name === '7898961803166').path);
-        break;
+    if ('1') {
+      return (<Image source={require('../../../../../Images/Reports/img/1.png')} style={[styles.image]}/>)
+    }
+    if ('2') {
+      return (<Image source={require('../../../../../Images/Reports/img/2.png')} style={[styles.image]}/>)
+    }
+    if ('3') {
+      return (<Image source={require('../../../../../Images/Reports/img/3.png')} style={[styles.image]}/>)
+    }
+    if ('4') {
+      return (<Image source={require('../../../../../Images/Reports/img/4.png')} style={[styles.image]}/>)
+    }
+    if ('5') {
+      return (<Image source={require('../../../../../Images/Reports/img/5.png')} style={[styles.image]}/>)
+    }
+    if ('6') {
+      return (<Image source={require('../../../../../Images/Reports/img/6.png')} style={[styles.image]}/>)
+    }
+    if ('7') {
+      return (<Image source={require('../../../../../Images/Reports/img/7.png')} style={[styles.image]}/>)
+    }
+    if ('8') {
+      return (<Image source={require('../../../../../Images/Reports/img/8.png')} style={[styles.image]}/>)
+    }
+    if ('10') {
+      return (<Image source={require('../../../../../Images/Reports/img/10.png')} style={[styles.image]}/>)
+    }
+    if ('14') {
+      return (<Image source={require('../../../../../Images/Reports/img/14.png')} style={[styles.image]}/>)
+    }
+    if ('15') {
+      return (<Image source={require('../../../../../Images/Reports/img/15.png')} style={[styles.image]}/>)
+    }
+    if ('16') {
+      return (<Image source={require('../../../../../Images/Reports/img/16.png')} style={[styles.image]}/>)
+    }
+    if ('17') {
+      return (<Image source={require('../../../../../Images/Reports/img/17.png')} style={[styles.image]}/>)
+    }
+    if ('606529582999') {
+      return (<Image source={require('../../../../../Images/Reports/img/606529582999.png')} style={[styles.image]}/>)
+    }
+    if ('742832823340') {
+      return (<Image source={require('../../../../../Images/Reports/img/742832823340.png')} style={[styles.image]}/>)
+    }
+    if ('742832823357') {
+      return (<Image source={require('../../../../../Images/Reports/img/742832823357.png')} style={[styles.image]}/>)
+    }
+    if ('742832823364') {
+      return (<Image source={require('../../../../../Images/Reports/img/742832823364.png')} style={[styles.image]}/>)
+    }
+    if ('742832823371') {
+      return (<Image source={require('../../../../../Images/Reports/img/742832823371.png')} style={[styles.image]}/>)
+    }
+    if ('751320841056') {
+      return (<Image source={require('../../../../../Images/Reports/img/751320841056.png')} style={[styles.image]}/>)
+    }
+    if ('751320841070') {
+      return (<Image source={require('../../../../../Images/Reports/img/751320841070.png')} style={[styles.image]}/>)
+    }
+    if ('7898951177277') {
+      return (<Image source={require('../../../../../Images/Reports/img/7898951177277.png')} style={[styles.image]}/>)
+    }
+    if ('7898961803005') {
+      return (<Image source={require('../../../../../Images/Reports/img/7898961803005.png')} style={[styles.image]}/>)
+    }
+    if ('7898961803067') {
+      return (<Image source={require('../../../../../Images/Reports/img/7898961803067.png')} style={[styles.image]}/>)
+    }
+    if ('7898961803074') {
+      return (<Image source={require('../../../../../Images/Reports/img/7898961803074.png')} style={[styles.image]}/>)
+    }
+    if ('7898961803159') {
+      return (<Image source={require('../../../../../Images/Reports/img/7898961803159.png')} style={[styles.image]}/>)
+    }
+    if ('7898961803166') {
+      return (<Image source={require('../../../../../Images/Reports/img/7898961803166.png')} style={[styles.image]}/>)
     }
   }
 
@@ -210,10 +193,7 @@ export function ItemValidation( props: ItemValidationProps ) {
               initialZoom={1}
               bindToBorders={true}
             >
-              <Image
-                source={getLaudoPath(props.reportPath)}
-                style={[styles.image]}
-              />
+              {getLaudoPath(props.reportPath)}
             </ReactNativeZoomableView>
           </View>
         </RNModal>
@@ -251,7 +231,6 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 2,
     backgroundColor: 'gray',
-    // opacity: 0.75,
     elevation: 5,
     alignSelf: 'baseline',
   },
