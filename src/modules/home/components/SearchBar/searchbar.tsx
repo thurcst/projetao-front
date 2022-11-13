@@ -8,6 +8,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { stackRouteNames } from '../../types/stackRouteNames';
 import { Alert, Text, Pressable} from "react-native";
 import { KeyboardEvent } from "react";
+import eventsInstance from '../../../../shared/services/analytics';
 
 
 
@@ -39,6 +40,7 @@ const SearchBar = ({ navigation }) => {
             value={searchPhrase}
             onChangeText={setSearchPhrase}
             onFocus={() => {
+              eventsInstance.sendEvent("Tocou na barra de pesquisa");
               setClicked(true);
             }}
           />
@@ -68,9 +70,11 @@ const SearchBar = ({ navigation }) => {
         {
             clicked &&
             (<View style={styles.iconView}>
-              <TouchableOpacity onPress={onSearch}>
-                <EvilIcons name="search" size={30} color="black" style={{ marginLeft: 1 }}/>
-              </TouchableOpacity>
+              <Pressable onPress={() => {eventsInstance.sendEvent("Tocou no botão de pesquisar")}}>
+                <TouchableOpacity onPress={onSearch}>
+                  <EvilIcons name="search" size={30} color="black" style={{ marginLeft: 1 }}/>
+                </TouchableOpacity>
+              </Pressable>
             </View>)
       }
 

@@ -8,6 +8,7 @@ import { moderateScale, scale, verticalScale } from '../../../../shared/styles/s
 import { stackRouteNames } from '../../types/stackRouteNames';
 import { NavigationScreenProp } from 'react-navigation';
 import { ProductResponse } from '../../types/responseInterfaces';
+import eventsInstance from '../../../../shared/services/analytics';
 
 interface ActionsItemsProps {
   itemId: number,
@@ -48,6 +49,7 @@ export function ActionsItems( props: ActionsItemsProps ){
           <TouchableOpacity
             onPress={() => 
               {
+                eventsInstance.sendEvent("Tocou no produto " + item.productName + " de MainItems");
                 props.navigationProp.navigate(
                   stackRouteNames.ProductPage,
                   { item }

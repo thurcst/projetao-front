@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { stackRouteNames } from '../../../home/types/stackRouteNames';
+import eventsInstance from '../../../../shared/services/analytics';
 
 export default function Scanner({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
+    eventsInstance.sendEvent("Tocou no botão do scanner");
     const getBarCodeScannerPermissions = async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === 'granted');

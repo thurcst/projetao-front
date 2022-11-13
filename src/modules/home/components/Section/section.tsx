@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NavigationScreenProp } from 'react-navigation';
 import { moderateScale, scale, verticalScale } from '../../../../shared/styles/scaling_units';
 import { stackRouteNames } from '../../types/stackRouteNames';
+import eventsInstance from '../../../../shared/services/analytics';
 
 export interface SectionProps {
     productCategory: string;
@@ -18,7 +19,12 @@ const Section = ({ productCategory, urlImage, navigation }: SectionProps) => {
             <TouchableOpacity
                 style={styles.button}
                 activeOpacity={0.8}
-                onPress={() => navigation.navigate(stackRouteNames.CategoryPage, { productCategory, urlImage })}
+                onPress={() => 
+                    {
+                        eventsInstance.sendEvent("Tocou na categoria " + productCategory);
+                        navigation.navigate(stackRouteNames.CategoryPage, { productCategory, urlImage })
+                    }
+                }
             >
                 <Image
                     style={styles.image}

@@ -10,6 +10,7 @@ import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/s
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import laudosImages from "../../../../../../laudosImages";
+import eventsInstance from "../../../../../shared/services/analytics";
 
 interface ItemValidationProps {
   navigationProp:  NavigationScreenProp<any,any>,
@@ -122,21 +123,21 @@ export function ItemValidation( props: ItemValidationProps ) {
       </Text>)
 
     } else return (
-      <Text
-      style={styles.itemValidationReport} 
-      onPress={handleReportModal}>
-            LAUDO
-          </Text>
+      <TouchableOpacity onPress={() => {eventsInstance.sendEvent("Tocou no botão para mostrar o laudo")}}>
+        <Text
+        style={styles.itemValidationReport} 
+        onPress={handleReportModal}>
+              LAUDO
+            </Text>
+      </TouchableOpacity>
      );
   }
-  console.log('REPORT PATH: '+'/home/matheus/Documentos/Faculdade/5oPeriodo/Projetao/projetao-front/src/Images/Reports/img/'+props.reportPath+'.png');
-  console.log('REPORT PATH: '+'/home/matheus/Documentos/Faculdade/5oPeriodo/Projetao/projetao-front/src/Images/Reports/img/606529582999.png');
 
   return (
       <View style={styles.itemValidationView}>
 
         {/* Title */}
-        <Text style={styles.itemValidationTitle}>Segurança</Text>
+        <Text style={styles.itemValidationTitle} onPress={eventsInstance.sendEvent("Tocou no título de itemValidation")}>Segurança</Text>
 
         {/* Security */}
         <View style={styles.itemValidationItem}>
@@ -144,9 +145,9 @@ export function ItemValidation( props: ItemValidationProps ) {
         </View>
 
         {/* Learn more */}
-        <View style={styles.itemValidationItem}>
+        <TouchableOpacity style={styles.itemValidationItem} onPress={() => {eventsInstance.sendEvent("Tocou no botão para entender os níveis de segurança")}}>
           <Text style={styles.itemValidationLearnMore} onPress={handleCriteriaModal}>Entenda os níveis de segurança</Text>
-        </View>
+        </TouchableOpacity>
 
         {/* Report */}
         <View style={styles.itemValidationItem}>
@@ -166,8 +167,8 @@ export function ItemValidation( props: ItemValidationProps ) {
               </Modal.Body>
               <Modal.Footer>
                 <View style={styles.buttonView}>
-                  <Button title="Critérios de avaliação" onPress={goToCriteriaPage}/>
-                  <Button title="Fechar" onPress={handleCriteriaModal}/>
+                  <Button title="Critérios de avaliação" onPress={() => {eventsInstance.sendEvent("Tocou no botão de ver os critérios de avaliação"); goToCriteriaPage}}/>
+                  <Button title="Fechar" onPress={() => {eventsInstance.sendEvent("Tocou no botão de fechar o pop-up de entender os critérios de avaliação"); handleCriteriaModal}}/>
                 </View>
               </Modal.Footer>
             </View>

@@ -7,6 +7,7 @@ import { ItemReview } from "./itemReview";
 import { getReviewsWithBarCode } from "../../../services/product.service";
 import { ShowAlert } from "../../../../../shared/pages/showAlert";
 import { Review } from "../../../types/responseInterfaces";
+import eventsInstance from "../../../../../shared/services/analytics";
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 const clampGrade = grade => clamp(grade, 1, 5);
@@ -43,7 +44,7 @@ export function ItemCommunityPreview( { barCode } ) {
       ShowAlert("Não foi possível carregar as avaliações dos usuários");
     else return (
       <View style={styles.container}>  
-        <Text style={styles.title}>Comunidade</Text>
+        <Text style={styles.title} onPress={eventsInstance.sendEvent("Tocou no título 'Comunidade'")}>Comunidade</Text>
         <ItemReviewStars size={1} numStars={getGradeMean(reviews)}/>
         <View style={styles.itemReviewsContainer}>
           {reviews.map((review) => 

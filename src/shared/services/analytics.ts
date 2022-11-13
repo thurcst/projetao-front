@@ -1,13 +1,13 @@
-import { Axios } from "axios";
-import { randomUUID } from "crypto";
+import axios from "axios";
+import uuid from 'react-native-uuid';
 
-const axios = new Axios();
+// const axios = new Axios();
 
 class Events {
-  private pseudo_id: string;
+  private pseudo_id: string | number[];
 
   constructor() {
-    this.pseudo_id = randomUUID();
+    this.pseudo_id = uuid.v4();
   }
 
   identify_user() {

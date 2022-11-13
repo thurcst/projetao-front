@@ -16,7 +16,9 @@ import {
   ActivityIndicator,
   ScrollView,
   Dimensions,
+  Pressable,
 } from 'react-native'
+import eventsInstance from '../../../../shared/services/analytics'
 
 interface ProductPageState {
   itemNameCardHeight: number
@@ -99,14 +101,16 @@ export function ProductPage(props) {
       <View style={styles.container}>
         {/* Image */}
         <View style={styles.imageView}>
-          <Image
-            source={{
-              uri: item.picturePath
-                ? item.picturePath
-                : 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png',
-            }}
-            style={styles.image}
-          />
+          <Pressable onPress={() => eventsInstance.sendEvent("Tocou na imagem de um produto na tela do produto")}>
+            <Image
+              source={{
+                uri: item.picturePath
+                  ? item.picturePath
+                  : 'https://cdn.discordapp.com/attachments/1014314736126545941/1016454312349683844/darkbckg.png',
+              }}
+              style={styles.image}
+            />
+          </Pressable>
         </View>
 
         {/* Name */}

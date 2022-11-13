@@ -1,20 +1,23 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import { scale } from "../../../../../shared/styles/scaling_units";
 import { Ionicons } from '@expo/vector-icons';
+import eventsInstance from "../../../../../shared/services/analytics";
 
 export function ItemReviewStars({ size, numStars }) {
   const [numBright, setNumBright] = useState(numStars);
   const [numDull, setNumDull] = useState(5 - numStars);
   return (
-    <View style={styles.container}>
-      {new Array(Math.floor(numBright)).fill(0).map( (value, i) =>
-        <Ionicons key={i} name='star' style={[styles.star(size), styles.brightStar]}/>
-      )}
-      {new Array(Math.floor(numDull)).fill(0).map( (value, i) =>
-        <Ionicons key={numBright+i} name='star' style={[styles.star(size), styles.dullStar]}/>
-      )}
-    </View>
+    <Pressable onPress={() => {eventsInstance.sendEvent("Tocou nas estrelas da comunidade")}}>
+      <View style={styles.container}>
+        {new Array(Math.floor(numBright)).fill(0).map( (value, i) =>
+          <Ionicons key={i} name='star' style={[styles.star(size), styles.brightStar]}/>
+        )}
+        {new Array(Math.floor(numDull)).fill(0).map( (value, i) =>
+          <Ionicons key={numBright+i} name='star' style={[styles.star(size), styles.dullStar]}/>
+        )}
+      </View>
+    </Pressable>
   );
 }
 

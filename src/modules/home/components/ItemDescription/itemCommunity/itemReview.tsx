@@ -1,47 +1,49 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, Image, SafeAreaView, Pressable } from "react-native";
 import { scale, verticalScale } from "../../../../../shared/styles/scaling_units";
 import { ItemReviewStars } from "./itemReviewStars";
 import { Ionicons } from '@expo/vector-icons';
 import { Review } from "../../../types/responseInterfaces";
+import eventsInstance from "../../../../../shared/services/analytics";
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 const clampGrade = grade => clamp(grade, 1, 5);
 
 export function ItemReview( { review } ) {
   return (
-    <View style={styles.container}>
-      
-      {/* Profile picture */}
-      <View style={styles.imageContainer}>
-        <Ionicons name='person-circle' size={60} color='green'/>
-      </View>
-
-      {/* Review info */}
-      <View style={styles.info}>
-
-        {/* Header */}
-        <View style={styles.headerContainer}>
-          {/* Reviewer name */}
-          <View style={styles.reviewerNameContainer}>
-            <Text style={styles.reviewerName}>{review.user}</Text>
-          </View>
-          {/* Rating */}
-          <View style={styles.reviewerRatingContainer}>
-            <ItemReviewStars size={0.525} numStars={clampGrade(Math.round(review.grade))}/>
-          </View>
-        </View>
-        
-        {/* Message */}
-        <View style={styles.reviewerMessageContainer}>
-          <Text style={styles.reviewerMessage}>
-            {review.text}
-          </Text>
+    <Pressable onPress={() => eventsInstance.sendEvent("Tocou em uma review")}>
+      <View style={styles.container}>
+        {/* Profile picture */}
+        <View style={styles.imageContainer}>
+          <Ionicons name='person-circle' size={60} color='green'/>
         </View>
 
-      </View>
+        {/* Review info */}
+        <View style={styles.info}>
 
-    </View>
+          {/* Header */}
+          <View style={styles.headerContainer}>
+            {/* Reviewer name */}
+            <View style={styles.reviewerNameContainer}>
+              <Text style={styles.reviewerName}>{review.user}</Text>
+            </View>
+            {/* Rating */}
+            <View style={styles.reviewerRatingContainer}>
+              <ItemReviewStars size={0.525} numStars={clampGrade(Math.round(review.grade))}/>
+            </View>
+          </View>
+          
+          {/* Message */}
+          <View style={styles.reviewerMessageContainer}>
+            <Text style={styles.reviewerMessage}>
+              {review.text}
+            </Text>
+          </View>
+
+        </View>
+      </View>
+    </Pressable> 
+
   )
 }
 
