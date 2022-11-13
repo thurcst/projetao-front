@@ -728,16 +728,6 @@ const database = [
         "productingredients": "Fecula de mandioca"
     },
     {
-        "barcode": 7898344321843,
-        "idbrandid": "AMINNA",
-        "idreportid": '100',
-        "idsafetyid": 7,
-        "productname": "Pao sem Glúten de Milho AMINNA 380G",
-        "productcategory": "pães",
-        "picturepath": "https://www.aminna.com.br/wp-content/uploads/2020/07/PaoMilho-01-2.png",
-        "productingredients": "Fecula de mandioca, farinha de soja, ovo, farinha de milho, amido de milho, óleo de soja, açúcar, fermento biológico, sal, conservante INS 282 e estabilizante INS 415.\r\n\r\n\r\nNaO CONTeM GLÚTEN. NaO CONTeM LEITE. \r\n\r\nALeRGICOS: CONTeM OVO E SOJA.\r\n\r\nSaiba Mais\r\nSEM GLÚTEN\r\nSEM LACTOSE\r\nSEM AÇÚCAR\r\nSEM OVOS\r"
-    },
-    {
         "barcode": 7898344321355,
         "idbrandid": "AMINNA",
         "idreportid": '100',
@@ -971,16 +961,6 @@ const database = [
         "idbrandid": "BEM NUTRIR",
         "idreportid": '100',
         "idsafetyid": 7,
-        "productname": "Pao de cenoura BEM NUTRIR 500G ",
-        "productcategory": "pães",
-        "picturepath": "http://www.bemnutriralimentos.com.br/images/Sem-Gluten-Pao-de-cenoura__2.jpg",
-        "productingredients": "Farinha de arroz, agua, farinha de soja integral, fecula de mandioca, cenoura, óleo de girassol, fermento biológico, sal marinho e vinagre."
-    },
-    {
-        "barcode": 7898935445057,
-        "idbrandid": "BEM NUTRIR",
-        "idreportid": '100',
-        "idsafetyid": 7,
         "productname": "Pao de cenoura 500G BEM NUTRIR",
         "productcategory": "PÃES",
         "picturepath": "http://www.bemnutriralimentos.com.br/images/Sem-Gluten-Pao-de-cenoura__2.jpg",
@@ -1044,16 +1024,6 @@ const database = [
         "productingredients": "Feijão.\n\nNÃO CONTÉM GLÚTEN. PODE CONTER SOJA"
     },
     {
-        "barcode": 7891100794905,
-        "idbrandid": "CAMIL",
-        "idreportid": '100',
-        "idsafetyid": 7,
-        "productname": "FEIJAO CAMIL 1KG CARIOCA",
-        "productcategory": "grãos",
-        "picturepath": "https://www.camil.com.br/wp-content/uploads/sites/12/2020/06/7896006744115-feijao-carioca-camil-1kg-1.png",
-        "productingredients": "Feijão.\n\nNÃO CONTÉM GLÚTEN. PODE CONTER SOJA"
-    },
-    {
         "barcode": 7896006715160,
         "idbrandid": "CAMIL",
         "idreportid": '100',
@@ -1072,16 +1042,6 @@ const database = [
         "productcategory": "farinácios",
         "picturepath": "https://www.casariganisemgluten.com.br/wp-content/uploads/2021/02/mix-farinha-sem-gluten-768x691.png",
         "productingredients": "Farinha de arroz, fecula de batata, fecula de mandioca e espessante goma xantana."
-    },
-    {
-        "barcode": 7898643940431,
-        "idbrandid": "CELIVITA",
-        "idreportid": '100',
-        "idsafetyid": 2,
-        "productname": "PAO DE FORMA ABOBORA CELIVITA 300G",
-        "productcategory": "pães",
-        "picturepath": "https://cdn.awsli.com.br/1000x1000/493/493352/produto/36640478/352e96f351.jpg",
-        "productingredients": "Clara de ovo, amido de milho, fecula de batata, fecula de mandioca, farinha de arroz, polvilho azedo, óleo de girassol, açúcar refinado, farinha de batata doce, fermento biológico, sal, e emulsificantes: HPMC e monoglicerídeo de acido graxo, propionato de calcio espessante: goma xantana polidextrose e carboximetilcelulose, aroma idêntico ao natural de abóbora, sorbitol, acidulante: acido cítrico, proteína de arroz, corante de urucum e edulcorante: sucralose.\r\n\r\n "
     },
     {
         "barcode": 7898643940301,
@@ -1394,16 +1354,6 @@ const database = [
         "idbrandid": "JASMINE",
         "idreportid": '100',
         "idsafetyid": 7,
-        "productname": "PaO DE SANDUÍCHE TRADICIONAL JASMINE PACOTE 350G",
-        "productcategory": "pães",
-        "picturepath": "https://www.zonacerealista.com.br/media/catalog/product/cache/1/image/736x460/9df78eab33525d08d6e5fb8d27136e95/0/0/001954_h_2.jpg",
-        "productingredients": "Ingredientes: Amido modificado, amido (mandioca e ou milho e ou batata), extrato de soja, gordura de palma, glicose em pó, açúcar demerara, fibra vegetal, sal, espessantes hidroxipropilmetilcelulose, goma xantana e goma guar, conservante propionato de calcio. NaO CONTeM GLÚTEN.\n\nALeRGICOS: CONTeM DERIVADO DE SOJA E PODE CONTER AMENDOIM, AMÊNDOA, AVELaS, CASTANHA DE CAJU, CASTANHA DO PARa, MACADÂMIA, NOZES, PECaS, PISTACHES, PINOLI E CASTANHAS."
-    },
-    {
-        "barcode": 7896283006142,
-        "idbrandid": "JASMINE",
-        "idreportid": '100',
-        "idsafetyid": 7,
         "productname": "PaO DE SANDUÍCHE TRADICIONAL JASMINE 350G",
         "productcategory": "PÃES",
         "picturepath": "https://www.zonacerealista.com.br/media/catalog/product/cache/1/image/736x460/9df78eab33525d08d6e5fb8d27136e95/0/0/001954_h_2.jpg",
@@ -1566,16 +1516,6 @@ const database = [
         "productcategory": "grãos",
         "picturepath": "https://kodilar.com.br/media/1175/conversions/w.600/h.350/q.80/fit.crop/fm.png/grao-de-bico-736-thumb.png",
         "productingredients": "Grão-de-bico branco. CONTÉM GLÚTEN*.\r\n\r\n*Pode conter por compartilhar equipamento de produção. "
-    },
-    {
-        "barcode": 7896256040371,
-        "idbrandid": "KODILAR",
-        "idreportid": '100',
-        "idsafetyid": 1,
-        "productname": "ARROZ KODILAR",
-        "productcategory": "grãos",
-        "picturepath": "https://cdn-cosmos.bluesoft.com.br/products/7896256040371",
-        "productingredients": "Arroz integral agulhinha. CONTeM GLÚTEN. ALeRGICOS: PODE CONTER CEVADA, AVEIA, DERIVADOS DE TRIGO E LEITE."
     },
     {
         "barcode": 7896256040371,
@@ -2466,16 +2406,6 @@ const database = [
         "idbrandid": "PULLMAN",
         "idreportid": '100',
         "idsafetyid": 1,
-        "productname": "PAO DE FORMA TRADICIONAL PULMMAN",
-        "productcategory": "pães",
-        "picturepath": "https://era-images.s3.amazonaws.com/produto/8D6A2D14-B799-4214-9546-43462785B177/base/771bf4c62a30a97342634f5904475b28.jpg",
-        "productingredients": "Farinha de trigo enriquecida com ferro e acido fólico, açúcar, vinagre, óleo vegetal de soja, sal e glúten, conservadores: propionato de calcio e acido sórbico, emulsificante: estearoil-2-lactil lactato de calcio, acidulante: acido cítrico, melhorador de farinha: acido ascórbico e espessante: carboximetilcelulose sódica. ALeRGICOS: CONTeM DERIVADOS DE TRIGO E DE SOJA. PODE CONTER LEITE, AVEIA, CENTEIO, CEVADA, TRITICALE, NOZES, CASTANHA-DO-PARa E CASTANHA-DE-CAJU. CONTeM GLÚTEN."
-    },
-    {
-        "barcode": 7896002300643,
-        "idbrandid": "PULLMAN",
-        "idreportid": '100',
-        "idsafetyid": 1,
         "productname": "PaO DE FORMA TRADICIONAL PULMMAN",
         "productcategory": "pães",
         "picturepath": "https://era-images.s3.amazonaws.com/produto/8D6A2D14-B799-4214-9546-43462785B177/base/771bf4c62a30a97342634f5904475b28.jpg",
@@ -2677,16 +2607,6 @@ const database = [
         "productcategory": "GRÃOS",
         "picturepath": "https://www.schaer.com/sites/default/files/styles/packaging/public/2022-02/Product_Flour_MixItUniversal_1000g_Front%20-%20New.webp?itok=rSQzgJkN",
         "productingredients": "maize starch  ,   rice flour  ,   sorghum flour  ,   rice starch  ,   dextrose  ,   vegetable fibre (psyllium)  ,   pea protein  ,   thickener:   hydroxypropyl methyl cellulose  ;   salt  ."
-    },
-    {
-        "barcode": 8008698002209,
-        "idbrandid": "SCHÄR",
-        "idreportid": '100',
-        "idsafetyid": 7,
-        "productname": "Torrada de pao SCHÄR",
-        "productcategory": "pães",
-        "picturepath": "https://www.schaer.com/sites/default/files/styles/packaging/public/packaging/Products_Bakery_TorradasDePao_150g_Front.webp?itok=U0t-gL2_",
-        "productingredients": "amido de milho , farinha de arroz , margarina vegetal [gorduras e óleos vegetais (palma, palmiste, canola), agua, sal; emulsificante: mono e diglicerídeos de acidos graxos; regulador de acidez: acido cítrico; aromatizantes naturais] , fecula de batata , farinha de milho , açúcar , fermentos químicos: glucona-delta lactona, bicarbonato de sódio ; proteína de tremoço , dextrose , fermento biológico , sal , espessante: hidroxipropilmetilcelulose ; aromatizantes naturais . ALeRGICOS: PODE CONTER CASTANHAS E DERIVADOS DE SOJA. NaO CONTeM GLÚTEN."
     },
     {
         "barcode": 7898954933450,
@@ -3112,26 +3032,6 @@ const database = [
         "productcategory": "pães",
         "picturepath": "https://www.wickbold.com.br/wp-content/webp-express/webp-images/uploads/2012/10/IMG-1-2.png.webp",
         "productingredients": "Farinha de trigo enriquecida com ferro e acido fólico, açúcar, óleo de soja, sal, glúten, sal hipossódico e conservadores propionato de calcio e sorbato de potassio.\r"
-    },
-    {
-        "barcode": 7896066301457,
-        "idbrandid": "WICKBOLD",
-        "idreportid": '100',
-        "idsafetyid": 1,
-        "productname": "Pao de Forma Integral WICKBOLD",
-        "productcategory": "pães",
-        "picturepath": "https://samsclub.vtexassets.com/arquivos/ids/156829-800-auto?v=637430326311170000&width=800&height=auto&aspect=true",
-        "productingredients": "INGREDIENTES:\r\nFarinha de trigo integral, farinha de trigo enriquecida com ferro e acido fólico, glúten, fibra de trigo, açúcar, óleo de soja, sal, sal hipossódico e conservadores propionato de calcio e sorbato de potassio.\r\n\r\nCONTeM GLÚTEN.\r\n\r\nALeRGICOS: CONTeM DERIVADOS DE SOJA E DERIVADOS DE TRIGO. PODE CONTER AMÊNDOA, AMENDOIM, AVEIA, AVELaS, CASTANHA-DE-CAJU, CASTANHA-DO-PARa, CENTEIO, CEVADA, ESPELTA, FARRO, FREEKEH, LEITE, MACADÂMIAS, NOZES, OVOS, PECaS, PISTACHES E TRITICALE."
-    },
-    {
-        "barcode": 7896066301419,
-        "idbrandid": "WICKBOLD",
-        "idreportid": '100',
-        "idsafetyid": 1,
-        "productname": "Pao de Forma Tradicional WICKBOLD",
-        "productcategory": "pães",
-        "picturepath": "https://www.wickbold.com.br/wp-content/webp-express/webp-images/uploads/2012/10/IMG-1-2.png.webp",
-        "productingredients": "Farinha de trigo enriquecida com ferro e acido fólico, açúcar, óleo de soja, sal, glúten, sal hipossódico e conservadores propionato de calcio e sorbato de potassio.\n\nCONTeM GLÚTEN.\n\nALeRGICOS: CONTeM DERIVADOS DE SOJA E DERIVADOS DE TRIGO. PODE CONTER AMÊNDOA, AMENDOIM, AVEIA, AVELaS, CASTANHA-DE-CAJU, CASTANHA-DO-PARa, CENTEIO, CEVADA, ESPELTA, FARRO, FREEKEH, LEITE, MACADÂMIAS, NOZES, OVOS, PECaS, PISTACHES E TRITICALE."
     },
     {
         "barcode": 7896066301457,
