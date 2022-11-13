@@ -3,7 +3,7 @@ import { randomUUID } from "crypto";
 
 const axios = new Axios();
 
-export class Events {
+class Events {
   private pseudo_id: string;
 
   constructor() {
@@ -25,3 +25,7 @@ export class Events {
     });
   }
 }
+
+const eventsInstance = new Events();
+
+export default eventsInstance;
