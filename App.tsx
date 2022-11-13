@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { AppRoutes } from './src/shared/routes';
 import { StatusBar } from 'expo-status-bar';
 import { Modal } from 'react-native';
-import { getAuthorizationTokens } from './src/modules/home/services/product.service';
+// import { getAuthorizationTokens } from './src/modules/home/services/product.service';
 
 export default function App() {
   const [tokenRefresh, setTokenRefresh] = useState("");
@@ -18,9 +18,9 @@ export default function App() {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const response = await getAuthorizationTokens();
-      setTokenRefresh(response.refresh);
-      setTokenAccess(response.access);
+      // const response = await getAuthorizationTokens();
+      // setTokenRefresh(response.refresh);
+      // setTokenAccess(response.access);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
