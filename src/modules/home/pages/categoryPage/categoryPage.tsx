@@ -230,15 +230,16 @@ type ParamList = {
     return (
         <View style={styles.container}>
              {/*Filtro*/} 
-      <Pressable onPress={() => eventsInstance.sendEvent("Tocou no botão de 'Filtros Personalizados' da página de categorias")}>
-        <TouchableOpacity  onPress={handleModal}>
+        <TouchableOpacity  onPress={() => {
+          eventsInstance.sendEvent("Tocou no botão de 'Filtros Personalizados' da página de categorias")
+          handleModal();
+          }}>
                   <View style={styles.customFilter}>
                   <Text style ={{fontSize : 20}}>Filtros Personalizados</Text>
                   <EvilIcons name = "chevron-down" size={28} color="black" style={{ marginLeft: 1 }}/>
                   </View>
                   
         </TouchableOpacity>
-      </Pressable>
             
             
       <Modal isVisible={isModalVisible}>
@@ -248,31 +249,23 @@ type ParamList = {
                 <View style={{borderBottomWidth: 2, borderBottomColor: 'grey',}}></View>
                 <Modal.Body>
                   <View style={{flexDirection: 'column', alignItems: 'center' }}>
-                    <Pressable onPress={() => eventsInstance.sendEvent("Tocou no filtro de segurança da página de categorias")}>
-                      <Pressable style={[styles.button, styles.buttonClose]} onPress={handleModal2}>
-                        <View style={{flexDirection: 'row',  marginLeft: 10   }}>
-                          <Text style ={{fontSize : 15, color: "black"}}>Segurança: {buttonSecurity}</Text>
-                          <EvilIcons name="chevron-down" size={28} color="black" style={{ marginLeft: 1 }}/>
-                        </View> 
-                      </Pressable>
+                    <Pressable style={[styles.button, styles.buttonClose]} onPress={() => {eventsInstance.sendEvent("Tocou no filtro de segurança da página de categorias"); handleModal2();}}>
+                      <View style={{flexDirection: 'row',  marginLeft: 10   }}>
+                        <Text style ={{fontSize : 15, color: "black"}}>Segurança: {buttonSecurity}</Text>
+                        <EvilIcons name="chevron-down" size={28} color="black" style={{ marginLeft: 1 }}/>
+                      </View> 
                     </Pressable>
                   </View>
                  </Modal.Body>
                 <Modal.Footer>
-                  <Pressable onPress={() => eventsInstance.sendEvent("Tocou no botão aplicar filtro da página de categorias")}>
-                    <Pressable style={{borderRadius: 10,padding: 10,elevation: 2,marginTop: 15,backgroundColor: "#66cc66"}} onPress={(handleModal) }>
-                      <Text style ={ {color: "black"}}>Aplicar</Text>
-                    </Pressable>
+                  <Pressable style={{borderRadius: 10,padding: 10,elevation: 2,marginTop: 15,backgroundColor: "#66cc66"}} onPress={() => {eventsInstance.sendEvent("Tocou no botão aplicar filtro da página de categorias"); handleModal();}}>
+                    <Text style ={ {color: "black"}}>Aplicar</Text>
                   </Pressable>
-                  <Pressable onPress={() => eventsInstance.sendEvent("Tocou no botão limpar filtro do pop-up 1 da página de categorias")}>
-                    <Pressable style={{borderRadius: 10,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#ff3333"}} onPress={(filterCancel) }>
-                      <Text style ={ {color: "white"}}>Limpar Filtros</Text>
-                    </Pressable>
+                  <Pressable style={{borderRadius: 10,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#ff3333"}} onPress={() => {eventsInstance.sendEvent("Tocou no botão limpar filtro do pop-up 1 da página de categorias"); filterCancel();}}>
+                    <Text style ={ {color: "white"}}>Limpar Filtros</Text>
                   </Pressable>
-                  <Pressable onPress={() => eventsInstance.sendEvent("Tocou no botão voltar do filtro do pop-up 1 da página de categorias")}>
-                    <Pressable style={{borderRadius: 10,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#dcdcdc"}} onPress={(handleModal) }>
-                      <Text style ={ {color: "black"}}>Voltar</Text>
-                    </Pressable>
+                  <Pressable style={{borderRadius: 10,padding: 10,elevation: 2,marginTop: 15,marginLeft:15, backgroundColor: "#dcdcdc"}} onPress={() => {eventsInstance.sendEvent("Tocou no botão voltar do filtro do pop-up 1 da página de categorias"); handleModal();}}>
+                    <Text style ={ {color: "black"}}>Voltar</Text>
                   </Pressable>
                 </Modal.Footer>
               </View>
@@ -287,61 +280,43 @@ type ParamList = {
               
               <Modal.Body>
                 <View>
-                  <Pressable onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança 0 na página de categorias")}}>
-                    <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter0) }>
-                      <Ionicons style={styles.icons} name="shield-sharp" color={'red'} size={20}/>
-                      <Text style ={ {marginLeft: moderateScale(10), color: "black", textAlign: 'center'}}>Nível: 0</Text>
-                    </Pressable>
+                  <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança 0 na página de categorias"); filter0()}}>
+                    <Ionicons style={styles.icons} name="shield-sharp" color={'red'} size={20}/>
+                    <Text style ={ {marginLeft: moderateScale(10), color: "black", textAlign: 'center'}}>Nível: 0</Text>
                   </Pressable>
-                  <Pressable onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança 1 na página de categorias")}}>
-                    <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter1) }>
-                      <Ionicons style={styles.icons} name="shield-sharp" color={'#FF4500'} size={20}/>
-                      <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 1</Text>
-                    </Pressable>
+                  <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança 1 na página de categorias"); filter1()}}>
+                    <Ionicons style={styles.icons} name="shield-sharp" color={'#FF4500'} size={20}/>
+                    <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 1</Text>
                   </Pressable>
-                  <Pressable onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança 2 na página de categorias")}}>
-                    <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter2) }>
-                      <Ionicons style={styles.icons} name="shield-sharp" color={'#FFA500'} size={20}/>
-                      <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 2</Text>
-                    </Pressable>
+                  <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança 2 na página de categorias"); filter2()}}>
+                    <Ionicons style={styles.icons} name="shield-sharp" color={'#FFA500'} size={20}/>
+                    <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 2</Text>
                   </Pressable>
-                  <Pressable onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança 3 na página de categorias")}}>
-                    <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter3) }>
-                      <Ionicons style={styles.icons} name="shield-sharp" color={'yellow'} size={20}/>
-                      <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 3</Text>
-                    </Pressable>
+                  <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança 3 na página de categorias"); filter3()}}>
+                    <Ionicons style={styles.icons} name="shield-sharp" color={'yellow'} size={20}/>
+                    <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 3</Text>
                   </Pressable>
-                  <Pressable onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança 4 na página de categorias")}}>
-                    <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter4) }>
-                      <Ionicons style={styles.icons} name="shield-sharp" color={'#9ACD32'} size={20}/>
-                      <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 4</Text>
-                    </Pressable>
+                  <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança 4 na página de categorias"); filter4()}}>
+                    <Ionicons style={styles.icons} name="shield-sharp" color={'#9ACD32'} size={20}/>
+                    <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 4</Text>
                   </Pressable>
-                  <Pressable onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança 5 na página de categorias")}}>
-                    <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter5) }>
-                      <Ionicons style={styles.icons} name="shield-sharp" color={'#9ACD32'} size={20}/>
-                      <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 5</Text>
-                    </Pressable>
+                  <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança 5 na página de categorias"); filter5()}}>
+                    <Ionicons style={styles.icons} name="shield-sharp" color={'#9ACD32'} size={20}/>
+                    <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: 5</Text>
                   </Pressable>
-                  <Pressable onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança Star Gold na página de categorias")}}>
-                    <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={(filter6) }>
-                      <Ionicons style={styles.icons} name="shield-checkmark-sharp" color={'#008000'} size={20}/>
-                      <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: Star Gold</Text>
-                    </Pressable>
+                  <Pressable style={[styles.button, styles.buttonClose, styles.buttonSecurity]} onPress={() => {eventsInstance.sendEvent("Tocou para filtrar pelo nível de segurança Star Gold na página de categorias"); filter6()}}>
+                    <Ionicons style={styles.icons} name="shield-checkmark-sharp" color={'#008000'} size={20}/>
+                    <Text style ={ {marginLeft: moderateScale(10), color: "black",textAlign: 'center'}}>Nível: Star Gold</Text>
                   </Pressable>
                 </View>
               </Modal.Body>  
               
               <Modal.Footer>
-                <Pressable onPress={() => eventsInstance.sendEvent("Tocou no botão de Limpar filtro do pop-up 2 da página de categorias")}>
-                  <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#ff3333"}} onPress={(filterCancel2) }>
-                    <Text style ={ {color: "white"}}>Limpar filtro</Text>
-                  </Pressable>
+                <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#ff3333"}} onPress={() => {eventsInstance.sendEvent("Tocou no botão de Limpar filtro do pop-up 2 da página de categorias"); filterCancel2()}}>
+                  <Text style ={ {color: "white"}}>Limpar filtro</Text>
                 </Pressable>
-                <Pressable onPress={() => eventsInstance.sendEvent("Tocou no botão de voltar do filtro do pop-up 2 da página de categorias")}>
-                  <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#dcdcdc"}} onPress={(handleModal2) }>
-                    <Text style ={ {color: "black"}}>Voltar</Text>
-                  </Pressable>
+                <Pressable style={{borderRadius: 20,padding: 10,elevation: 2,marginTop: 15,marginLeft:15,backgroundColor: "#dcdcdc"}} onPress={() => {eventsInstance.sendEvent("Tocou no botão de voltar do filtro do pop-up 2 da página de categorias"); handleModal2()}}>
+                  <Text style ={ {color: "black"}}>Voltar</Text>
                 </Pressable>
               </Modal.Footer>
               </View>

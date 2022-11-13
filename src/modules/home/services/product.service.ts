@@ -80,7 +80,6 @@ export async function getProduct(productId: number): Promise<ProductResponse> {
             "idSafety": response.idsafetyid,
             "idReport": response.idreportid
         };
-        console.log(responseJson);
         return responseJson;
     } catch (error) {
         console.log(error);
@@ -121,7 +120,6 @@ export async function getProductsByCategory(productCategory: string): Promise<Pr
             }
 
         ));
-        console.log(listResponses);
         return listResponses;
     } catch (error) {
         console.log("não achei a database " + error);
@@ -161,7 +159,6 @@ export async function getProductsByName(productName: string) {
             }
 
         ));
-        console.log(listResponses);
         return listResponses;
     } catch (error) {
         console.log("não achei a database " + error);

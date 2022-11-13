@@ -10,8 +10,7 @@ const Tab = createBottomTabNavigator();
 
 export function TabBar() {
   return (
-      <Tab.Navigator screenOptions={{headerShown:false, tabBarStyle:styles.navBar}}
-       tabBarOptions={{showLabel: false }}
+      <Tab.Navigator screenOptions={{headerShown:false, tabBarStyle:styles.navBar, tabBarShowLabel: false}}
        tabBarIcon={{size:400}}> 
         <Tab.Screen 
             name="Home" 
